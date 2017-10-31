@@ -4,29 +4,43 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/chkmessage01"
+    <RadioGroup
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/message01" />
+        android:layout_height="wrap_content">
 
-    <CheckBox
-        android:id="@+id/chkmessage02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/message02" />
+        <RadioButton
+            android:id="@+id/message01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/message01" />
 
-    <CheckBox
-        android:id="@+id/chkmessage03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/message03" />
+        <RadioButton
+            android:id="@+id/message02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/message02" />
+
+        <RadioButton
+            android:id="@+id/message03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="@string/message03" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/btnDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/buttonlabel" />
+
+    <TextView
+        android:id="@+id/chosenLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_message"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 </LinearLayout>

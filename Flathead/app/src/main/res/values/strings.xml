@@ -2,9 +2,11 @@
     <string name="app_name">Flathead</string>
 
     <string name="default_message">Hello world!</string>
-    <string name="message01">Today is a good day.</string>
+    <string name="message01">Today is a good day. Tomorrow will be even better.</string>
     <string name="message02">You are our eyes.</string>
-    <string name="message03">Function over form</string>
+    <string name="message03">Every shape has its purpose.</string>
+
+    <string name="subtitle">-- Mood prompt issued by the Functionist Council</string>
 
     <string name="buttonlabel">Update label</string>
 

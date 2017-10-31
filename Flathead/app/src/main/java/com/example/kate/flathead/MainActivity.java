@@ -5,47 +5,55 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CheckBox chkmessage01, chkmessage02, chkmessage03;
+    private RadioButton message01, message02, message03;
     private Button btnDisplay;
+    private TextView label;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addListenerOnChkmessage01();
+        label = findViewById(R.id.chosenLabel);
         addListenerOnButton();
     }
 
-    public void addListenerOnChkmessage01() {
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
 
-        chkmessage01 = findViewById(R.id.chkmessage01);
-
-        chkmessage01.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //is chkmessage01 checked?
-                if (((CheckBox) v).isChecked()) {
-                    Toast.makeText(MainActivity.this,
-                            "Tomorrow will be even better", Toast.LENGTH_LONG).show();
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.message01:
+                if (checked) {
+                    label.setText(R.string.message01);
                 }
-
-            }
-        });
-
+                break;
+            case R.id.message02:
+                if (checked) {
+                    label.setText(R.string.message02);
+                }
+                break;
+            case R.id.message03:
+                if (checked) {
+                    label.setText(R.string.message03);
+                }
+                break;
+        }
     }
+
 
     public void addListenerOnButton() {
 
-        chkmessage01 = findViewById(R.id.chkmessage01);
-        chkmessage02 = findViewById(R.id.chkmessage02);
-        chkmessage03 = findViewById(R.id.chkmessage03);
+        message01 = findViewById(R.id.message01);
+        message02 = findViewById(R.id.message02);
+        message03 = findViewById(R.id.message03);
         btnDisplay = findViewById(R.id.btnDisplay);
 
         btnDisplay.setOnClickListener(new OnClickListener() {
@@ -55,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 StringBuffer result = new StringBuffer();
-                result.append("Message 1 check : ").append(chkmessage01.isChecked());
-                result.append("\nMessage 2 check : ").append(chkmessage02.isChecked());
-                result.append("\nMessage 3 check : ").append(chkmessage03.isChecked());
+                result.append("Message 1 check : ").append(message01.isChecked());
+                result.append("\nMessage 2 check : ").append(message02.isChecked());
+                result.append("\nMessage 3 check : ").append(message03.isChecked());
 
                 Toast.makeText(MainActivity.this, result.toString(),
                         Toast.LENGTH_LONG).show();
