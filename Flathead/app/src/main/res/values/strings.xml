@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Flathead</string>
+
+    <string name="default_message">Hello world!</string>
+    <string name="message01">Today is a good day.</string>
+    <string name="message02">You are our eyes.</string>
+    <string name="message03">Function over form</string>
+
+    <string name="buttonlabel">Update label</string>
+
+
+</resources>
