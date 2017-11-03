@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton message01, message02, message03;
     private Button btnDisplay;
     private TextView label;
+    private HashMap<Integer, Integer> radio_lookup = new HashMap();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,19 +25,18 @@ public class MainActivity extends AppCompatActivity {
 
         label = findViewById(R.id.chosenLabel);
         addListenerOnButton();
+
+        radio_lookup.put(R.id.message01, R.string.message01);
+        radio_lookup.put(R.id.message02, R.string.message02);
+        radio_lookup.put(R.id.message03, R.string.message03);
     }
 
     public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
         if(!checked) return;
 
-        HashMap<Integer, Integer> lookup = new HashMap();
-        lookup.put(R.id.message01, R.string.message01);
-        lookup.put(R.id.message02, R.string.message02);
-        lookup.put(R.id.message03, R.string.message03);
         int id = view.getId();
-        label.setText(lookup.get(id));
+        label.setText(radio_lookup.get(id));
     }
 
 
