@@ -9,6 +9,7 @@
     <string name="subtitle">-- Mood prompt issued by the Functionist Council</string>
 
     <string name="buttonlabel">Update label</string>
+    <string name="spacer">spacer</string>
 
 
 </resources>
