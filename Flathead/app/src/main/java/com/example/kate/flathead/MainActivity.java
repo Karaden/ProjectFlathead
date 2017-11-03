@@ -9,6 +9,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     private RadioButton message01, message02, message03;
@@ -29,20 +31,12 @@ public class MainActivity extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
         if(!checked) return;
 
+        HashMap<Integer, Integer> lookup = new HashMap();
+        lookup.put(R.id.message01, R.string.message01);
+        lookup.put(R.id.message02, R.string.message02);
+        lookup.put(R.id.message03, R.string.message03);
         int id = view.getId();
-
-        // Check which radio button was clicked
-        switch (id) {
-            case R.id.message01:
-                label.setText(R.string.message01);
-                break;
-            case R.id.message02:
-                label.setText(R.string.message02);
-                break;
-            case R.id.message03:
-                label.setText(R.string.message03);
-                break;
-        }
+        label.setText(lookup.get(id));
     }
 
 
