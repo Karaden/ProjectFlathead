@@ -27,23 +27,20 @@ public class MainActivity extends AppCompatActivity {
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
+        if(!checked) return;
+
+        int id = view.getId();
 
         // Check which radio button was clicked
-        switch (view.getId()) {
+        switch (id) {
             case R.id.message01:
-                if (checked) {
-                    label.setText(R.string.message01);
-                }
+                label.setText(R.string.message01);
                 break;
             case R.id.message02:
-                if (checked) {
-                    label.setText(R.string.message02);
-                }
+                label.setText(R.string.message02);
                 break;
             case R.id.message03:
-                if (checked) {
-                    label.setText(R.string.message03);
-                }
+                label.setText(R.string.message03);
                 break;
         }
     }
