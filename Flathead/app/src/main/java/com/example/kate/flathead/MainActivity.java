@@ -10,13 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.function.Function;
 
 public class MainActivity extends AppCompatActivity {
 
     private RadioButton message01, message02, message03;
     private Button btnDisplay;
     private TextView label;
-    private HashMap<Integer, Integer> radio_lookup = new HashMap();
+    private HashMap<Integer, Function> radio_lookup = new HashMap();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,19 +27,28 @@ public class MainActivity extends AppCompatActivity {
         label = findViewById(R.id.chosenLabel);
         addListenerOnButton();
 
-        radio_lookup.put(R.id.message01, R.string.message01);
-        radio_lookup.put(R.id.message02, R.string.message02);
-        radio_lookup.put(R.id.message03, R.string.message03);
+        radio_lookup.put(R.id.message01, this::call_method1);
+        radio_lookup.put(R.id.message02, this::call_method2);
+        radio_lookup.put(R.id.message03, this::call_method3);
     }
+
 
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
         if(!checked) return;
 
         int id = view.getId();
-        label.setText(radio_lookup.get(id));
+        //label.setText(radio_lookup.get(id));
+        radio_lookup.get(id).apply(null);
     }
 
+    public Object call_method1(Object o){method1(); return null;}
+    public Object call_method2(Object o){method2(7); return null;}
+    public Object call_method3(Object o){method3(6,"st"); return null;}
+
+    public void method1(){label.setText("No params");}
+    public void method2(Integer i){label.setText(i.toString());}
+    public void method3(Integer i, String j){label.setText(i.toString().concat(j));}
 
     public void addListenerOnButton() {
 
