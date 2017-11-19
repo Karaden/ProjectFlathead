@@ -75,13 +75,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                StringBuffer result = new StringBuffer();
-                result.append("Message 1 check : ").append(message01.isChecked());
-                result.append("\nMessage 2 check : ").append(message02.isChecked());
-                result.append("\nMessage 3 check : ").append(message03.isChecked());
-                result.append("\n Typeface is: ").append(label.getTypeface().toString());
+                String result = "Message 1 check : " + message01.isChecked() +
+                        "\nMessage 2 check : " + message02.isChecked() +
+                        "\nMessage 3 check : " + message03.isChecked() +
+                        "\n Typeface is: " + label.getTypeface().toString();
 
-                Toast.makeText(MainActivity.this, result.toString(),
+                Toast.makeText(MainActivity.this, result,
                         Toast.LENGTH_LONG).show();
 
 
