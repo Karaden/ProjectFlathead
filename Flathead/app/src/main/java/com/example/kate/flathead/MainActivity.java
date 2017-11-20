@@ -1,5 +1,6 @@
 package com.example.kate.flathead;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     private RadioButton message01, message02, message03, message04;
     private Button btnDisplay;
-    private TextView label;
-    private Typeface furmanite, datacontrol;
+    private TextView label, subLabel;
+    private Typeface moodPromptFont, conversationFont;
     private ImageView logo;
 
     @Override
@@ -25,19 +26,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
+        conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
+
         label = findViewById(R.id.chosenLabel);
+
+        subLabel = findViewById(R.id.subtitleLabel);
+        subLabel.setText(R.string.moodSubtitle);
+        subLabel.setTypeface(moodPromptFont);
+        subLabel.setTextColor(Color.WHITE);
+        subLabel.setVisibility(View.GONE);
+
         addListenerOnButton();
 
         logo = findViewById(R.id.logo);
         logo.setImageResource(R.drawable.functionistcouncilinsignia);
         logo.setVisibility(View.INVISIBLE);
 
-        furmanite = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
-        datacontrol = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
+        message01.setTypeface(moodPromptFont);
+        message02.setTypeface(conversationFont);
 
-        message01.setTypeface(furmanite);
-        message02.setTypeface(datacontrol);
+    }
 
+    private void displayMoodPrompt(int message) {
+        label.setTypeface(moodPromptFont);
+
+        label.setText(message);
+        subLabel.setVisibility(View.VISIBLE);
+        logo.setVisibility(View.VISIBLE);
+    }
+
+    private void displayConversation(int message) {
+        label.setTypeface(conversationFont);
+
+        String bob = getResources().getString(message);
+        String ben = getResources().getString(R.string.conversationSuffix);
+
+        label.setText(bob + ben);
+        subLabel.setVisibility(View.GONE);
+
+        logo.setVisibility(View.GONE);
     }
 
     public void onRadioButtonClicked(View view) {
@@ -48,33 +76,23 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.message01:
                 if (checked) {
-                    label.setText(R.string.message01);
-                    label.setTypeface(furmanite);
-
-                    logo.setVisibility(View.INVISIBLE);
+                    displayMoodPrompt(R.string.mood01);
                 }
                 break;
             case R.id.message02:
                 if (checked) {
-                    label.setText(R.string.message02);
-                    label.setTypeface(datacontrol);
-
-                    logo.setVisibility(View.INVISIBLE);
+                    displayConversation(R.string.conversation03);
                 }
                 break;
             case R.id.message03:
                 if (checked) {
-                    label.setText(R.string.message03);
-                    label.setTypeface(Typeface.DEFAULT);
+                    displayMoodPrompt(R.string.mood03);
 
-                    logo.setVisibility(View.INVISIBLE);
                 }
                 break;
             case R.id.message04:
                 if (checked) {
-                    label.setText("");
-
-                    logo.setVisibility(View.VISIBLE);
+                    displayConversation(R.string.conversation02);
                 }
                 break;
         }
