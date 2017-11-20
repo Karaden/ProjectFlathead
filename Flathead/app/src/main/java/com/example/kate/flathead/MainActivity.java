@@ -59,10 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private void displayConversation(int message) {
         label.setTypeface(conversationFont);
 
-        String bob = getResources().getString(message);
-        String ben = getResources().getString(R.string.conversationSuffix);
-
-        label.setText(bob + ben);
+        label.setText(getResources().getString(message) + getResources().getString(R.string.conversationSuffix));
         subLabel.setVisibility(View.GONE);
 
         logo.setVisibility(View.GONE);
