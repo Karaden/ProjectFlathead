@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="conversations">
+        <item>Get a proper job.</item>
+        <item>Remove a person\'s face, and you fetter their ability to express themselves. Do that,
+            and they become easier to ignore.
+        </item>
+        <item>Error.\nPlease repeat.</item>
+        <item>Hello, Minimus.\n\nLong time no speak.</item>
+    </array>
+
+    <array name="moodPrompts">
+        <item>Today is a good day. Tomorrow will be even better.</item>
+        <item>You are our eyes.</item>
+        <item>Every shape has its purpose.</item>
+    </array>
+</resources>

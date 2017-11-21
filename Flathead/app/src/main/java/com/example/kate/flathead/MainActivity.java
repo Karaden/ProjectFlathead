@@ -8,18 +8,29 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private RadioButton message01, message02, message03, message04;
     private Button btnDisplay;
+
+
     private TextView label, subLabel;
     private Typeface moodPromptFont, conversationFont;
     private ImageView logo;
+    private List<ScreenMessage> screenMessages;
+    private RadioGroup radioGroup;
+    private String messageSuffix;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
 
+        message01 = findViewById(R.id.message01);
+        message02 = findViewById(R.id.message02);
+        message03 = findViewById(R.id.message03);
+        message04 = findViewById(R.id.message04);
+        btnDisplay = findViewById(R.id.btnDisplay);
+
         label = findViewById(R.id.chosenLabel);
 
         subLabel = findViewById(R.id.subtitleLabel);
@@ -37,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         subLabel.setTextColor(Color.WHITE);
         subLabel.setVisibility(View.GONE);
 
-        addListenerOnButton();
-
         logo = findViewById(R.id.logo);
         logo.setImageResource(R.drawable.functionistcouncilinsignia);
         logo.setVisibility(View.INVISIBLE);
@@ -46,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         message01.setTypeface(moodPromptFont);
         message02.setTypeface(conversationFont);
 
+        radioGroup = findViewById(R.id.dynamicMessageList);
+        messageSuffix = getResources().getString(R.string.conversationSuffix);
+
+        addListenerOnButton();
+
+
+        populateScreenMessages();
+        populateRadioButtons();
     }
 
     private void displayMoodPrompt(int message) {
@@ -98,11 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addListenerOnButton() {
 
-        message01 = findViewById(R.id.message01);
-        message02 = findViewById(R.id.message02);
-        message03 = findViewById(R.id.message03);
-        message04 = findViewById(R.id.message04);
-        btnDisplay = findViewById(R.id.btnDisplay);
+
 
         btnDisplay.setOnClickListener(new OnClickListener() {
 
@@ -124,4 +143,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private void populateScreenMessages() {
+
+        screenMessages = new ArrayList<>(0);
+
+        for (String m : getResources().getStringArray(R.array.moodPrompts)) {
+            screenMessages.add(new MoodPromptMessage(m, moodPromptFont, label, subLabel, logo, messageSuffix));
+        }
+
+        for (String m : getResources().getStringArray(R.array.conversations)) {
+            screenMessages.add(new ConversationMessage(m, conversationFont, label, subLabel, logo, messageSuffix));
+        }
+
+    }
+
+
+    private void populateRadioButtons() {
+
+        radioGroup.setOrientation(LinearLayout.VERTICAL);
+
+        for (ScreenMessage s : screenMessages) {
+
+            RadioButton rb = new RadioButton(this);
+            rb.setText(s.message);
+            rb.setTypeface(s.defaultTypeface);
+
+            radioGroup.addView(rb);
+
+        }
+    }
+
 }
