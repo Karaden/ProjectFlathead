@@ -19,16 +19,20 @@ abstract class ScreenMessage {
     TextView secondaryLabel;
     ImageView logo;
     String messageSuffix;
+    String messageSubtitle;
 
 
     ScreenMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
-                  TextView secondaryLabel, ImageView logo, String messageSuffix) {
+                  TextView secondaryLabel, ImageView logo, String messageSuffix,
+                  String messageSubtitle) {
         this.message = message;
         this.defaultTypeface = defaultTypeface;
         this.primaryLabel = primaryLabel;
         this.secondaryLabel = secondaryLabel;
         this.logo = logo;
         this.messageSuffix = messageSuffix;
+        this.messageSubtitle = messageSubtitle;
+
     }
 
     abstract void display();

@@ -3,23 +3,12 @@
 
     <string name="default_message">Hello world!</string>
 
-    <string name="mood01">Today is a good day. Tomorrow will be even better.</string>
-    <string name="mood02">You are our eyes.</string>
-    <string name="mood03">Every shape has its purpose.</string>
-    <string name="moodSubtitle">\n\n-- Mood prompt issued by the Functionist Council</string>
-
-
-    <string name="conversation01">Get a proper job.</string>
-    <string name="conversation02">Remove a person\'s face, and you fetter their ability to express themselves. Do that, and they become easier to ignore.</string>
-    <string name="conversation03">Error.\nPlease repeat.</string>
-    <string name="conversation04">Hello, Minimus.\n\nLong time no speak.</string>
-
+    <string name="messageSubtitle">\n\n-- Mood prompt issued by the Functionist Council</string>
     <string name="messageSuffix">⌷</string>
 
 
-    <string name="message04">[show image]</string>
+    <string name="logoDescription">[Functionist insignia]</string>
     <string name="buttonlabel">Update font</string>
     <string name="spacer">spacer</string>
-
 
 </resources>
