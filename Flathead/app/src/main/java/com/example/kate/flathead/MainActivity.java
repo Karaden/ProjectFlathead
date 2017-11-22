@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +12,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,24 +105,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void populateListView() {
-        // Defined Array values to show in ListView
-        String[] values = new String[]{"Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View",
-                "Android Example List View",
-                "Android Example List View",
-                "Android Example List View",
-                "Android Example List View",
-                "Android Example List View",
-                "last",
-
-
-        };
 
         // Define a new Adapter
         // First parameter - Context
@@ -132,8 +112,12 @@ public class MainActivity extends AppCompatActivity {
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        ArrayAdapter<ScreenMessage> adapter = new ArrayAdapter<ScreenMessage>(
+                this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                screenMessages);
+
 
 
         // Assign adapter to ListView
@@ -141,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // ListView Item Click Listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+     /*   listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -151,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 int itemPosition = position;
 
                 // ListView Clicked item value
-                String itemValue = (String) listView.getItemAtPosition(position);
+                String itemValue = (ScreenMessage) listView.getItemAtPosition(position).;
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
@@ -161,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
+*/
     }
 }
 
