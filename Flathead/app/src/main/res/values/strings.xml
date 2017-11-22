@@ -14,7 +14,7 @@
     <string name="conversation03">Error.\nPlease repeat.</string>
     <string name="conversation04">Hello, Minimus.\n\nLong time no speak.</string>
 
-    <string name="conversationSuffix">⌷</string>
+    <string name="messageSuffix">⌷</string>
 
 
     <string name="message04">[show image]</string>

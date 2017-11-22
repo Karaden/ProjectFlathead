@@ -56,7 +56,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/chosenLabel"
+            android:id="@+id/primaryLabel"
             android:layout_width="match_parent"
             android:layout_height="253dp"
             android:layout_marginBottom="10dp"
@@ -66,7 +66,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <TextView
-            android:id="@+id/subtitleLabel"
+            android:id="@+id/secondaryLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -86,14 +86,7 @@
     <RadioGroup
         android:id="@+id/dynamicMessageList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RadioButton
-            android:id="@+id/message0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mood01" />
-    </RadioGroup>
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

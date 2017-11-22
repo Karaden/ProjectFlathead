@@ -20,49 +20,58 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    OnClickListener radioButtonListener = new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            ScreenMessage message;
+            message = (ScreenMessage) view.getTag();
+
+            message.display();
+        }
+    };
     private RadioButton message01, message02, message03, message04;
     private Button btnDisplay;
-
-
-    private TextView label, subLabel;
+    private TextView primaryLabel, secondaryLabel;
     private Typeface moodPromptFont, conversationFont;
     private ImageView logo;
     private List<ScreenMessage> screenMessages;
     private RadioGroup radioGroup;
     private String messageSuffix;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
-        conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
-
+        // Hardcoded radio buttons
         message01 = findViewById(R.id.message01);
         message02 = findViewById(R.id.message02);
         message03 = findViewById(R.id.message03);
         message04 = findViewById(R.id.message04);
         btnDisplay = findViewById(R.id.btnDisplay);
 
-        label = findViewById(R.id.chosenLabel);
+        moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
+        conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
 
-        subLabel = findViewById(R.id.subtitleLabel);
-        subLabel.setText(R.string.moodSubtitle);
-        subLabel.setTypeface(moodPromptFont);
-        subLabel.setTextColor(Color.WHITE);
-        subLabel.setVisibility(View.GONE);
+        primaryLabel = findViewById(R.id.primaryLabel);
+        secondaryLabel = findViewById(R.id.secondaryLabel);
+        secondaryLabel.setText(R.string.moodSubtitle);
+        secondaryLabel.setTypeface(moodPromptFont);
+        secondaryLabel.setTextColor(Color.WHITE);
+        secondaryLabel.setVisibility(View.GONE);
+
+        messageSuffix = getResources().getString(R.string.messageSuffix);
 
         logo = findViewById(R.id.logo);
         logo.setImageResource(R.drawable.functionistcouncilinsignia);
         logo.setVisibility(View.INVISIBLE);
 
+        //Hardcoded radio buttons
         message01.setTypeface(moodPromptFont);
         message02.setTypeface(conversationFont);
 
         radioGroup = findViewById(R.id.dynamicMessageList);
-        messageSuffix = getResources().getString(R.string.conversationSuffix);
 
         addListenerOnButton();
 
@@ -71,23 +80,26 @@ public class MainActivity extends AppCompatActivity {
         populateRadioButtons();
     }
 
+    // for the hardcoded radio buttons
     private void displayMoodPrompt(int message) {
-        label.setTypeface(moodPromptFont);
+        primaryLabel.setTypeface(moodPromptFont);
 
-        label.setText(message);
-        subLabel.setVisibility(View.VISIBLE);
+        primaryLabel.setText(message);
+        secondaryLabel.setVisibility(View.VISIBLE);
         logo.setVisibility(View.VISIBLE);
     }
 
+    // for the hardcoded radio buttons
     private void displayConversation(int message) {
-        label.setTypeface(conversationFont);
+        primaryLabel.setTypeface(conversationFont);
 
-        label.setText(getResources().getString(message) + getResources().getString(R.string.conversationSuffix));
-        subLabel.setVisibility(View.GONE);
+        primaryLabel.setText(getResources().getString(message) + getResources().getString(R.string.messageSuffix));
+        secondaryLabel.setVisibility(View.GONE);
 
         logo.setVisibility(View.GONE);
     }
 
+    // for the hardcoded radio buttons
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -118,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void addListenerOnButton() {
 
 
@@ -133,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         "\nMessage 2 check : " + message02.isChecked() +
                         "\nMessage 3 check : " + message03.isChecked() +
                         "\nMessage 4 check : " + message04.isChecked() +
-                        "\n Typeface is: " + label.getTypeface().toString();
+                        "\n Typeface is: " + primaryLabel.getTypeface().toString();
 
                 Toast.makeText(MainActivity.this, result,
                         Toast.LENGTH_LONG).show();
@@ -144,16 +155,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private void populateScreenMessages() {
 
         screenMessages = new ArrayList<>(0);
 
         for (String m : getResources().getStringArray(R.array.moodPrompts)) {
-            screenMessages.add(new MoodPromptMessage(m, moodPromptFont, label, subLabel, logo, messageSuffix));
+            screenMessages.add(new MoodPromptMessage(m, moodPromptFont, primaryLabel, secondaryLabel, logo, messageSuffix));
         }
 
         for (String m : getResources().getStringArray(R.array.conversations)) {
-            screenMessages.add(new ConversationMessage(m, conversationFont, label, subLabel, logo, messageSuffix));
+            screenMessages.add(new ConversationMessage(m, conversationFont, primaryLabel, secondaryLabel, logo, messageSuffix));
         }
 
     }
@@ -167,11 +179,15 @@ public class MainActivity extends AppCompatActivity {
 
             RadioButton rb = new RadioButton(this);
             rb.setText(s.message);
+            rb.setTag(s); // connects the rb to the message object itself
             rb.setTypeface(s.defaultTypeface);
+            rb.setOnClickListener(radioButtonListener);
 
             radioGroup.addView(rb);
 
         }
     }
 
+
 }
+
