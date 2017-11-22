@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -30,20 +32,21 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private Button btnDisplay;
     private TextView primaryLabel, secondaryLabel;
     private Typeface moodPromptFont, conversationFont;
     private ImageView logo;
     private List<ScreenMessage> screenMessages;
-    private RadioGroup radioGroup;
     private String messageSuffix, messageSubtitle;
+
+    private RadioGroup radioGroup;
+    private ListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnDisplay = findViewById(R.id.btnDisplay);
+
 
         moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
@@ -59,33 +62,14 @@ public class MainActivity extends AppCompatActivity {
         logo = findViewById(R.id.logo);
         logo.setVisibility(View.INVISIBLE);
 
-        radioGroup = findViewById(R.id.dynamicMessageList);
+        radioGroup = findViewById(R.id.dynamicRadioGroup);
+        listView = findViewById(R.id.dynamicListView);
 
-        addListenerOnButton();
 
         populateScreenMessages();
         populateRadioButtons();
+        populateListView();
     }
-
-    public void addListenerOnButton() {
-
-        btnDisplay.setOnClickListener(new OnClickListener() {
-
-            //Run when button is clicked
-            @Override
-            public void onClick(View v) {
-
-                String result = "Typeface is: " + primaryLabel.getTypeface().toString();
-
-                Toast.makeText(MainActivity.this, result,
-                        Toast.LENGTH_LONG).show();
-
-
-            }
-        });
-
-    }
-
 
     private void populateScreenMessages() {
 
@@ -122,5 +106,62 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void populateListView() {
+        // Defined Array values to show in ListView
+        String[] values = new String[]{"Android List View",
+                "Adapter implementation",
+                "Simple List View In Android",
+                "Create List View Android",
+                "Android Example",
+                "List View Source Code",
+                "List View Array Adapter",
+                "Android Example List View",
+                "Android Example List View",
+                "Android Example List View",
+                "Android Example List View",
+                "Android Example List View",
+                "Android Example List View",
+                "last",
+
+
+        };
+
+        // Define a new Adapter
+        // First parameter - Context
+        // Second parameter - Layout for the row
+        // Third parameter - ID of the TextView to which the data is written
+        // Forth - the Array of data
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+
+        // Assign adapter to ListView
+        listView.setAdapter(adapter);
+
+
+        // ListView Item Click Listener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                // ListView Clicked item index
+                int itemPosition = position;
+
+                // ListView Clicked item value
+                String itemValue = (String) listView.getItemAtPosition(position);
+
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                        .show();
+
+            }
+
+        });
+
+    }
 }
 
