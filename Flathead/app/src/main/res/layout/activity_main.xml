@@ -33,7 +33,7 @@
             android:id="@+id/VisiblePanel"
             android:layout_width="381dp"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/flatScreenPrimary"
             android:fadingEdge="horizontal"
             android:orientation="vertical">
 

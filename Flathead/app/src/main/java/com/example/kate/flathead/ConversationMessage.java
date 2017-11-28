@@ -1,6 +1,7 @@
 package com.example.kate.flathead;
 
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ class ConversationMessage extends ScreenMessage {
     void display() {
         primaryLabel.setTypeface(defaultTypeface);
         primaryLabel.setText(message + messageSuffix);
+        primaryLabel.setTextColor(Color.BLACK);
 
         secondaryLabel.setVisibility(View.GONE);
         logo.setVisibility(View.GONE);

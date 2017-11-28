@@ -21,10 +21,11 @@ class MoodPromptMessage extends ScreenMessage {
     void display() {
         primaryLabel.setTypeface(defaultTypeface);
         primaryLabel.setText(message);
+        primaryLabel.setTextColor(Color.WHITE);
 
         secondaryLabel.setText(messageSubtitle);
         secondaryLabel.setTypeface(defaultTypeface);
-        secondaryLabel.setTextColor(Color.WHITE);
+        secondaryLabel.setTextColor(Color.BLACK);
         secondaryLabel.setVisibility(View.VISIBLE);
 
         logo.setImageResource(R.drawable.functionistcouncilinsignia);
