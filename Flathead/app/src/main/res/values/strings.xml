@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">Flathead</string>
 
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
     <string name="default_message">Hello world!</string>
 
     <string name="messageSubtitle">\n\n-- Mood prompt issued by the Functionist Council</string>
     <string name="messageSuffix">⌷</string>
-
 
     <string name="logoDescription">[Functionist insignia]</string>
     <string name="buttonlabel">Update font</string>

@@ -1,57 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:background="#0099cc"
+    android:orientation="horizontal"
+    tools:context="com.example.kate.flathead.MainActivity">
 
-    <ListView
-        android:id="@+id/dynamicListView"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content">
-
-    </ListView>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/VisiblePanel"
-        android:layout_width="381dp"
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <LinearLayout
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
-        android:fadingEdge="horizontal"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:text="@string/dummy_content"
+        android:textColor="#33b5e5"
+        android:textSize="50sp"
+        android:textStyle="bold">
 
-        <TextView
-            android:id="@+id/primaryLabel"
-            android:layout_width="match_parent"
-            android:layout_height="253dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:padding="20dp"
-            android:text="@string/default_message"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        <ListView
+            android:id="@+id/dynamicListView"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/secondaryLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textAlignment="textEnd" />
+        </ListView>
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/logoDescription"
-            android:padding="5dp"
-            app:srcCompat="@android:drawable/btn_star" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/VisiblePanel"
+            android:layout_width="381dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:fadingEdge="horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/primaryLabel"
+                android:layout_width="match_parent"
+                android:layout_height="253dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:padding="20dp"
+                android:text="@string/default_message"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+            <TextView
+                android:id="@+id/secondaryLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textAlignment="textEnd" />
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/logoDescription"
+                android:padding="5dp"
+                app:srcCompat="@android:drawable/btn_star" />
 
     </LinearLayout>
 
 
-    <RadioGroup
+        <RadioGroup
         android:id="@+id/dynamicRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    </LinearLayout>
 
-</LinearLayout>
+    <!-- This FrameLayout insets its children based on system windows using
+        android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <Button
+                android:id="@+id/dummy_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dummy_button" />
+
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>
+
+
