@@ -25,7 +25,8 @@
         <ListView
             android:id="@+id/dynamicListView"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start">
 
         </ListView>
 
@@ -33,6 +34,7 @@
             android:id="@+id/VisiblePanel"
             android:layout_width="381dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
             android:background="@color/flatScreenPrimary"
             android:fadingEdge="horizontal"
             android:orientation="vertical">
@@ -41,6 +43,7 @@
                 android:id="@+id/primaryLabel"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_gravity="center_horizontal|top"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
@@ -66,11 +69,11 @@
 
     </LinearLayout>
 
-
         <RadioGroup
         android:id="@+id/dynamicRadioGroup"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|end" />
 
     </LinearLayout>
 
