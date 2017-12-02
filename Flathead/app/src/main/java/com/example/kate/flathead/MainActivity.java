@@ -14,10 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
+
 public class MainActivity extends FullscreenActivity {
 
     View.OnClickListener radioButtonListener = new View.OnClickListener() {
