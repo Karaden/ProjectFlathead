@@ -44,6 +44,22 @@ public class MainActivity extends AppCompatActivity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
+    //endregion Fullscreen App specific
+    /**
+     * Touch listener to use for in-layout UI controls to delay hiding the
+     * system UI. This is to prevent the jarring behavior of controls going away
+     * while interacting with activity UI.
+     */
+    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (AUTO_HIDE) {
+                delayedHide(AUTO_HIDE_DELAY_MILLIS);
+            }
+            return false;
+        }
+    };
+    //endregion  Custom Functionality
     //region Custom Functionality
     View.OnClickListener radioButtonListener = new View.OnClickListener() {
         @Override
@@ -55,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             message.display();
         }
     };
+    //region Fullscreen specific
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -86,29 +103,14 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private boolean mVisible;
-    //endregion FullScreen App Specific
     private final Runnable mHideRunnable = new Runnable() {
         @Override
         public void run() {
             hide();
         }
     };
-
-    //endregion Fullscreen App Specific
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
-    };
+    //endregion Fullscreeen App specific
+    //region Custom Functionality
     private TextView primaryLabel, secondaryLabel;
     private Typeface moodPromptFont, conversationFont;
     private ImageView logo;
@@ -273,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
         // Third parameter - ID of the TextView to which the data is written
         // Forth - the Array of data
 
-        ArrayAdapter<ScreenMessage> adapter = new ArrayAdapter<ScreenMessage>(
+        ArrayAdapter<ScreenMessage> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
