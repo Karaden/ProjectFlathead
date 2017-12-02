@@ -1,12 +1,7 @@
 package com.example.kate.flathead;
 
-import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -24,8 +19,7 @@ import java.util.List;
  * status bar and navigation/system bar) with user interaction.
  */
 public class MainActivity extends FullscreenActivity {
-    //endregion  Custom Functionality
-    //region Custom Functionality
+
     View.OnClickListener radioButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -37,7 +31,7 @@ public class MainActivity extends FullscreenActivity {
         }
     };
 
-    //region Custom Functionality
+
     private TextView primaryLabel, secondaryLabel;
     private Typeface moodPromptFont, conversationFont;
     private ImageView logo;
@@ -46,18 +40,14 @@ public class MainActivity extends FullscreenActivity {
 
     private RadioGroup radioGroup;
     private ListView listView;
-    //endregion Custom Functionality
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
 
         initialise();
     }
 
-    //region Custom Functionality
     private void initialise() {
         moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
@@ -161,7 +151,6 @@ public class MainActivity extends FullscreenActivity {
 */
     }
 
-    //endregion Custom Functionality
 
 }
 
