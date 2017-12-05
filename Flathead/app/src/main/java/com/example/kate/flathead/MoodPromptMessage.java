@@ -32,9 +32,6 @@ class MoodPromptMessage extends ScreenMessage {
         logo.setImageResource(R.drawable.functionistcouncilinsignia);
         logo.setVisibility(View.VISIBLE);
 
-        /*
-        TODO: things like the default font, colour, logo etc should be specific to class, not object.
-         Can they be set in the class file, rather than on object instantiation?
-        */
+
     }
 }

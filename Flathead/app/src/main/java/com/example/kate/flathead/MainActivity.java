@@ -30,6 +30,11 @@ public class MainActivity extends FullscreenActivity {
     }
 
     private void initialise() {
+        /*
+        TODO: things like the default font, colour, logo etc should be specific to class, not object.
+         Can they be set in the class file, rather than on object instantiation?
+        */
+
         moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
 
