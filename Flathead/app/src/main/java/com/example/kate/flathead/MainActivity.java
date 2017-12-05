@@ -3,6 +3,7 @@ package com.example.kate.flathead;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -124,27 +125,21 @@ public class MainActivity extends FullscreenActivity {
 
 
         // ListView Item Click Listener
-     /*   listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                // ListView Clicked item index
-                int itemPosition = position;
-
                 // ListView Clicked item value
-                String itemValue = (ScreenMessage) listView.getItemAtPosition(position).;
+                ScreenMessage blah = (ScreenMessage) listView.getItemAtPosition(position);
+                blah.display();
 
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
-                        .show();
 
             }
 
         });
-*/
+
     }
 
 
