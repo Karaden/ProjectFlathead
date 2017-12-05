@@ -43,7 +43,7 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
 
         text.setText(sm.message);
         text.setTypeface(sm.defaultTypeface);
-        text.setPadding(0, 30, 0, 30);
+        text.setPadding(20, 30, 20, 30);
         return text;
 
 
