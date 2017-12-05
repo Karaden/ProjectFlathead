@@ -3,7 +3,6 @@ package com.example.kate.flathead;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -110,9 +109,9 @@ public class MainActivity extends FullscreenActivity {
         // First parameter - Context
         // Second parameter - Layout for the row
         // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
+        // Fourth - the Array of data
 
-        ArrayAdapter<ScreenMessage> adapter = new ArrayAdapter<>(
+        ScreenMessageAdapter<ScreenMessage> adapter = new ScreenMessageAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
