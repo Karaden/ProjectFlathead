@@ -38,6 +38,7 @@ abstract class ScreenMessage {
     abstract void display();
 
     public String toString() {
+
         return this.message;
     }
 

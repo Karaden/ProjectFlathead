@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,25 +14,12 @@ import java.util.List;
 
 public class MainActivity extends FullscreenActivity {
 
-    View.OnClickListener radioButtonListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            ScreenMessage message;
-            message = (ScreenMessage) view.getTag();
-
-            message.display();
-        }
-    };
-
-
     private TextView primaryLabel, secondaryLabel;
     private Typeface moodPromptFont, conversationFont;
     private ImageView logo;
     private List<ScreenMessage> screenMessages;
     private String messageSuffix, messageSubtitle;
 
-    private RadioGroup radioGroup;
     private ListView listView;
 
     @Override
@@ -60,15 +44,13 @@ public class MainActivity extends FullscreenActivity {
         logo = findViewById(R.id.logo);
         logo.setVisibility(View.INVISIBLE);
 
-        radioGroup = findViewById(R.id.dynamicRadioGroup);
         listView = findViewById(R.id.dynamicListView);
 
-
         populateScreenMessages();
-        populateRadioButtons();
         populateListView();
     }
 
+    // Crete a list of all available messages from the two arrays in the resource file
     private void populateScreenMessages() {
 
         screenMessages = new ArrayList<>(0);
@@ -85,25 +67,6 @@ public class MainActivity extends FullscreenActivity {
 
     }
 
-
-    private void populateRadioButtons() {
-
-        radioGroup.setOrientation(LinearLayout.VERTICAL);
-
-        for (ScreenMessage s : screenMessages) {
-
-            RadioButton rb = new RadioButton(this);
-            rb.setText(s.message);
-            rb.setTag(s); // connects the rb to the message object itself
-            rb.setTypeface(s.defaultTypeface);
-            rb.setOnClickListener(radioButtonListener);
-
-            radioGroup.addView(rb);
-
-        }
-    }
-
-
     private void populateListView() {
 
         // Define a new Adapter
@@ -117,8 +80,6 @@ public class MainActivity extends FullscreenActivity {
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
                 screenMessages);
-
-
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
@@ -134,14 +95,9 @@ public class MainActivity extends FullscreenActivity {
                 // ListView Clicked item value
                 ScreenMessage blah = (ScreenMessage) listView.getItemAtPosition(position);
                 blah.display();
-
-
             }
-
         });
-
     }
-
 
 }
 

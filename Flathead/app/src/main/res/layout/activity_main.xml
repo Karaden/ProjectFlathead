@@ -67,13 +67,7 @@
                 android:padding="5dp"
                 app:srcCompat="@android:drawable/btn_star" />
 
-    </LinearLayout>
-
-        <RadioGroup
-        android:id="@+id/dynamicRadioGroup"
-        android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|end" />
+        </LinearLayout>
 
     </LinearLayout>
 
