@@ -17,58 +17,71 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
+        android:orientation="horizontal"
         android:text="@string/dummy_content"
         android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold">
 
-        <ListView
-            android:id="@+id/dynamicListView"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start">
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5">
 
-        </ListView>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/VisiblePanel"
-            android:layout_width="381dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:background="@color/flatScreenPrimary"
-            android:fadingEdge="horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/primaryLabel"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal|top"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:padding="20dp"
-                android:text="@string/default_message"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-            <TextView
-                android:id="@+id/secondaryLabel"
+            <ListView
+                android:id="@+id/dynamicListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textAlignment="textEnd"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:layout_gravity="center_vertical|start">
 
-            <ImageView
-                android:id="@+id/logo"
+            </ListView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/VisiblePanel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/logoDescription"
-                android:padding="5dp"
-                app:srcCompat="@android:drawable/btn_star" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@color/flatScreenPrimary"
+                android:fadingEdge="horizontal"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/primaryLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:text="@string/default_message"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
+                <TextView
+                    android:id="@+id/secondaryLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/logoDescription"
+                    android:padding="5dp"
+                    app:srcCompat="@android:drawable/btn_star" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
     </LinearLayout>
 
     <!-- This FrameLayout insets its children based on system windows using
