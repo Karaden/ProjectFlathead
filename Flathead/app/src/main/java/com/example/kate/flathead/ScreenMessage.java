@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 abstract class ScreenMessage {
     String message;
-    Typeface defaultTypeface;
+    Typeface typeface;
     TextView primaryLabel;
     TextView secondaryLabel;
     ImageView logo;
@@ -22,11 +22,11 @@ abstract class ScreenMessage {
     String messageSubtitle;
 
 
-    ScreenMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
+    ScreenMessage(String message, Typeface typeface, TextView primaryLabel,
                   TextView secondaryLabel, ImageView logo, String messageSuffix,
                   String messageSubtitle) {
         this.message = message;
-        this.defaultTypeface = defaultTypeface;
+        this.typeface = typeface;
         this.primaryLabel = primaryLabel;
         this.secondaryLabel = secondaryLabel;
         this.logo = logo;

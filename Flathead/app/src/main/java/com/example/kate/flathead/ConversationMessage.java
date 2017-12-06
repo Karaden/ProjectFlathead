@@ -18,7 +18,7 @@ class ConversationMessage extends ScreenMessage {
     }
 
     void display() {
-        primaryLabel.setTypeface(defaultTypeface);
+        primaryLabel.setTypeface(typeface);
         primaryLabel.setText(message + messageSuffix);
         primaryLabel.setTextColor(Color.BLACK);
 

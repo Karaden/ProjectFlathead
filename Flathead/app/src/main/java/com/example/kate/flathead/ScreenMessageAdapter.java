@@ -28,10 +28,7 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        // return super.getView(position, convertView, parent);
-
         TextView text;
-
 
         if (convertView == null) {
             text = new TextView(getContext());
@@ -42,10 +39,10 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
         ScreenMessage sm = (ScreenMessage) getItem(position);
 
         text.setText(sm.message);
-        text.setTypeface(sm.defaultTypeface);
+        text.setTypeface(sm.typeface);
         text.setPadding(20, 30, 20, 30);
-        return text;
 
+        return text;
 
     }
 

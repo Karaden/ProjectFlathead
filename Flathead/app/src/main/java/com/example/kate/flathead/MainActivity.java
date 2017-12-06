@@ -31,31 +31,29 @@ public class MainActivity extends FullscreenActivity {
 
     private void initialise() {
         /*
-        TODO: things like the default font, colour, logo etc should be specific to class, not object.
+        TODO: the following resources should be specific to class, not object.
          Can they be set in the class file, rather than on object instantiation?
         */
 
         moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
-
-        primaryLabel = findViewById(R.id.primaryLabel);
-        secondaryLabel = findViewById(R.id.secondaryLabel);
-
-        secondaryLabel.setVisibility(View.GONE);
-
         messageSuffix = getResources().getString(R.string.messageSuffix);
         messageSubtitle = getResources().getString(R.string.messageSubtitle);
 
-        logo = findViewById(R.id.logo);
-        logo.setVisibility(View.INVISIBLE);
 
+        primaryLabel = findViewById(R.id.primaryLabel);
+        secondaryLabel = findViewById(R.id.secondaryLabel);
+        logo = findViewById(R.id.logo);
         listView = findViewById(R.id.dynamicListView);
+
+        secondaryLabel.setVisibility(View.GONE);
+        logo.setVisibility(View.INVISIBLE);
 
         populateScreenMessages();
         populateListView();
     }
 
-    // Crete a list of all available messages from the two arrays in the resource file
+    // Create a list of all available messages from the two arrays in the resource file
     private void populateScreenMessages() {
 
         screenMessages = new ArrayList<>(0);
