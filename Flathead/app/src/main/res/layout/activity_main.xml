@@ -15,6 +15,7 @@
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:baselineAligned="false"
         android:gravity="center"
         android:keepScreenOn="true"
         android:orientation="horizontal"
@@ -26,7 +27,7 @@
         <RelativeLayout
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="0.5">
+            android:layout_weight="0.25">
 
             <ListView
                 android:id="@+id/dynamicListView"
@@ -82,6 +83,20 @@
             </LinearLayout>
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25">
+
+            <Spinner
+                android:id="@+id/spin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|end">
+
+            </Spinner>
+        </RelativeLayout>
     </LinearLayout>
 
     <!-- This FrameLayout insets its children based on system windows using
@@ -110,6 +125,7 @@
                 android:text="@string/dummy_button" />
 
         </LinearLayout>
+
     </FrameLayout>
 </FrameLayout>
 
