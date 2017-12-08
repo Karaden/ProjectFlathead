@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class MainActivity extends FullscreenActivity {
     private String messageSuffix, messageSubtitle;
 
     private ListView listView;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +47,14 @@ public class MainActivity extends FullscreenActivity {
         secondaryLabel = findViewById(R.id.secondaryLabel);
         logo = findViewById(R.id.logo);
         listView = findViewById(R.id.dynamicListView);
+        spinner = findViewById(R.id.spin);
 
         secondaryLabel.setVisibility(View.GONE);
         logo.setVisibility(View.INVISIBLE);
 
         populateScreenMessages();
         populateListView();
+        populateSpinner();
     }
 
     // Create a list of all available messages from the two arrays in the resource file
@@ -99,6 +103,30 @@ public class MainActivity extends FullscreenActivity {
                 ScreenMessage blah = (ScreenMessage) listView.getItemAtPosition(position);
                 blah.display();
             }
+        });
+    }
+
+    private void populateSpinner() {
+        ScreenMessageAdapter<ScreenMessage> adapter = new ScreenMessageAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                screenMessages);
+
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                ScreenMessage blah = (ScreenMessage) spinner.getItemAtPosition(position);
+                blah.display();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
         });
     }
 
