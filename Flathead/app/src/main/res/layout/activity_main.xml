@@ -23,6 +23,7 @@
         android:textSize="50sp"
         android:textStyle="bold">
 
+        <!--The list of messages to pick from-->
         <RelativeLayout
             android:layout_width="0dip"
             android:layout_height="fill_parent"
@@ -37,6 +38,7 @@
             </ListView>
         </RelativeLayout>
 
+        <!--The message display-->
         <RelativeLayout
             android:layout_width="0dip"
             android:layout_height="fill_parent"
@@ -83,7 +85,9 @@
 
         </RelativeLayout>
 
+        <!--The video preview panel-->
         <RelativeLayout
+            android:id="@+id/container"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="0.25">

@@ -27,6 +27,16 @@ public class MainActivity extends FullscreenActivity {
         super.onCreate(savedInstanceState);
 
         initialise();
+        init_camera(savedInstanceState);
+    }
+
+    private void init_camera(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_main);
+        if (null == savedInstanceState) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, Camera2BasicFragment.newInstance())
+                    .commit();
+        }
     }
 
     private void initialise() {
