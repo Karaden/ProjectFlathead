@@ -13,4 +13,6 @@
     <string name="buttonlabel">Update font</string>
     <string name="spacer">spacer</string>
 
+    <string name="picture">picture</string>
+    <string name="description_info">description_info</string>
 </resources>
