@@ -81,26 +81,7 @@ public class Camera2BasicFragment extends Fragment
      * Tag for the {@link Log}.
      */
     private static final String TAG = "Camera2BasicFragment";
-    /**
-     * Camera state: Showing camera preview.
-     */
-    private static final int STATE_PREVIEW = 0;
-    /**
-     * Camera state: Waiting for the focus to be locked.
-     */
-    private static final int STATE_WAITING_LOCK = 1;
-    /**
-     * Camera state: Waiting for the exposure to be precapture state.
-     */
-    private static final int STATE_WAITING_PRECAPTURE = 2;
-    /**
-     * Camera state: Waiting for the exposure state to be something other than precapture.
-     */
-    private static final int STATE_WAITING_NON_PRECAPTURE = 3;
-    /**
-     * Camera state: Picture was taken.
-     */
-    private static final int STATE_PICTURE_TAKEN = 4;
+
     /**
      * Max preview width that is guaranteed by Camera2 API
      */
@@ -665,19 +646,11 @@ public class Camera2BasicFragment extends Fragment
         mTextureView.setTransform(matrix);
     }
 
-
-
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.picture: {
-                // takePicture();
-
-                //TODO: use button to iterate through camera devices
                 switchCamera();
-
                 break;
             }
             case R.id.info: {
@@ -696,7 +669,10 @@ public class Camera2BasicFragment extends Fragment
 
 
     private void switchCamera() {
-        //TODO implement this!
+        //TODO Decide if I want to implement a camera-switcher button. Probably no need!
+
+        //Would need to consider refactoring setUpCameraOutputs - currently hardcoded to
+        //only use front-facing camera
     }
 
     private void setAutoFlash(CaptureRequest.Builder requestBuilder) {
