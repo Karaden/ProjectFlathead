@@ -1,0 +1,31 @@
+Device Attached 
+Device Descriptor: 
+Device Class: Wireless Miscellaneous -> Subclass: 0x02 -> Protocol: 0x01 
+Max Packet Size: 64 
+VID: 0x145f 
+PID:0x01cc 
+
+Configuration Descriptor: 
+4 Interfaces 
+Attributes: BusPowered 
+Max Power: 500mA 
+
+- Interface 0 Class: Video -> Subclass: 0x01 -> Protocol: 0x00, 1 Endpoints 
+    - Endpoint 3, Interrupt IN, 16 byte packets 
+- Interface 1 Class: Video -> Subclass: 0x02 -> Protocol: 0x00, 0 Endpoints 
+- Interface 1 Class: Video -> Subclass: 0x02 -> Protocol: 0x00, 1 Endpoints 
+    - Endpoint 1, Isochronous IN, 128 byte packets 
+- Interface 1 Class: Video -> Subclass: 0x02 -> Protocol: 0x00, 1 Endpoints 
+    - Endpoint 1, Isochronous IN, 256 byte packets 
+- Interface 1 Class: Video -> Subclass: 0x02 -> Protocol: 0x00, 1 Endpoints 
+    - Endpoint 1, Isochronous IN, 800 byte packets 
+- Interface 1 Class: Video -> Subclass: 0x02 -> Protocol: 0x00, 1 Endpoints 
+    - Endpoint 1, Isochronous IN, 2848 byte packets 
+- Interface 1 Class: Video -> Subclass: 0x02 -> Protocol: 0x00, 1 Endpoints 
+    - Endpoint 1, Isochronous IN, 4896 byte packets 
+- Interface 1 Class: Video -> Subclass: 0x02 -> Protocol: 0x00, 1 Endpoints 
+    - Endpoint 1, Isochronous IN, 5120 byte packets 
+- Interface 2 Class: Audio -> Subclass: 0x01 -> Protocol: 0x00, 0 Endpoints 
+- Interface 3 Class: Audio -> Subclass: 0x02 -> Protocol: 0x00, 0 Endpoints 
+- Interface 3 Class: Audio -> Subclass: 0x02 -> Protocol: 0x00, 1 Endpoints 
+    - Endpoint 4, Isochronous IN, 400 byte packets 
