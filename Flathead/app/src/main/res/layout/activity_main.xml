@@ -29,7 +29,6 @@
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="0.3">
-
             <ListView
                 android:id="@+id/dynamicListView"
                 android:layout_width="match_parent"
@@ -91,6 +90,12 @@
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="0.3">
+
+            <fragment
+                android:id="@+id/vid_fragment"
+                android:name="com.example.kate.flathead.Camera2BasicFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
 
         </RelativeLayout>

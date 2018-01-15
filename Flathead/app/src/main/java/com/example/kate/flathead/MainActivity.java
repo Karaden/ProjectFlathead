@@ -26,15 +26,10 @@ public class MainActivity extends FullscreenActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        init_camera();
         initialise();
-
     }
 
-    private void init_camera() {
 
-
-    }
 
     private void initialise() {
         /*
