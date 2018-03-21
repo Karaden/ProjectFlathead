@@ -1,9 +1,5 @@
 package com.example.kate.flathead;
 
-/*
-  Handle the reading/writing of the messages file
- */
-
 import android.content.res.AssetManager;
 import android.util.Log;
 
@@ -13,6 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Created by kate on 21/3/18.
+ * Handle the reading/writing of the messages file
+ */
 class FileManager {
     static void checkAndLoadMessages(File externalFilesDir, String messageFileName, AssetManager assetManager) {
 
