@@ -2,12 +2,15 @@ package com.example.kate.flathead;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,8 @@ public class MainActivity extends FullscreenActivity {
     private String messageSuffix, messageSubtitle;
 
     private ListView listView;
+    private String moodFileName = "mood_messages.txt";
+    private String conversationFileName = "conversation_messages.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +56,35 @@ public class MainActivity extends FullscreenActivity {
         secondaryLabel.setVisibility(View.GONE);
         logo.setVisibility(View.INVISIBLE);
 
+        checkAndLoadMessages();
         populateScreenMessages();
         populateListView();
     }
+
+    private void checkAndLoadMessages() {
+
+        File outFile = new File(getExternalFilesDir(null), moodFileName);
+
+        //if it doesn't exist
+        if (!outFile.isFile() && !outFile.isDirectory()) {
+
+            try {
+                outFile.createNewFile();
+
+            } catch (IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + moodFileName, e);
+            }
+        }
+    }
+
+
 
     // Create a list of all available messages from the two arrays in the resource file
     private void populateScreenMessages() {
 
         screenMessages = new ArrayList<>(0);
 
+        //TODO: change source from Resources to custom location
         for (String m : getResources().getStringArray(R.array.moodPrompts)) {
             screenMessages.add(new MoodPromptMessage(m, moodPromptFont, primaryLabel,
                     secondaryLabel, logo, messageSuffix, messageSubtitle));
