@@ -1,20 +1,13 @@
 package com.example.kate.flathead;
 
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +21,7 @@ public class MainActivity extends FullscreenActivity {
     private String messageSuffix, messageSubtitle;
 
     private ListView listView;
-    private String moodFileName = "mood_messages.txt";
-    private String conversationFileName = "conversation_messages.txt";
+    private String messageFileName = "messages.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,51 +58,7 @@ public class MainActivity extends FullscreenActivity {
     }
 
     private void checkAndLoadMessages() {
-
-        File outFile = new File(getExternalFilesDir(null), moodFileName);
-
-        //if it doesn't exist
-        if (!outFile.isFile() && !outFile.isDirectory()) {
-
-
-            AssetManager assetManager = getAssets();
-
-            InputStream in = null;
-            OutputStream out = null;
-
-            try {
-
-                in = assetManager.open("arrays.xml");
-                out = new FileOutputStream(outFile);
-                copyFile(in, out);
-
-            } catch (IOException e) {
-                Log.e("tag", "Failed to copy asset file: " + moodFileName, e);
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        // NOOP
-                    }
-                }
-                if (out != null) {
-                    try {
-                        out.close();
-                    } catch (IOException e) {
-                        // NOOP
-                    }
-                }
-            }
-        }
-    }
-
-    private void copyFile(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[1024];
-        int read;
-        while ((read = in.read(buffer)) != -1) {
-            out.write(buffer, 0, read);
-        }
+        FileManager.checkAndLoadMessages(getExternalFilesDir(null), messageFileName, getAssets());
     }
 
 
