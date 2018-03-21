@@ -2,12 +2,14 @@ package com.example.kate.flathead;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,8 @@ public class MainActivity extends FullscreenActivity {
     private String messageSuffix, messageSubtitle;
 
     private ListView listView;
-    private String messageFileName = "messages.txt";
+    private String moodFile = "mood_messages.txt";
+    private String conversationFile = "conversation_messages.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,6 @@ public class MainActivity extends FullscreenActivity {
 
         initialise();
     }
-
-
 
     private void initialise() {
         /*
@@ -52,13 +53,14 @@ public class MainActivity extends FullscreenActivity {
         secondaryLabel.setVisibility(View.GONE);
         logo.setVisibility(View.INVISIBLE);
 
-        checkAndLoadMessages();
+        ensureMessagesAreAvailable();
         populateScreenMessages();
         populateListView();
     }
 
-    private void checkAndLoadMessages() {
-        FileManager.checkAndLoadMessages(getExternalFilesDir(null), messageFileName, getAssets());
+    private void ensureMessagesAreAvailable() {
+        FileManager.writeMessageFile(getExternalFilesDir(null), moodFile, getAssets(), moodFile);
+        FileManager.writeMessageFile(getExternalFilesDir(null), conversationFile, getAssets(), conversationFile);
     }
 
 
@@ -68,15 +70,22 @@ public class MainActivity extends FullscreenActivity {
 
         screenMessages = new ArrayList<>(0);
 
-        //TODO: change source from Resources to custom location
-        for (String m : getResources().getStringArray(R.array.moodPrompts)) {
-            screenMessages.add(new MoodPromptMessage(m, moodPromptFont, primaryLabel,
-                    secondaryLabel, logo, messageSuffix, messageSubtitle));
+        try {
+            for (String m : FileManager.readArrayFromFile(getExternalFilesDir(null), moodFile)) {
+                screenMessages.add(new MoodPromptMessage(m, moodPromptFont, primaryLabel,
+                        secondaryLabel, logo, messageSuffix, messageSubtitle));
+            }
+        } catch (IOException e) {
+            Log.e("tag", "Failed to read mood message file", e);
         }
 
-        for (String m : getResources().getStringArray(R.array.conversations)) {
-            screenMessages.add(new ConversationMessage(m, conversationFont, primaryLabel,
-                    secondaryLabel, logo, messageSuffix, messageSubtitle));
+        try {
+            for (String m : FileManager.readArrayFromFile(getExternalFilesDir(null), conversationFile)) {
+                screenMessages.add(new ConversationMessage(m, conversationFont, primaryLabel,
+                        secondaryLabel, logo, messageSuffix, messageSubtitle));
+            }
+        } catch (IOException e) {
+            Log.e("tag", "Failed to read conversation message file", e);
         }
 
     }
