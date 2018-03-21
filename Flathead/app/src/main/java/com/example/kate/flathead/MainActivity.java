@@ -64,7 +64,6 @@ public class MainActivity extends FullscreenActivity {
     }
 
 
-
     // Create a list of all available messages from the two arrays in the resource file
     private void populateScreenMessages() {
 
