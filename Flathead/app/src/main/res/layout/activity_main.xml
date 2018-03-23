@@ -93,7 +93,7 @@
 
             <fragment
                 android:id="@+id/vid_fragment"
-                android:name="com.example.kate.flathead.Camera2BasicFragment"
+                android:name="com.example.kate.flathead.camera.Camera2BasicFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

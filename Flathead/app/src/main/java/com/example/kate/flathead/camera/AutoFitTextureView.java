@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kate.flathead;
+package com.example.kate.flathead.camera;
 
 import android.content.Context;
 import android.util.AttributeSet;

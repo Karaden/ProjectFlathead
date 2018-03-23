@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kate.flathead;
+package com.example.kate.flathead.camera;
 
 import android.Manifest;
 import android.app.Activity;
@@ -55,6 +55,8 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.example.kate.flathead.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
