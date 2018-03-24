@@ -1,135 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0099cc"
+    android:keepScreenOn="true"
     android:orientation="horizontal"
     tools:context="com.example.kate.flathead.MainActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <LinearLayout
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:orientation="horizontal"
-        android:text="@string/dummy_content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold">
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.25">
 
-
-        <!--The list of messages to pick from-->
-        <RelativeLayout
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.25">
-            <ListView
-                android:id="@+id/dynamicListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start">
-
-            </ListView>
-        </RelativeLayout>
-
-        <!--The message display-->
-        <RelativeLayout
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5">
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/VisiblePanel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:background="@color/flatScreenPrimary"
-                android:fadingEdge="horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/primaryLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center_horizontal|top"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:padding="20dp"
-                    android:text="@string/default_message"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-                <TextView
-                    android:id="@+id/secondaryLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textAlignment="textEnd"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-                <ImageView
-                    android:id="@+id/logo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/logoDescription"
-                    android:padding="5dp"
-                    app:srcCompat="@android:drawable/btn_star" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <!--The video preview panel-->
-        <RelativeLayout
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.25">
-
-            <fragment
-                android:id="@+id/vid_fragment"
-                android:name="com.example.kate.flathead.camera.Camera2BasicFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </RelativeLayout>
-
-
-    </LinearLayout>
-
-    <!-- This FrameLayout insets its children based on system windows using
-        android:fitsSystemWindows. -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
+        <fragment
+            android:id="@+id/fragment1"
+            android:name="com.example.kate.flathead.blue.BlueFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_blue" />
+    </RelativeLayout>
 
-            <Button
-                android:id="@+id/dummy_button"
-                style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/dummy_button" />
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.5">
 
-        </LinearLayout>
-    </FrameLayout>
-</FrameLayout>
+        <fragment
+            android:id="@+id/fragment2"
+            android:name="com.example.kate.flathead.red.RedFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_red" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.25">
+
+        <fragment
+            android:id="@+id/fragment3"
+            android:name="com.example.kate.flathead.green.GreenFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_green" />
+
+    </RelativeLayout>
+
+
+    <!--&lt;!&ndash; The primary full-screen view. This can be replaced with whatever view-->
+    <!--is needed to present your content, e.g. VideoView, SurfaceView,-->
+    <!--TextureView, etc. &ndash;&gt;-->
+
+    <!--&lt;!&ndash;The list of messages to pick from&ndash;&gt;-->
+    <!--<RelativeLayout-->
+    <!--android:layout_width="0dip"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_weight="0.25">-->
+    <!--<ListView-->
+    <!--android:id="@+id/dynamicListView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_vertical|start">-->
+
+    <!--</ListView>-->
+    <!--</RelativeLayout>-->
+
+    <!--&lt;!&ndash;The message display&ndash;&gt;-->
+    <!--<RelativeLayout-->
+    <!--android:layout_width="0dip"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_weight="0.5">-->
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/VisiblePanel"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:background="@color/flatScreenPrimary"-->
+    <!--android:fadingEdge="horizontal"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/primaryLabel"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="200dp"-->
+    <!--android:layout_gravity="center_horizontal|top"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:padding="20dp"-->
+    <!--android:text="@string/default_message"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Headline" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/secondaryLabel"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="10dp"-->
+    <!--android:textAlignment="textEnd"-->
+    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/logo"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:contentDescription="@string/logoDescription"-->
+    <!--android:padding="5dp"-->
+    <!--app:srcCompat="@android:drawable/btn_star" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--&lt;!&ndash;The video preview panel&ndash;&gt;-->
+    <!--<RelativeLayout-->
+    <!--android:layout_width="0dip"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_weight="0.25">-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/vid_fragment"-->
+    <!--android:name="com.example.kate.flathead.camera.Camera2BasicFragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+
+    <!--</RelativeLayout>-->
+
+
+</LinearLayout>
 
 
