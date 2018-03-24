@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0099cc"
+    android:baselineAligned="false"
     android:keepScreenOn="true"
     android:orientation="horizontal"
     tools:context="com.example.kate.flathead.MainActivity">
@@ -34,17 +35,19 @@
             tools:layout="@layout/fragment_red" />
     </RelativeLayout>
 
+
+    <!--The video preview panel-->
     <RelativeLayout
         android:layout_width="0dip"
         android:layout_height="fill_parent"
         android:layout_weight="0.25">
 
         <fragment
-            android:id="@+id/fragment3"
-            android:name="com.example.kate.flathead.green.GreenFragment"
+            android:id="@+id/vid_fragment"
+            android:name="com.example.kate.flathead.camera.Camera2BasicFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_green" />
+            tools:layout="@layout/fragment_camera2_basic" />
 
     </RelativeLayout>
 
@@ -111,21 +114,6 @@
     <!--app:srcCompat="@android:drawable/btn_star" />-->
 
     <!--</LinearLayout>-->
-
-    <!--</RelativeLayout>-->
-
-    <!--&lt;!&ndash;The video preview panel&ndash;&gt;-->
-    <!--<RelativeLayout-->
-    <!--android:layout_width="0dip"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:layout_weight="0.25">-->
-
-    <!--<fragment-->
-    <!--android:id="@+id/vid_fragment"-->
-    <!--android:name="com.example.kate.flathead.camera.Camera2BasicFragment"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
-
 
     <!--</RelativeLayout>-->
 
