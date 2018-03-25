@@ -1,10 +1,7 @@
 package com.example.kate.flathead.message.types;
 
 
-import android.graphics.Color;
 import android.graphics.Typeface;
-
-import com.example.kate.flathead.message.display.MessageDisplayFragment;
 
 public class ConversationMessage extends ScreenMessage {
 
@@ -15,15 +12,6 @@ public class ConversationMessage extends ScreenMessage {
 
         super(message, defaultTypeface, messageSuffix, messageSubtitle, logoImage);
 
-    }
-
-
-    public void display(MessageDisplayFragment mdf) {
-        // send info only to DisplayFragment to decide how to display
-        mdf.updateDisplay(
-                (primaryText + messageSuffix),
-                typeface,
-                Color.BLACK);
     }
 
 }

@@ -2,8 +2,6 @@ package com.example.kate.flathead.message.types;
 
 import android.graphics.Typeface;
 
-import com.example.kate.flathead.message.display.MessageDisplayFragment;
-
 /**
  * Created by kate on 20/11/17.
  * Representation of the kind of messages that can be displayed on the Flathead.
@@ -28,8 +26,6 @@ public abstract class ScreenMessage {
         this.logoResourceID = logoImage;
 
     }
-
-    public abstract void display(MessageDisplayFragment mdf);
 
     public String toString() {
 
