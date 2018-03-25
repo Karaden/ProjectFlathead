@@ -5,10 +5,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.kate.flathead.immersivemode.BasicImmersiveModeFragment;
+import com.example.kate.flathead.message.MessageFragmentsController;
 
 
 public class MainActivity extends AppCompatActivity {
 
+
+    public MessageFragmentsController mfc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

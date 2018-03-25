@@ -2,12 +2,8 @@ package com.example.kate.flathead.message;
 
 import android.app.Fragment;
 import android.graphics.Typeface;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -35,20 +31,23 @@ public class MessageFragmentsController extends Fragment {
     private String moodFile = "mood_messages.txt";
     private String conversationFile = "conversation_messages.txt";
 
-    @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_messagepicker, container, false);
+    public void initialisePicker() {
+        listView = getView().findViewById(R.id.dynamicListView); //TODO: null check
+
+        ensureMessagesAreAvailable();
+        populateScreenMessages();
+        populateListView();
     }
 
+    public void initialiseDisplay() {
+        // Locations to send things to
+        primaryLabel = getView().findViewById(R.id.primaryLabel);
+        secondaryLabel = getView().findViewById(R.id.secondaryLabel);
+        logo = getView().findViewById(R.id.logo);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        initialise();
+        secondaryLabel.setVisibility(View.GONE);
+        logo.setVisibility(View.INVISIBLE);
     }
 
     private void initialise() {
@@ -63,21 +62,7 @@ public class MessageFragmentsController extends Fragment {
         messageSuffix = getResources().getString(R.string.messageSuffix);
         messageSubtitle = getResources().getString(R.string.messageSubtitle);
 
-        //Locations to send things to
-//        primaryLabel = getView().findViewById(R.id.primaryLabel);
-//        secondaryLabel = getView().findViewById(R.id.secondaryLabel);
-//        logo = getView().findViewById(R.id.logo);
 
-
-        listView = getView().findViewById(R.id.dynamicListView); //TODO: null check
-
-
-//        secondaryLabel.setVisibility(View.GONE);
-//        logo.setVisibility(View.INVISIBLE);
-
-        ensureMessagesAreAvailable();
-        populateScreenMessages();
-        populateListView();
     }
 
     private void ensureMessagesAreAvailable() {

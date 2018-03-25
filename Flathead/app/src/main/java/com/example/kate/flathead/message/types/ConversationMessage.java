@@ -15,6 +15,7 @@ public class ConversationMessage extends ScreenMessage {
 
         super(message, defaultTypeface, primaryLabel, secondaryLabel, logo, messageSuffix,
                 messageSubtitle);
+
     }
 
     public void display() {

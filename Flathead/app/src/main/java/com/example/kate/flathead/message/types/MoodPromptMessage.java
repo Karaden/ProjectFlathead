@@ -19,10 +19,13 @@ public class MoodPromptMessage extends ScreenMessage {
     Typeface typeface = Resources.getSystem().getFont(R.font.furmanite);
     */
 
+    // Typeface mTypeface = Typeface.createFromFile("fonts/furmanite.otf"); //TODO: check this works, apply to Convo types
+    // String mMessageSuffix = Resources.getSystem().getString(R.string.messageSuffix);
+
+
     public MoodPromptMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
                              TextView secondaryLabel, ImageView logo, String messageSuffix,
                              String messageSubtitle) {
-
         super(message, defaultTypeface, primaryLabel, secondaryLabel, logo, messageSuffix,
                 messageSubtitle);
 
