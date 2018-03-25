@@ -1,11 +1,9 @@
 package com.example.kate.flathead.message.types;
 
-
 import android.graphics.Typeface;
 
 public class ConversationMessage extends ScreenMessage {
 
-    //String mMessageSuffix =
 
     public ConversationMessage(String message, Typeface defaultTypeface, String messageSuffix,
                                String messageSubtitle, int logoImage) {
@@ -13,5 +11,4 @@ public class ConversationMessage extends ScreenMessage {
         super(message, defaultTypeface, messageSuffix, messageSubtitle, logoImage);
 
     }
-
 }
