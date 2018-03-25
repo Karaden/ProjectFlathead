@@ -11,9 +11,9 @@ public class ConversationMessage extends ScreenMessage {
     //String mMessageSuffix =
 
     public ConversationMessage(String message, Typeface defaultTypeface, String messageSuffix,
-                               String messageSubtitle, int logoResourceID) {
+                               String messageSubtitle, int logoImage) {
 
-        super(message, defaultTypeface, messageSuffix, messageSubtitle, logoResourceID);
+        super(message, defaultTypeface, messageSuffix, messageSubtitle, logoImage);
 
     }
 

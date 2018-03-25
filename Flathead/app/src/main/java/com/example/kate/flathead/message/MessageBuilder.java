@@ -21,10 +21,12 @@ public class MessageBuilder {
 
     private List<ScreenMessage> screenMessages;
     private String messageSuffix, messageSubtitle;
+    private int logo;
 
     private ListView listView;
     private String moodFile = "mood_messages.txt";
     private String conversationFile = "conversation_messages.txt";
+
 
     private Activity act;
 
@@ -46,6 +48,8 @@ public class MessageBuilder {
         conversationFont = Typeface.createFromAsset(act.getAssets(), "fonts/datacontrol.ttf");
         messageSuffix = act.getResources().getString(R.string.messageSuffix);
         messageSubtitle = act.getResources().getString(R.string.secondaryText);
+        logo = R.drawable.functionistcouncilinsignia;
+
 
         ensureMessagesAreAvailable();
         populateScreenMessages();
@@ -63,7 +67,7 @@ public class MessageBuilder {
 
         try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), moodFile)) {
-                screenMessages.add(new MoodPromptMessage(m, moodPromptFont, messageSuffix, messageSubtitle, R.id.logo));
+                screenMessages.add(new MoodPromptMessage(m, moodPromptFont, messageSuffix, messageSubtitle, logo));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read mood primaryText file", e);
@@ -71,7 +75,7 @@ public class MessageBuilder {
 
         try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), conversationFile)) {
-                screenMessages.add(new ConversationMessage(m, conversationFont, messageSuffix, messageSubtitle, R.id.logo));
+                screenMessages.add(new ConversationMessage(m, conversationFont, messageSuffix, messageSubtitle, logo));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read conversation primaryText file", e);

@@ -20,12 +20,12 @@ public abstract class ScreenMessage {
     public int logoResourceID;
 
 
-    ScreenMessage(String primaryText, Typeface typeface, String messageSuffix, String secondaryText, int logoResourceID) {
+    ScreenMessage(String primaryText, Typeface typeface, String messageSuffix, String secondaryText, int logoImage) {
         this.primaryText = primaryText;
         this.typeface = typeface;
         this.messageSuffix = messageSuffix;
         this.secondaryText = secondaryText;
-        this.logoResourceID = logoResourceID;
+        this.logoResourceID = logoImage;
 
     }
 

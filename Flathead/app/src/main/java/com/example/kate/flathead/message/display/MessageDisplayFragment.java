@@ -55,7 +55,8 @@ public class MessageDisplayFragment extends Fragment {
     }
 
     public void updateDisplay(String primaryText, Typeface primaryTypeface, int primaryTextColour,
-                              String secondaryText, Typeface secondaryTypeface, int secondaryTextColour, int logo) {
+                              String secondaryText, Typeface secondaryTypeface, int secondaryTextColour,
+                              int logo) {
 
         mPrimaryLabel.setVisibility(View.VISIBLE);
         mPrimaryLabel.setText(primaryText);
@@ -67,9 +68,9 @@ public class MessageDisplayFragment extends Fragment {
         mSecondaryLabel.setTypeface(secondaryTypeface);
         mSecondaryLabel.setTextColor(secondaryTextColour);
 
-        mLogo.setVisibility(View.VISIBLE);
         mLogo.setImageResource(logo);
 
+        mLogo.setVisibility(View.VISIBLE);
     }
 
     public void updateDisplay(String primaryText, Typeface primaryTypeface,
