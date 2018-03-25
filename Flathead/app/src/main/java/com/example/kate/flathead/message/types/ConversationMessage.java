@@ -3,27 +3,25 @@ package com.example.kate.flathead.message.types;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.example.kate.flathead.message.display.MessageDisplayFragment;
 
 public class ConversationMessage extends ScreenMessage {
 
-    public ConversationMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
-                               TextView secondaryLabel, ImageView logo, String messageSuffix,
-                               String messageSubtitle) {
+    public ConversationMessage(String message, Typeface defaultTypeface, String messageSuffix,
+                               String messageSubtitle, int logoResourceID) {
 
-        super(message, defaultTypeface, primaryLabel, secondaryLabel, logo, messageSuffix,
-                messageSubtitle);
+        super(message, defaultTypeface, messageSuffix, messageSubtitle, logoResourceID);
 
     }
 
-    public void display() {
-        primaryLabel.setTypeface(typeface);
-        primaryLabel.setText(message + messageSuffix);
-        primaryLabel.setTextColor(Color.BLACK);
 
-        secondaryLabel.setVisibility(View.GONE);
-        logo.setVisibility(View.GONE);
+    public void display(MessageDisplayFragment mdf) {
+        // send info only to DisplayFragment to decide how to display
+        mdf.updateDisplay(
+                (message + messageSuffix),
+                typeface,
+                Color.BLACK);
     }
+
 }

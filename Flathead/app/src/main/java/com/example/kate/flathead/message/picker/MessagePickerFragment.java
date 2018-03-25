@@ -1,17 +1,15 @@
 package com.example.kate.flathead.message.picker;
 
+import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.kate.flathead.R;
 import com.example.kate.flathead.message.FileManager;
@@ -29,16 +27,17 @@ import java.util.List;
  * Message picker fragment-specific stuff
  */
 
-public class MessagePickerFragment extends Fragment {
+public class MessagePickerFragment extends ListFragment {
 
-    private TextView primaryLabel, secondaryLabel;
+    OnMessageSelectedListener mCallback;
+
     private Typeface moodPromptFont, conversationFont;
 
     ////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////The following is TEMPORARY FOR TESTING////////////////////////////
     //////////////////////it belongs in the controller/interface/////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////
-    private ImageView logo;
+
     private List<ScreenMessage> screenMessages;
     private String messageSuffix, messageSubtitle;
     private ListView listView;
@@ -81,7 +80,6 @@ public class MessagePickerFragment extends Fragment {
 
     }
 
-
     public void initialisePicker() {
         listView = getView().findViewById(R.id.dynamicListView); //TODO: null check
 
@@ -90,21 +88,10 @@ public class MessagePickerFragment extends Fragment {
         populateListView();
     }
 
-    public void initialiseDisplay() {
-        // Locations to send things to
-        primaryLabel = getView().findViewById(R.id.primaryLabel);
-        secondaryLabel = getView().findViewById(R.id.secondaryLabel);
-        logo = getView().findViewById(R.id.logo);
-
-        secondaryLabel.setVisibility(View.GONE);
-        logo.setVisibility(View.INVISIBLE);
-    }
-
     private void ensureMessagesAreAvailable() {
         FileManager.writeMessageFile(getActivity().getExternalFilesDir(null), moodFile, getActivity().getAssets(), moodFile);
         FileManager.writeMessageFile(getActivity().getExternalFilesDir(null), conversationFile, getActivity().getAssets(), conversationFile);
     }
-
 
     // Create a list of all available messages from the two arrays in the resource file
     private void populateScreenMessages() {
@@ -113,8 +100,7 @@ public class MessagePickerFragment extends Fragment {
 
         try {
             for (String m : FileManager.readArrayFromFile(getActivity().getExternalFilesDir(null), moodFile)) {
-                screenMessages.add(new MoodPromptMessage(m, moodPromptFont, primaryLabel,
-                        secondaryLabel, logo, messageSuffix, messageSubtitle));
+                screenMessages.add(new MoodPromptMessage(m, moodPromptFont, messageSuffix, messageSubtitle, R.id.logo));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read mood message file", e);
@@ -122,8 +108,7 @@ public class MessagePickerFragment extends Fragment {
 
         try {
             for (String m : FileManager.readArrayFromFile(getActivity().getExternalFilesDir(null), conversationFile)) {
-                screenMessages.add(new ConversationMessage(m, conversationFont, primaryLabel,
-                        secondaryLabel, logo, messageSuffix, messageSubtitle));
+                screenMessages.add(new ConversationMessage(m, conversationFont, messageSuffix, messageSubtitle, R.id.logo));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read conversation message file", e);
@@ -149,21 +134,53 @@ public class MessagePickerFragment extends Fragment {
         listView.setAdapter(adapter);
 
 
-        // ListView Item Click Listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item value
-                ScreenMessage sm = (ScreenMessage) listView.getItemAtPosition(position);
-                // TODO: reenable when DisplayFragment is ready
-                // sm.display();
-            }
-        });
+//        // ListView Item Click Listener
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//
+//                // ListView Clicked item value
+//                ScreenMessage sm = (ScreenMessage) listView.getItemAtPosition(position);
+//                // TODO: reenable when DisplayFragment is ready
+//                // sm.display();
+//            }
+//        });
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
 
+        // Notify the parent activity of selected item
+        mCallback.onMessageSelected(position);
+
+        // Set the item as checked to be highlighted when in two-pane layout
+        //  getListView().setItemChecked(position, true);
+
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception.
+        try {
+            mCallback = (OnMessageSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }
+
+    // The container Activity must implement this interface so the frag can deliver messages
+    public interface OnMessageSelectedListener {
+        /**
+         * Called by MessagePickerFragment when a list item is selected
+         */
+        void onMessageSelected(int position);
+    }
 
 }

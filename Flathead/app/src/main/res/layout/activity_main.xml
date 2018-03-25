@@ -15,12 +15,20 @@
         android:layout_height="fill_parent"
         android:layout_weight="0.25">
 
+        <!--<fragment-->
+        <!--android:id="@+id/messageListFragment"-->
+        <!--android:name="com.example.kate.flathead.message.picker.MessagePickerFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout="@layout/fragment_messagepicker" />-->
+
         <fragment
-            android:id="@+id/fragment1"
-            android:name="com.example.kate.flathead.message.picker.MessagePickerFragment"
+            android:id="@+id/messageListFragment"
+            android:name="com.example.kate.flathead.dummy.RedFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_messagepicker" />
+            tools:layout="@layout/fragment_red" />
+
     </RelativeLayout>
 
     <!--The message display-->
@@ -30,7 +38,7 @@
         android:layout_weight="0.5">
 
         <fragment
-            android:id="@+id/fragment2"
+            android:id="@+id/displayFragment"
             android:name="com.example.kate.flathead.message.display.MessageDisplayFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -1,8 +1,8 @@
 package com.example.kate.flathead.message.types;
 
 import android.graphics.Typeface;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.example.kate.flathead.message.display.MessageDisplayFragment;
 
 /**
  * Created by kate on 20/11/17.
@@ -15,27 +15,21 @@ import android.widget.TextView;
 public abstract class ScreenMessage {
     String message;
     Typeface typeface;
-    TextView primaryLabel;
-    TextView secondaryLabel;
-    ImageView logo;
     String messageSuffix;
     String messageSubtitle;
+    int logoResourceID;
 
 
-    ScreenMessage(String message, Typeface typeface, TextView primaryLabel,
-                  TextView secondaryLabel, ImageView logo, String messageSuffix,
-                  String messageSubtitle) {
+    ScreenMessage(String message, Typeface typeface, String messageSuffix, String messageSubtitle, int logoResourceID) {
         this.message = message;
         this.typeface = typeface;
-        this.primaryLabel = primaryLabel;
-        this.secondaryLabel = secondaryLabel;
-        this.logo = logo;
         this.messageSuffix = messageSuffix;
         this.messageSubtitle = messageSubtitle;
+        this.logoResourceID = logoResourceID;
 
     }
 
-    public abstract void display();
+    public abstract void display(MessageDisplayFragment mdf);
 
     public String toString() {
 

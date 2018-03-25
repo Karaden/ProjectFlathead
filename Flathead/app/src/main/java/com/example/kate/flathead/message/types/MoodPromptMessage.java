@@ -4,11 +4,9 @@ package com.example.kate.flathead.message.types;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.kate.flathead.R;
+import com.example.kate.flathead.message.display.MessageDisplayFragment;
 
 public class MoodPromptMessage extends ScreenMessage {
 
@@ -23,28 +21,24 @@ public class MoodPromptMessage extends ScreenMessage {
     // String mMessageSuffix = Resources.getSystem().getString(R.string.messageSuffix);
 
 
-    public MoodPromptMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
-                             TextView secondaryLabel, ImageView logo, String messageSuffix,
-                             String messageSubtitle) {
-        super(message, defaultTypeface, primaryLabel, secondaryLabel, logo, messageSuffix,
-                messageSubtitle);
+    public MoodPromptMessage(String message, Typeface defaultTypeface, String messageSuffix,
+                             String messageSubtitle, int logoResourceID) {
+
+        super(message, defaultTypeface, messageSuffix, messageSubtitle, logoResourceID);
 
     }
 
 
-    public void display() {
-        primaryLabel.setTypeface(typeface);
-        primaryLabel.setText(message);
-        primaryLabel.setTextColor(Color.WHITE);
-
-        secondaryLabel.setText(messageSubtitle);
-        secondaryLabel.setTypeface(typeface);
-        secondaryLabel.setTextColor(Color.BLACK);
-        secondaryLabel.setVisibility(View.VISIBLE);
-
-        logo.setImageResource(R.drawable.functionistcouncilinsignia);
-        logo.setVisibility(View.VISIBLE);
-
+    public void display(MessageDisplayFragment mdf) {
+        // send info only to DisplayFragment to decide how to display
+        mdf.updateDisplay(
+                message,
+                typeface,
+                Color.WHITE,
+                messageSubtitle,
+                typeface,
+                Color.BLACK,
+                R.drawable.functionistcouncilinsignia);
 
     }
 }

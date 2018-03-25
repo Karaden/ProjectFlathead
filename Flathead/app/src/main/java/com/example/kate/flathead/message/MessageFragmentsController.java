@@ -2,21 +2,13 @@ package com.example.kate.flathead.message;
 
 import android.app.Fragment;
 import android.graphics.Typeface;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.kate.flathead.R;
-import com.example.kate.flathead.message.types.ConversationMessage;
-import com.example.kate.flathead.message.types.MoodPromptMessage;
 import com.example.kate.flathead.message.types.ScreenMessage;
-import com.example.kate.flathead.message.types.ScreenMessageAdapter;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MessageFragmentsController extends Fragment {
@@ -32,23 +24,7 @@ public class MessageFragmentsController extends Fragment {
     private String conversationFile = "conversation_messages.txt";
 
 
-    public void initialisePicker() {
-        listView = getView().findViewById(R.id.dynamicListView); //TODO: null check
 
-        ensureMessagesAreAvailable();
-        populateScreenMessages();
-        populateListView();
-    }
-
-    public void initialiseDisplay() {
-        // Locations to send things to
-        primaryLabel = getView().findViewById(R.id.primaryLabel);
-        secondaryLabel = getView().findViewById(R.id.secondaryLabel);
-        logo = getView().findViewById(R.id.logo);
-
-        secondaryLabel.setVisibility(View.GONE);
-        logo.setVisibility(View.INVISIBLE);
-    }
 
     private void initialise() {
         /*
@@ -63,70 +39,6 @@ public class MessageFragmentsController extends Fragment {
         messageSubtitle = getResources().getString(R.string.messageSubtitle);
 
 
-    }
-
-    private void ensureMessagesAreAvailable() {
-        FileManager.writeMessageFile(getActivity().getExternalFilesDir(null), moodFile, getActivity().getAssets(), moodFile);
-        FileManager.writeMessageFile(getActivity().getExternalFilesDir(null), conversationFile, getActivity().getAssets(), conversationFile);
-    }
-
-
-    // Create a list of all available messages from the two arrays in the resource file
-    private void populateScreenMessages() {
-
-        screenMessages = new ArrayList<>(0);
-
-        try {
-            for (String m : FileManager.readArrayFromFile(getActivity().getExternalFilesDir(null), moodFile)) {
-                screenMessages.add(new MoodPromptMessage(m, moodPromptFont, primaryLabel,
-                        secondaryLabel, logo, messageSuffix, messageSubtitle));
-            }
-        } catch (IOException e) {
-            Log.e("tag", "Failed to read mood message file", e);
-        }
-
-        try {
-            for (String m : FileManager.readArrayFromFile(getActivity().getExternalFilesDir(null), conversationFile)) {
-                screenMessages.add(new ConversationMessage(m, conversationFont, primaryLabel,
-                        secondaryLabel, logo, messageSuffix, messageSubtitle));
-            }
-        } catch (IOException e) {
-            Log.e("tag", "Failed to read conversation message file", e);
-        }
-
-    }
-
-    private void populateListView() {
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Fourth - the Array of data
-
-        ScreenMessageAdapter<ScreenMessage> adapter = new ScreenMessageAdapter<>(
-                getContext(),
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                screenMessages);
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
-
-
-        // ListView Item Click Listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item value
-                ScreenMessage sm = (ScreenMessage) listView.getItemAtPosition(position);
-                // TODO: reenable when DisplayFragment is ready
-                // sm.display();
-            }
-        });
     }
 
 
