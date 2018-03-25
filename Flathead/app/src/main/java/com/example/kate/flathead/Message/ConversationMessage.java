@@ -1,4 +1,4 @@
-package com.example.kate.flathead;
+package com.example.kate.flathead.Message;
 
 
 import android.graphics.Color;
@@ -7,17 +7,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-class ConversationMessage extends ScreenMessage {
+public class ConversationMessage extends ScreenMessage {
 
-    ConversationMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
-                        TextView secondaryLabel, ImageView logo, String messageSuffix,
-                        String messageSubtitle) {
+    public ConversationMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
+                               TextView secondaryLabel, ImageView logo, String messageSuffix,
+                               String messageSubtitle) {
 
         super(message, defaultTypeface, primaryLabel, secondaryLabel, logo, messageSuffix,
                 messageSubtitle);
     }
 
-    void display() {
+    public void display() {
         primaryLabel.setTypeface(typeface);
         primaryLabel.setText(message + messageSuffix);
         primaryLabel.setTextColor(Color.BLACK);

@@ -1,5 +1,5 @@
 
-package com.example.kate.flathead;
+package com.example.kate.flathead.Message;
 
 
 import android.graphics.Color;
@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-class MoodPromptMessage extends ScreenMessage {
+import com.example.kate.flathead.R;
+
+public class MoodPromptMessage extends ScreenMessage {
 
     /*
     String defaultSubtitle = Resources.getSystem().getString(R.string.messageSubtitle);
@@ -17,9 +19,9 @@ class MoodPromptMessage extends ScreenMessage {
     Typeface typeface = Resources.getSystem().getFont(R.font.furmanite);
     */
 
-    MoodPromptMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
-                      TextView secondaryLabel, ImageView logo, String messageSuffix,
-                      String messageSubtitle) {
+    public MoodPromptMessage(String message, Typeface defaultTypeface, TextView primaryLabel,
+                             TextView secondaryLabel, ImageView logo, String messageSuffix,
+                             String messageSubtitle) {
 
         super(message, defaultTypeface, primaryLabel, secondaryLabel, logo, messageSuffix,
                 messageSubtitle);
@@ -27,7 +29,7 @@ class MoodPromptMessage extends ScreenMessage {
     }
 
 
-    void display() {
+    public void display() {
         primaryLabel.setTypeface(typeface);
         primaryLabel.setText(message);
         primaryLabel.setTextColor(Color.WHITE);

@@ -1,4 +1,4 @@
-package com.example.kate.flathead;
+package com.example.kate.flathead.Message;
 
 import android.graphics.Typeface;
 import android.widget.ImageView;
@@ -12,7 +12,7 @@ import android.widget.TextView;
  * and Special are anything else unusual
  */
 
-abstract class ScreenMessage {
+public abstract class ScreenMessage {
     String message;
     Typeface typeface;
     TextView primaryLabel;
@@ -35,7 +35,7 @@ abstract class ScreenMessage {
 
     }
 
-    abstract void display();
+    public abstract void display();
 
     public String toString() {
 

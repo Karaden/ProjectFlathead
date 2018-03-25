@@ -1,4 +1,4 @@
-package com.example.kate.flathead;
+package com.example.kate.flathead.Message;
 
 import android.content.res.AssetManager;
 import android.util.Log;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
  * Created by kate on 21/3/18.
  * Handle the reading/writing of the messages file
  */
-class FileManager {
-    static void writeMessageFile(File externalFilesDir, String messageFileName, AssetManager assetManager, String assetFileName) {
+public class FileManager {
+    public static void writeMessageFile(File externalFilesDir, String messageFileName, AssetManager assetManager, String assetFileName) {
 
         File outFile = new File(externalFilesDir, messageFileName);
 
@@ -68,7 +68,7 @@ class FileManager {
      * @param messageFileName  filename to open
      * @return array of strings from the file (newline separated)
      */
-    static ArrayList<String> readArrayFromFile(File externalFilesDir, String messageFileName)
+    public static ArrayList<String> readArrayFromFile(File externalFilesDir, String messageFileName)
             throws IOException {
         ArrayList<String> res = new ArrayList<>();
         FileInputStream in;
