@@ -1,9 +1,9 @@
 package com.example.kate.flathead.message;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
-import android.widget.ListView;
 
 import com.example.kate.flathead.R;
 import com.example.kate.flathead.message.types.ConversationMessage;
@@ -20,12 +20,14 @@ public class MessageBuilder {
     private Typeface moodPromptFont, conversationFont;
 
     private List<ScreenMessage> screenMessages;
-    private String messageSuffix, messageSubtitle;
+    private String messageSuffix, secondaryText;
     private int logo;
 
-    private ListView listView;
     private String moodFile = "mood_messages.txt";
     private String conversationFile = "conversation_messages.txt";
+
+    private int defaultTextColour;
+    private int moodPromptTextColour;
 
 
     private Activity act;
@@ -35,7 +37,6 @@ public class MessageBuilder {
         act = activity;
         initialise();
     }
-
 
     private void initialise() {
         /*
@@ -47,8 +48,10 @@ public class MessageBuilder {
         moodPromptFont = Typeface.createFromAsset(act.getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(act.getAssets(), "fonts/datacontrol.ttf");
         messageSuffix = act.getResources().getString(R.string.messageSuffix);
-        messageSubtitle = act.getResources().getString(R.string.secondaryText);
+        secondaryText = act.getResources().getString(R.string.secondaryText);
         logo = R.drawable.functionistcouncilinsignia;
+        defaultTextColour = Color.BLACK;
+        moodPromptTextColour = Color.WHITE;
 
 
         ensureMessagesAreAvailable();
@@ -56,8 +59,10 @@ public class MessageBuilder {
     }
 
     private void ensureMessagesAreAvailable() {
-        FileManager.writeMessageFile(act.getExternalFilesDir(null), moodFile, act.getAssets(), moodFile);
-        FileManager.writeMessageFile(act.getExternalFilesDir(null), conversationFile, act.getAssets(), conversationFile);
+        FileManager.writeMessageFile(act.getExternalFilesDir(null),
+                moodFile, act.getAssets(), moodFile);
+        FileManager.writeMessageFile(act.getExternalFilesDir(null),
+                conversationFile, act.getAssets(), conversationFile);
     }
 
     // Create a list of all available messages from the two arrays in the resource file
@@ -67,7 +72,8 @@ public class MessageBuilder {
 
         try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), moodFile)) {
-                screenMessages.add(new MoodPromptMessage(m, moodPromptFont, messageSuffix, messageSubtitle, logo));
+                screenMessages.add(new MoodPromptMessage(m, moodPromptTextColour, moodPromptFont,
+                        messageSuffix, secondaryText, defaultTextColour, logo));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read mood primaryText file", e);
@@ -75,7 +81,8 @@ public class MessageBuilder {
 
         try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), conversationFile)) {
-                screenMessages.add(new ConversationMessage(m, conversationFont, messageSuffix, messageSubtitle, logo));
+                screenMessages.add(new ConversationMessage(m, defaultTextColour, conversationFont,
+                        messageSuffix, secondaryText, defaultTextColour, logo));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read conversation primaryText file", e);

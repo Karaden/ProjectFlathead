@@ -16,13 +16,18 @@ public abstract class ScreenMessage {
     public String messageSuffix;
     public String secondaryText;
     public int logoResourceID;
+    public int primaryColour;
+    public int secondaryColour;
 
 
-    ScreenMessage(String primaryText, Typeface typeface, String messageSuffix, String secondaryText, int logoImage) {
+    ScreenMessage(String primaryText, int primaryColour, Typeface typeface, String messageSuffix,
+                  String secondaryText, int secondaryColour, int logoImage) {
         this.primaryText = primaryText;
+        this.primaryColour = primaryColour;
         this.typeface = typeface;
         this.messageSuffix = messageSuffix;
         this.secondaryText = secondaryText;
+        this.secondaryColour = secondaryColour;
         this.logoResourceID = logoImage;
     }
 

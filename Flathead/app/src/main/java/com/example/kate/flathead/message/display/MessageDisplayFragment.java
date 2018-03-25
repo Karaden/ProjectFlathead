@@ -1,7 +1,6 @@
 package com.example.kate.flathead.message.display;
 
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -68,9 +67,8 @@ public class MessageDisplayFragment extends Fragment {
         mSecondaryLabel.setTypeface(secondaryTypeface);
         mSecondaryLabel.setTextColor(secondaryTextColour);
 
-        mLogo.setImageResource(logo);
-
         mLogo.setVisibility(View.VISIBLE);
+        mLogo.setImageResource(logo);
     }
 
     public void updateDisplay(String primaryText, Typeface primaryTypeface,
@@ -87,18 +85,14 @@ public class MessageDisplayFragment extends Fragment {
 
     }
 
-    public void updateColourOnly(int colour) {
-        mPrimaryLabel.setTextColor(colour);
-    }
-
     public void updateDisplay(ScreenMessage sm) {
 
         if (sm instanceof MoodPromptMessage) {
-            updateDisplay(sm.primaryText, sm.typeface, Color.WHITE,
-                    sm.secondaryText, sm.typeface, Color.BLACK,
+            updateDisplay(sm.primaryText, sm.typeface, sm.primaryColour,
+                    sm.secondaryText, sm.typeface, sm.secondaryColour,
                     sm.logoResourceID);
         } else if (sm instanceof ConversationMessage) {
-            updateDisplay(sm.primaryText, sm.typeface, Color.BLACK); //TODO un-hard code
+            updateDisplay(sm.primaryText, sm.typeface, sm.primaryColour);
         }
 
 

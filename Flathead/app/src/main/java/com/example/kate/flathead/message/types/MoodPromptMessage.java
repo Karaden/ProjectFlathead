@@ -5,10 +5,12 @@ import android.graphics.Typeface;
 public class MoodPromptMessage extends ScreenMessage {
 
 
-    public MoodPromptMessage(String message, Typeface defaultTypeface, String messageSuffix,
-                             String messageSubtitle, int logoResourceID) {
+    public MoodPromptMessage(String primaryText, int primaryColour, Typeface defaultTypeface,
+                             String messageSuffix, String secondaryText, int secondaryColour,
+                             int logoResourceID) {
 
-        super(message, defaultTypeface, messageSuffix, messageSubtitle, logoResourceID);
+        super(primaryText, primaryColour, defaultTypeface, messageSuffix,
+                secondaryText, secondaryColour, logoResourceID);
 
     }
 }
