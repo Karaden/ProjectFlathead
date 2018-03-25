@@ -5,14 +5,11 @@
     tools:context="com.example.kate.flathead.message.MessageFragmentsController">
 
     <!--The list of messages to pick from-->
-
-
     <ListView
         android:id="@+id/dynamicListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start">
-
     </ListView>
 
 </FrameLayout>
