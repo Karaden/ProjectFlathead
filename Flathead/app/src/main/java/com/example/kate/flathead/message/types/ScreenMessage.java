@@ -1,4 +1,4 @@
-package com.example.kate.flathead.Message;
+package com.example.kate.flathead.message.types;
 
 import android.graphics.Typeface;
 import android.widget.ImageView;

@@ -17,7 +17,7 @@
 
         <fragment
             android:id="@+id/fragment1"
-            android:name="com.example.kate.flathead.Message.Picker.MessagePickerFragment"
+            android:name="com.example.kate.flathead.message.MessageFragmentsController"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_messagepicker" />
@@ -37,7 +37,7 @@
         <!--tools:layout="@layout/fragment_messagedisplay" />-->
         <fragment
             android:id="@+id/fragment2"
-            android:name="com.example.kate.flathead.red.RedFragment"
+            android:name="com.example.kate.flathead.dummy.RedFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_red" />

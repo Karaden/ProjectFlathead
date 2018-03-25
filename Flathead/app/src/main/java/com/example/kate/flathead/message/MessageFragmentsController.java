@@ -1,4 +1,4 @@
-package com.example.kate.flathead.Message.Picker;
+package com.example.kate.flathead.message;
 
 import android.app.Fragment;
 import android.graphics.Typeface;
@@ -13,18 +13,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.kate.flathead.Message.ConversationMessage;
-import com.example.kate.flathead.Message.FileManager;
-import com.example.kate.flathead.Message.MoodPromptMessage;
-import com.example.kate.flathead.Message.ScreenMessage;
-import com.example.kate.flathead.Message.ScreenMessageAdapter;
 import com.example.kate.flathead.R;
+import com.example.kate.flathead.message.types.ConversationMessage;
+import com.example.kate.flathead.message.types.MoodPromptMessage;
+import com.example.kate.flathead.message.types.ScreenMessage;
+import com.example.kate.flathead.message.types.ScreenMessageAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessagePickerFragment extends Fragment {
+public class MessageFragmentsController extends Fragment {
 
     private TextView primaryLabel, secondaryLabel;
     private Typeface moodPromptFont, conversationFont;
