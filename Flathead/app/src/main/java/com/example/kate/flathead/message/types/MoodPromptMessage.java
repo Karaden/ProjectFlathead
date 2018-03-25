@@ -11,7 +11,7 @@ import com.example.kate.flathead.message.display.MessageDisplayFragment;
 public class MoodPromptMessage extends ScreenMessage {
 
     /*
-    String defaultSubtitle = Resources.getSystem().getString(R.string.messageSubtitle);
+    String defaultSubtitle = Resources.getSystem().getString(R.string.secondaryText);
     //TODO: confirm whether the following fails on Not8 (7.1.1 OS)
     //8.0 expected early 2018? Beat release already available?
     Typeface typeface = Resources.getSystem().getFont(R.font.furmanite);
@@ -32,10 +32,10 @@ public class MoodPromptMessage extends ScreenMessage {
     public void display(MessageDisplayFragment mdf) {
         // send info only to DisplayFragment to decide how to display
         mdf.updateDisplay(
-                message,
+                primaryText,
                 typeface,
                 Color.WHITE,
-                messageSubtitle,
+                secondaryText,
                 typeface,
                 Color.BLACK,
                 R.drawable.functionistcouncilinsignia);

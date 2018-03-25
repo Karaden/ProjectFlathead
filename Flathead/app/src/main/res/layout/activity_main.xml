@@ -9,29 +9,29 @@
     android:orientation="horizontal"
     tools:context="com.example.kate.flathead.MainActivity">
 
-    <!--The message picker-->
+    <!--primaryTextsage picker-->
     <RelativeLayout
         android:layout_width="0dip"
         android:layout_height="fill_parent"
         android:layout_weight="0.25">
 
-        <!--<fragment-->
-        <!--android:id="@+id/messageListFragment"-->
-        <!--android:name="com.example.kate.flathead.message.picker.MessagePickerFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/fragment_messagepicker" />-->
-
         <fragment
             android:id="@+id/messageListFragment"
-            android:name="com.example.kate.flathead.dummy.RedFragment"
+            android:name="com.example.kate.flathead.message.picker.MessagePickerFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_red" />
+            tools:layout="@layout/fragment_messagepicker" />
+
+        <!--<fragment-->
+        <!--android:id="@+id/messageListFragment"-->
+        <!--android:name="com.example.kate.flathead.dummy.RedFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout="@layout/fragment_red" />-->
 
     </RelativeLayout>
 
-    <!--The message display-->
+    <!--primaryTextsage display-->
     <RelativeLayout
         android:layout_width="0dip"
         android:layout_height="fill_parent"
@@ -43,13 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_messagedisplay" />
-
-        <!--<fragment-->
-        <!--android:id="@+id/fragment2"-->
-        <!--android:name="com.example.kate.flathead.dummy.RedFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/fragment_red" />-->
 
     </RelativeLayout>
 

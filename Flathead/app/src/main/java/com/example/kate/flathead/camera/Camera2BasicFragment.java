@@ -287,7 +287,7 @@ public class Camera2BasicFragment extends Fragment
     /**
      * Shows a {@link Toast} on the UI thread.
      *
-     * @param text The message to show
+     * @param text The primaryText to show
      */
     private void showToast(final String text) {
         final Activity activity = getActivity();
@@ -743,11 +743,11 @@ public class Camera2BasicFragment extends Fragment
     }
 
     /**
-     * Shows an error message dialog.
+     * Shows an error primaryText dialog.
      */
     public static class ErrorDialog extends DialogFragment {
 
-        private static final String ARG_MESSAGE = "message";
+        private static final String ARG_MESSAGE = "primaryText";
 
         public static ErrorDialog newInstance(String message) {
             ErrorDialog dialog = new ErrorDialog();

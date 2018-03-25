@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Created by kate on 22/11/17.
- * Screen message adapter
+ * Screen primaryText adapter
  */
 
 public class ScreenMessageAdapter<T> extends ArrayAdapter {
@@ -39,7 +39,7 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
 
         ScreenMessage sm = (ScreenMessage) getItem(position);
 
-        text.setText(sm.message); //TODO: null check
+        text.setText(sm.primaryText); //TODO: null check
         text.setTypeface(sm.typeface);
         text.setPadding(20, 30, 20, 30);
 

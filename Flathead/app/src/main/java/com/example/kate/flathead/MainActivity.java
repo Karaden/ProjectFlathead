@@ -8,15 +8,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.kate.flathead.immersivemode.BasicImmersiveModeFragment;
+import com.example.kate.flathead.message.MessageBuilder;
 import com.example.kate.flathead.message.display.MessageDisplayFragment;
 import com.example.kate.flathead.message.picker.MessagePickerFragment;
+import com.example.kate.flathead.message.types.ScreenMessage;
 
 
 public class MainActivity extends AppCompatActivity
         implements MessagePickerFragment.OnMessageSelectedListener {
 
 
+    public MessageBuilder mb;
     public MessageDisplayFragment mdf;
+    public MessagePickerFragment mpf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +34,17 @@ public class MainActivity extends AppCompatActivity
         }
 
         setContentView(R.layout.activity_main);
+
+
+        mb = new MessageBuilder(this);
+
+
         mdf = (MessageDisplayFragment)
                 getSupportFragmentManager().findFragmentById(R.id.displayFragment);
+
+        mpf = (MessagePickerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.messageListFragment);
+
 
 
     }
@@ -42,28 +55,28 @@ public class MainActivity extends AppCompatActivity
         getDelegate().onPostCreate(savedInstanceState);
 
 
+        mpf.setMessages(mb.getScreenMessages());
+
         testDisplayFragment();
     }
 
 
-    public void onMessageSelected(int position) {
-
-        //TODO
-
-
+    public void onMessageSelected(ScreenMessage sm) {
         if (mdf == null) {
             //something went wrong
         } else {
-            // call sm.display(mdf)
+            mdf.updateDisplay(sm);
 
         }
-
     }
 
 
     private void testDisplayFragment() {
 
         mdf.updateDisplay("this is a test", Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf"), Color.RED);
+//        mdf.updateDisplay("this is a test", Typeface.createFromFile("fonts/furmanite.otf"), Color.YELLOW); //this method does not work
+
+
     }
 
 }

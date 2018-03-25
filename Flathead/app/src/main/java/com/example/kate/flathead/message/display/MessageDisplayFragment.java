@@ -1,6 +1,7 @@
 package com.example.kate.flathead.message.display;
 
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kate.flathead.R;
+import com.example.kate.flathead.message.types.ConversationMessage;
+import com.example.kate.flathead.message.types.MoodPromptMessage;
+import com.example.kate.flathead.message.types.ScreenMessage;
 
 
 /**
@@ -22,6 +26,7 @@ import com.example.kate.flathead.R;
 public class MessageDisplayFragment extends Fragment {
     private TextView mPrimaryLabel, mSecondaryLabel;
     private ImageView mLogo;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -83,6 +88,19 @@ public class MessageDisplayFragment extends Fragment {
 
     public void updateColourOnly(int colour) {
         mPrimaryLabel.setTextColor(colour);
+    }
+
+    public void updateDisplay(ScreenMessage sm) {
+
+        if (sm instanceof MoodPromptMessage) {
+            updateDisplay(sm.primaryText, sm.typeface, Color.WHITE,
+                    sm.secondaryText, sm.typeface, Color.BLACK,
+                    sm.logoResourceID);
+        } else if (sm instanceof ConversationMessage) {
+            updateDisplay(sm.primaryText, sm.typeface, Color.BLACK); //TODO un-hard code
+        }
+
+
     }
 
 }

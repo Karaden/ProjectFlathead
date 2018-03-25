@@ -13,18 +13,18 @@ import com.example.kate.flathead.message.display.MessageDisplayFragment;
  */
 
 public abstract class ScreenMessage {
-    String message;
-    Typeface typeface;
-    String messageSuffix;
-    String messageSubtitle;
-    int logoResourceID;
+    public String primaryText;
+    public Typeface typeface;
+    public String messageSuffix;
+    public String secondaryText;
+    public int logoResourceID;
 
 
-    ScreenMessage(String message, Typeface typeface, String messageSuffix, String messageSubtitle, int logoResourceID) {
-        this.message = message;
+    ScreenMessage(String primaryText, Typeface typeface, String messageSuffix, String secondaryText, int logoResourceID) {
+        this.primaryText = primaryText;
         this.typeface = typeface;
         this.messageSuffix = messageSuffix;
-        this.messageSubtitle = messageSubtitle;
+        this.secondaryText = secondaryText;
         this.logoResourceID = logoResourceID;
 
     }
@@ -33,7 +33,7 @@ public abstract class ScreenMessage {
 
     public String toString() {
 
-        return this.message;
+        return this.primaryText;
     }
 
 }

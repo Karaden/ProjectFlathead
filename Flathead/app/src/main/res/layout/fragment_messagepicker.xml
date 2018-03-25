@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kate.flathead.message.MessageFragmentsController">
+    tools:context="com.example.kate.flathead.message.MessageBuilder">
 
     <!--The list of messages to pick from-->
     <ListView
-        android:id="@+id/dynamicListView"
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start">
