@@ -22,22 +22,23 @@ public class MainActivity extends AppCompatActivity
     public MessageDisplayFragment mdf;
     public MessagePickerFragment mpf;
 
+    BasicImmersiveModeFragment immersiveModeFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getSupportFragmentManager().findFragmentByTag("BasicImmersiveModeFragment") == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            BasicImmersiveModeFragment fragment = new BasicImmersiveModeFragment();
-            transaction.add(fragment, "BasicImmersiveModeFragment");
+            immersiveModeFragment = new BasicImmersiveModeFragment();
+            transaction.add(immersiveModeFragment, "BasicImmersiveModeFragment");
             transaction.commit();
         }
 
         setContentView(R.layout.activity_main);
 
-
         mb = new MessageBuilder(this);
-
 
         mdf = (MessageDisplayFragment)
                 getSupportFragmentManager().findFragmentById(R.id.displayFragment);
@@ -47,6 +48,16 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        if (hasFocus) {
+
+            immersiveModeFragment.setImmersiveMode();
+        }
     }
 
     @Override
