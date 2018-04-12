@@ -49,27 +49,14 @@ public class BasicImmersiveModeFragment extends Fragment {
         // The UI options currently enabled are represented by a bitfield.
         // getSystemUiVisibility() gives us that bitfield.
 
-        int uiOptions = getActivity().getWindow().getDecorView().getSystemUiVisibility();
-        // END_INCLUDE (get_current_ui_flags)
-
-        // BEGIN_INCLUDE (toggle_ui_flags)
-
-        // Note that this flag doesn't do anything by itself, it only augments the behavior
-        // of HIDE_NAVIGATION and FLAG_FULLSCREEN.  For the purposes of this sample
-        // all the flags are being toggled together.
-        // This uses the "sticky" form of immersive mode, which will let the user swipe
-        // the bars back in again, but will automatically make them disappear a few seconds later.
-
-        uiOptions ^= View.SYSTEM_UI_FLAG_LOW_PROFILE;
-        uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
-        uiOptions ^= View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-        uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        uiOptions ^= View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
-        uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-
-        getActivity().getWindow().getDecorView().setSystemUiVisibility(uiOptions);
-        //END_INCLUDE (set_ui_flags)
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
     }
-
 
 }
