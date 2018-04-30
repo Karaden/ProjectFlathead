@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.kate.flathead.cameraUVC.UVCCameraFragment;
 import com.example.kate.flathead.immersivemode.BasicImmersiveModeFragment;
 import com.example.kate.flathead.message.MessageBuilder;
 import com.example.kate.flathead.message.display.MessageDisplayFragment;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity
     public MessageBuilder mb;
     public MessageDisplayFragment mdf;
     public MessagePickerFragment mpf;
+    public UVCCameraFragment ucf;
 
     BasicImmersiveModeFragment immersiveModeFragment;
 
@@ -46,9 +48,12 @@ public class MainActivity extends AppCompatActivity
         mpf = (MessagePickerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.messageListFragment);
 
+        ucf = (UVCCameraFragment)
+                getSupportFragmentManager().findFragmentById((R.id.vid_fragment));
 
 
     }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

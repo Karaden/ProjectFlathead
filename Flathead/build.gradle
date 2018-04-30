@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
         
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -17,11 +17,19 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+        maven { url 'http://raw.github.com/saki4510t/libcommon/master/repository/' }
         jcenter()
+        google()
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    versionCompiler = 25
+    versionTarget = 23
+    supportLibVersion = '25.3.1'  // variable that can be referenced to keep support libs consistent
+    commonLibVersion = '1.5.20'
 }

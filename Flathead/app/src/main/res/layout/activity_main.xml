@@ -22,12 +22,6 @@
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_messagepicker" />
 
-        <!--<fragment-->
-        <!--android:id="@+id/messageListFragment"-->
-        <!--android:name="com.example.kate.flathead.dummy.RedFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/fragment_red" />-->
 
     </RelativeLayout>
 
@@ -53,12 +47,20 @@
         android:layout_height="fill_parent"
         android:layout_weight="0.25">
 
+        <!--<fragment-->
+        <!--android:id="@+id/vid_fragment"-->
+        <!--android:name="com.example.kate.flathead.cameraUVC.UVCCameraFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout="@layout/fragment_uvccamera" />-->
+
         <fragment
             android:id="@+id/vid_fragment"
-            android:name="com.example.kate.flathead.camera.Camera2BasicFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_camera2_basic" />
+            android:name="com.example.kate.flathead.dummy.RedFragment">
+
+        </fragment>
 
     </RelativeLayout>
 
