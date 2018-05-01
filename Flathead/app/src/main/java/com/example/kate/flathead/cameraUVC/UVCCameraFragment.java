@@ -1,34 +1,77 @@
 package com.example.kate.flathead.cameraUVC;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ToggleButton;
 
 import com.example.kate.flathead.R;
+import com.serenegiant.usb.USBMonitor;
+import com.serenegiant.usb.UVCCamera;
+import com.serenegiant.usbcameracommon.UVCCameraHandlerMultiSurface;
+import com.serenegiant.widget.UVCCameraTextureView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link UVCCameraFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
+ *
  * Use the {@link UVCCameraFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class UVCCameraFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    /**
+     * set true if you want to record movie using MediaSurfaceEncoder
+     * (writing frame data into Surface camera from MediaCodec
+     * by almost same way as USBCameratest2)
+     * set false if you want to record movie using MediaVideoEncoder
+     */
+    private static final boolean USE_SURFACE_ENCODER = false;
 
-    private OnFragmentInteractionListener mListener;
+    /**
+     * preview resolution(width)
+     * if your camera does not support specific resolution and mode,
+     * {@link UVCCamera#setPreviewSize(int, int, int)} throw exception
+     */
+    private static final int PREVIEW_WIDTH = 640;
+    /**
+     * preview resolution(height)
+     * if your camera does not support specific resolution and mode,
+     * {@link UVCCamera#setPreviewSize(int, int, int)} throw exception
+     */
+    private static final int PREVIEW_HEIGHT = 480;
+    /**
+     * preview mode
+     * if your camera does not support specific resolution and mode,
+     * {@link UVCCamera#setPreviewSize(int, int, int)} throw exception
+     * 0:YUYV, other:MJPEG
+     */
+    private static final int PREVIEW_MODE = 1;
+
+
+    /**
+     * for accessing USB
+     */
+    private USBMonitor mUSBMonitor;
+    /**
+     * Handler to execute camera related methods sequentially on private thread
+     */
+    private UVCCameraHandlerMultiSurface mCameraHandler;
+    /**
+     * for camera preview display
+     */
+    private UVCCameraTextureView mUVCCameraView;
+
+    /**
+     * for open&start / stop&close camera preview
+     */
+    private ToggleButton mCameraButton;
+
+
+
+
+
 
     public UVCCameraFragment() {
         // Required empty public constructor
@@ -38,27 +81,19 @@ public class UVCCameraFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment UVCCameraFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static UVCCameraFragment newInstance(String param1, String param2) {
-        UVCCameraFragment fragment = new UVCCameraFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static UVCCameraFragment newInstance() {
+
+        return new UVCCameraFragment();
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+
     }
 
     @Override
@@ -68,42 +103,12 @@ public class UVCCameraFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_uvccamera, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+
+
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

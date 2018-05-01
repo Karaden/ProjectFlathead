@@ -47,20 +47,20 @@
         android:layout_height="fill_parent"
         android:layout_weight="0.25">
 
-        <!--<fragment-->
-        <!--android:id="@+id/vid_fragment"-->
-        <!--android:name="com.example.kate.flathead.cameraUVC.UVCCameraFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/fragment_uvccamera" />-->
-
         <fragment
             android:id="@+id/vid_fragment"
+            android:name="com.example.kate.flathead.cameraUVC.UVCCameraFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.example.kate.flathead.dummy.RedFragment">
+            tools:layout="@layout/fragment_uvccamera" />
 
-        </fragment>
+        <!--<fragment-->
+        <!--android:id="@+id/vid_fragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="com.example.kate.flathead.dummy.RedFragment">-->
+
+        <!--</fragment>-->
 
     </RelativeLayout>
 

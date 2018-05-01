@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity
         mpf = (MessagePickerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.messageListFragment);
 
-        ucf = (UVCCameraFragment)
-                getSupportFragmentManager().findFragmentById((R.id.vid_fragment));
+        //      ucf = (UVCCameraFragment)
+        //              getSupportFragmentManager().findFragmentById((R.id.vid_fragment));
 
 
     }
@@ -90,8 +90,6 @@ public class MainActivity extends AppCompatActivity
     private void testDisplayFragment() {
 
         mdf.updateDisplay("this is a test", Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf"), Color.RED);
-//        mdf.updateDisplay("this is a test", Typeface.createFromFile("fonts/furmanite.otf"), Color.YELLOW); //this method does not work
-
 
     }
 
