@@ -69,35 +69,49 @@ public class UVCCameraFragment extends Fragment
      * Handler to execute camera related methods sequentially on private thread
      */
     private UVCCameraHandlerMultiSurface mCameraHandler;
+
+    Activity mActivity;
+    Context mContext;
+    /**
+     * for open&start / stop&close camera preview
+     */
+    private ToggleButton mCameraButton;
     private final CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener
             = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(
                 final CompoundButton compoundButton, final boolean isChecked) {
 
-//            switch (compoundButton.getId()) {
-//                case R.id.camera_button:
-//                    if (isChecked && !mCameraHandler.isOpened()) {
-//                        CameraDialog.showDialog(mActivity);
-//                    } else {
-//                        stopPreview();
-//                    }
-//                    break;
-//            }
+            switch (compoundButton.getId()) {
+                case R.id.camera_button:
+                    if (isChecked && !mCameraHandler.isOpened()) {
+
+                        //CameraDialog.showDialog(mActivity);
+
+
+                        CameraDialog myCameraDialog = CameraDialog.newInstance();
+
+                        myCameraDialog.show(mActivity.getFragmentManager(), CameraDialog.class.getSimpleName());
+
+
+                    } else {
+                        stopPreview();
+                    }
+                    break;
+            }
         }
     };
 
-    /**
-     * for open&start / stop&close camera preview
-     */
-    private ToggleButton mCameraButton;
-    Activity mActivity;
-    Context mContext;
 
 
     public UVCCameraFragment() {
         // Required empty public constructor
     }
+
+    //==========================================================
+
+
+    //=============================================================
 
     /**
      * Use this factory method to create a new instance of
@@ -159,12 +173,14 @@ public class UVCCameraFragment extends Fragment
             if (mCameraHandler != null) {
 
                 //TODO: replace queueevent with a new threadcall
-                new Runnable() {
+                Runnable r = new Runnable() {
                     @Override
                     public void run() {
                         stopPreview();
                     }
                 };
+
+                r.run();
             }
         }
 
@@ -231,20 +247,20 @@ public class UVCCameraFragment extends Fragment
 
     private void setCameraButton(final boolean isOn) {
 
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (mCameraButton != null) {
-//                    try {
-//                        mCameraButton.setOnCheckedChangeListener(null);
-//                        mCameraButton.setChecked(isOn);
-//                    } finally {
-//                        mCameraButton.setOnCheckedChangeListener(mOnCheckedChangeListener);
-//                    }
-//                }
-//
-//            }
-//        }, 0);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mCameraButton != null) {
+                    try {
+                        mCameraButton.setOnCheckedChangeListener(null);
+                        mCameraButton.setChecked(isOn);
+                    } finally {
+                        mCameraButton.setOnCheckedChangeListener(mOnCheckedChangeListener);
+                    }
+                }
+
+            }
+        }, 0);
     }
 
     private void startPreview() {
@@ -288,6 +304,7 @@ public class UVCCameraFragment extends Fragment
     public USBMonitor getUSBMonitor() {
         return mUSBMonitor;
     }
+
 
     @Override
     public void onDialogResult(boolean canceled) {
