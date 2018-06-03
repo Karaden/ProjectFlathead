@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Flathead.iml" filepath="$PROJECT_DIR$/Flathead.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libuvccamera-release/libuvccamera-release.iml" filepath="$PROJECT_DIR$/libuvccamera-release/libuvccamera-release.iml" />
+      <module fileurl="file:///mnt/DATA/Karaden/AndroidStudioProjects/ProjectFlathead/Flathead/libuvccamera-release/libuvccamera-release.iml" filepath="/mnt/DATA/Karaden/AndroidStudioProjects/ProjectFlathead/Flathead/libuvccamera-release/libuvccamera-release.iml" />
       <module fileurl="file://$PROJECT_DIR$/usbCameraCommon-release/usbCameraCommon-release.iml" filepath="$PROJECT_DIR$/usbCameraCommon-release/usbCameraCommon-release.iml" />
     </modules>
   </component>

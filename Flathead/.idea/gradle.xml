@@ -7,10 +7,10 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/libuvccamera-release" />
-            <option value="$PROJECT_DIR$/usbCameraCommon-release" />
+            <option value="/mnt/DATA/Karaden/AndroidStudioProjects/ProjectFlathead/Flathead" />
+            <option value="/mnt/DATA/Karaden/AndroidStudioProjects/ProjectFlathead/Flathead/app" />
+            <option value="/mnt/DATA/Karaden/AndroidStudioProjects/ProjectFlathead/Flathead/libuvccamera-release" />
+            <option value="/mnt/DATA/Karaden/AndroidStudioProjects/ProjectFlathead/Flathead/usbCameraCommon-release" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
