@@ -43,6 +43,34 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getSupportFragmentManager().findFragmentByTag("BasicImmersiveModeFragment") == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            immersiveModeFragment = new BasicImmersiveModeFragment();
+            transaction.add(immersiveModeFragment, "BasicImmersiveModeFragment");
+            transaction.commit();
+        }
+
+        setContentView(R.layout.activity_main);
+
+        mb = new MessageBuilder(this);
+
+        mdf = (MessageDisplayFragment)
+                getSupportFragmentManager().findFragmentById(R.id.displayFragment);
+
+        mpf = (MessagePickerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.messageListFragment);
+
+        //==============================================
+        // =========Camera setup below this line========
+        //==============================================
+        createCamera();
+
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
@@ -81,11 +109,12 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    //======================================================
-    //======================================================
-    //======================================================
-    //======================================================
-    //======================================================
+    //==============================================================
+    //==============================================================
+    //==============Camera specific stuff below here================
+    //TODO: refactor this into its own class. USB Monitor is tricky.
+    //==============================================================
+    //==============================================================
     private static final String TAG = "MainActivity";
     /**
      * set true if you want to record movie using MediaSurfaceEncoder
@@ -197,33 +226,9 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-        if (getSupportFragmentManager().findFragmentByTag("BasicImmersiveModeFragment") == null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            immersiveModeFragment = new BasicImmersiveModeFragment();
-            transaction.add(immersiveModeFragment, "BasicImmersiveModeFragment");
-            transaction.commit();
-        }
-
-        setContentView(R.layout.activity_main);
-
-        mb = new MessageBuilder(this);
-
-        mdf = (MessageDisplayFragment)
-                getSupportFragmentManager().findFragmentById(R.id.displayFragment);
-
-        mpf = (MessagePickerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.messageListFragment);
-
-        //====================================================================================
-        //====================================================================================
-        //====================================================================================
-        //====================================================================================
-
-
+    private void createCamera()
+    {
         if (DEBUG) Log.v(TAG, "onCreate:");
 
         mCameraButton = findViewById(R.id.camera_button);
@@ -235,7 +240,6 @@ public class MainActivity extends AppCompatActivity
         mUSBMonitor = new USBMonitor(this, mOnDeviceConnectListener);
         mCameraHandler = UVCCameraHandlerMultiSurface.createHandler(this, mUVCCameraView,
                 USE_SURFACE_ENCODER ? 0 : 1, PREVIEW_WIDTH, PREVIEW_HEIGHT, PREVIEW_MODE);
-
 
     }
 
