@@ -1,14 +1,18 @@
 package com.example.kate.flathead;
 
+import android.app.Presentation;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.SurfaceTexture;
 import android.graphics.Typeface;
 import android.hardware.usb.UsbDevice;
+import android.media.MediaRouter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.Surface;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity
 
     BasicImmersiveModeFragment immersiveModeFragment;
 
+    private MyPresentation mPresentation = null;
+    private MyCallback mCallback = null;
 
     private static final boolean DEBUG = true;    // TODO set false on release
 
@@ -65,7 +71,9 @@ public class MainActivity extends AppCompatActivity
         //==============================================
         // =========Camera setup below this line========
         //==============================================
-        createCamera();
+        cameraCreate();
+
+        secondScreenCreate();
 
     }
 
@@ -89,6 +97,38 @@ public class MainActivity extends AppCompatActivity
 
         testDisplayFragment();
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //Camera
+        mUSBMonitor.register();
+    }
+
+    @Override
+    protected void onStop() {
+        //Camera
+        stopPreview();
+        mCameraHandler.close();
+        setCameraButton(false);
+
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+
+        secondScreenDestroy();
+
+        cameraDestroy();
+
+        super.onDestroy();
+    }
+
+
+
 
 //region Message handling
     public void onMessageSelected(ScreenMessage sm) {
@@ -228,7 +268,7 @@ public class MainActivity extends AppCompatActivity
     };
 
 
-    private void createCamera()
+    private void cameraCreate()
     {
         if (DEBUG) Log.v(TAG, "onCreate:");
 
@@ -244,23 +284,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mUSBMonitor.register();
-    }
-
-    @Override
-    protected void onStop() {
-        stopPreview();
-        mCameraHandler.close();
-        setCameraButton(false);
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
+    private void cameraDestroy(){
         if (mCameraHandler != null) {
             mCameraHandler.release();
             mCameraHandler = null;
@@ -271,8 +295,10 @@ public class MainActivity extends AppCompatActivity
         }
         mUVCCameraView = null;
         mCameraButton = null;
-        super.onDestroy();
+
+
     }
+
 
     private void setCameraButton(final boolean isOn) {
         runOnUiThread(new Runnable() {
@@ -343,6 +369,109 @@ public class MainActivity extends AppCompatActivity
         }
     }
 //endregion Camera
+
+//region Second Screen
+
+
+
+
+    private void secondScreenCreate()
+    {
+        MediaRouter mr = (MediaRouter) getSystemService(MEDIA_ROUTER_SERVICE);
+        if (mr != null)
+        {
+            mCallback = new MyCallback();
+            mr.addCallback(MediaRouter.ROUTE_TYPE_LIVE_VIDEO, mCallback);
+        }
+        MediaRouter.RouteInfo info = mr.getSelectedRoute(MediaRouter.ROUTE_TYPE_LIVE_VIDEO);
+        if (info != null && info.isEnabled() && info.getPresentationDisplay() != null)
+        {
+            mPresentation = new MyPresentation(this,
+                    info.getPresentationDisplay(),
+                    android.R.style.Theme_Holo_Light_NoActionBar);
+            mPresentation.show();
+        }
+    }
+
+
+    private void secondScreenDestroy()
+    {
+        if (mCallback != null)
+        {
+            MediaRouter mr = (MediaRouter) getSystemService(MEDIA_ROUTER_SERVICE);
+            mr.removeCallback(mCallback);
+            mCallback = null;
+        }
+    }
+
+
+    private class MyCallback extends MediaRouter.SimpleCallback
+    {
+        @Override
+        public void onRoutePresentationDisplayChanged(MediaRouter router,
+                                                      MediaRouter.RouteInfo info)
+        {
+            if (info != null && info.isEnabled() && mPresentation == null)
+            {
+                mPresentation = new MyPresentation(MainActivity.this,
+                        info.getPresentationDisplay(),
+                        android.R.style.Theme_Holo_Light_NoActionBar);
+                mPresentation.show();
+            }
+            else
+            {
+                mPresentation = null;
+            }
+        }
+    }
+
+//TODO: for reference only,
+//    private static void populate(View v, Display display)
+//    {
+//        DisplayMetrics metrics = new DisplayMetrics();
+//        display.getMetrics(metrics);
+//        float density = metrics.density;
+//        TextView actual = (TextView) v.findViewById(R.id.actual);
+//        if (actual != null)
+//        {
+//            actual.setText(String.format("%dx%d", metrics.widthPixels,
+//                    metrics.heightPixels));
+//        }
+//        TextView df = (TextView) v.findViewById(R.id.density_factor);
+//        if (df != null)
+//        {
+//            df.setText(String.format("%f", density));
+//        }
+//        TextView dp = (TextView) v.findViewById(R.id.device_pixels);
+//        if (dp != null)
+//        {
+//            dp.setText(String.format("%dx%d",
+//                    ((int) ((float) metrics.widthPixels / density)),
+//                    ((int) ((float) metrics.heightPixels / density))));
+//        }
+//    }
+
+
+
+    public class MyPresentation extends Presentation
+    {
+
+        public MyPresentation(Context outerContext, Display display, int theme)
+        {
+            super(outerContext, display, theme);
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState)
+        {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.fragment_red);
+
+        }
+    }
+
+//endregion Second Screen
+
 
 }
 
