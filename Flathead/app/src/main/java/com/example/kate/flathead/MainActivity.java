@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity
     public MessageBuilder mb;
     public MessageDisplayFragment mdf;
     public MessagePickerFragment mpf;
-    //  public UVCCameraFragment ucf;
 
     BasicImmersiveModeFragment immersiveModeFragment;
 
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         testDisplayFragment();
     }
 
-
+//region Message handling
     public void onMessageSelected(ScreenMessage sm) {
         if (mdf == null) {
             //something went wrong
@@ -108,7 +107,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+//endregion Message handling
 
+//region Camera
     //==============================================================
     //==============================================================
     //==============Camera specific stuff below here================
@@ -341,7 +342,7 @@ public class MainActivity extends AppCompatActivity
             setCameraButton(false);
         }
     }
-
+//endregion Camera
 
 }
 
