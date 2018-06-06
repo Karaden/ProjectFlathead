@@ -25,20 +25,20 @@
 
     </RelativeLayout>
 
-    <!--primaryTextsage display-->
-    <RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5">
+    <!--&lt;!&ndash;primaryTextsage display&ndash;&gt;-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="0dip"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:layout_weight="0.5">-->
 
-        <fragment
-            android:id="@+id/displayFragment"
-            android:name="com.example.kate.flathead.message.display.MessageDisplayFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_messagedisplay" />
+        <!--<fragment-->
+            <!--android:id="@+id/displayFragment"-->
+            <!--android:name="com.example.kate.flathead.message.display.MessageDisplayFragment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:layout="@layout/fragment_messagedisplay" />-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 
     <!--The video preview panel-->

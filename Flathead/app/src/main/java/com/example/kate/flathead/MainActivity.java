@@ -20,7 +20,7 @@ import android.widget.ToggleButton;
 
 import com.example.kate.flathead.immersivemode.BasicImmersiveModeFragment;
 import com.example.kate.flathead.message.MessageBuilder;
-import com.example.kate.flathead.message.display.MessageDisplayFragment;
+import com.example.kate.flathead.message.display.MessageDisplayer;
 import com.example.kate.flathead.message.picker.MessagePickerFragment;
 import com.example.kate.flathead.message.types.ScreenMessage;
 import com.serenegiant.usb.CameraDialog;
@@ -36,13 +36,14 @@ public class MainActivity extends AppCompatActivity
 
 
     public MessageBuilder mb;
-    public MessageDisplayFragment mdf;
+  //  public MessageDisplayFragment mdf;
     public MessagePickerFragment mpf;
 
     BasicImmersiveModeFragment immersiveModeFragment;
 
     private MyPresentation mPresentation = null;
     private MyCallback mCallback = null;
+    private MessageDisplayer mMessageDisplayer;
 
     private static final boolean DEBUG = true;    // TODO set false on release
 
@@ -62,8 +63,8 @@ public class MainActivity extends AppCompatActivity
 
         mb = new MessageBuilder(this);
 
-        mdf = (MessageDisplayFragment)
-                getSupportFragmentManager().findFragmentById(R.id.displayFragment);
+      //  mdf = (MessageDisplayFragment)
+       //         getSupportFragmentManager().findFragmentById(R.id.displayFragment);
 
         mpf = (MessagePickerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.messageListFragment);
@@ -132,10 +133,10 @@ public class MainActivity extends AppCompatActivity
 
 //region Message handling
     public void onMessageSelected(ScreenMessage sm) {
-        if (mdf == null) {
+        if (mMessageDisplayer == null) {
             //something went wrong
         } else {
-            mdf.updateDisplay(sm);
+            mMessageDisplayer.updateDisplay(sm);
 
         }
     }
@@ -143,7 +144,8 @@ public class MainActivity extends AppCompatActivity
 
     private void testDisplayFragment() {
 
-        mdf.updateDisplay("this is a test", Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf"), Color.RED);
+        mMessageDisplayer.updateDisplay("this is a test",
+                Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf"), Color.RED);
 
     }
 
@@ -465,7 +467,8 @@ public class MainActivity extends AppCompatActivity
         protected void onCreate(Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.fragment_red);
+            setContentView(R.layout.fragment_messagedisplay);
+            mMessageDisplayer = new MessageDisplayer(findViewById(R.id.MessageDisplayPanel));
 
         }
     }

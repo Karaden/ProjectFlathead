@@ -1,14 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/VisiblePanel"
+    android:id="@+id/MessageDisplayPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
     android:background="@color/flatScreenPrimary"
     android:fadingEdge="horizontal"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
 
-    <!--primaryTextsage display-->
+    <!--Message display-->
 
     <TextView
         android:id="@+id/primaryLabel"
