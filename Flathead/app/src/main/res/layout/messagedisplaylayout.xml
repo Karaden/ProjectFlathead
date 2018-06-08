@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MessageDisplayerPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:background="@color/flatScreenPrimary"
+    android:fadingEdge="horizontal"
+    android:orientation="horizontal">
+
+
+    <!--&lt;!&ndash;Message display&ndash;&gt;-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/mainLabel"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_gravity="center_horizontal|top"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:padding="20dp"-->
+        <!--android:text="@string/default_message"-->
+        <!--android:textAppearance="@style/TextAppearance.AppCompat.Headline" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/subLabel"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="10dp"-->
+        <!--android:textAlignment="textEnd"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/messageImage"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:contentDescription="@string/logoDescription"-->
+        <!--android:padding="5dp" />-->
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/mainLabel"
+            android:layout_width="295dp"
+            android:layout_height="78dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="36dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/messageImage"
+            android:layout_width="168dp"
+            android:layout_height="111dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="44dp"
+            android:contentDescription="Message @string/logoDescription"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainLabel"
+            app:srcCompat="@color/GOLD" />
+
+        <TextView
+            android:id="@+id/subLabel"
+            android:layout_width="161dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.531"
+            app:layout_constraintStart_toEndOf="@+id/messageImage" />
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>
+

@@ -2,25 +2,32 @@ package com.example.kate.flathead;
 
 import android.app.Presentation;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.SurfaceTexture;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.hardware.usb.UsbDevice;
 import android.media.MediaRouter;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.kate.flathead.immersivemode.BasicImmersiveModeFragment;
 import com.example.kate.flathead.message.MessageBuilder;
-import com.example.kate.flathead.message.display.MessageDisplayer;
 import com.example.kate.flathead.message.picker.MessagePickerFragment;
 import com.example.kate.flathead.message.types.ScreenMessage;
 import com.serenegiant.usb.CameraDialog;
@@ -36,13 +43,11 @@ public class MainActivity extends AppCompatActivity
 
 
     public MessageBuilder mb;
-  //  public MessageDisplayFragment mdf;
     public MessagePickerFragment mpf;
 
     BasicImmersiveModeFragment immersiveModeFragment;
 
-    private MyPresentation mPresentation = null;
-    private MyCallback mCallback = null;
+
     private MessageDisplayer mMessageDisplayer;
 
     private static final boolean DEBUG = true;    // TODO set false on release
@@ -63,9 +68,6 @@ public class MainActivity extends AppCompatActivity
 
         mb = new MessageBuilder(this);
 
-      //  mdf = (MessageDisplayFragment)
-       //         getSupportFragmentManager().findFragmentById(R.id.displayFragment);
-
         mpf = (MessagePickerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.messageListFragment);
 
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity
         //==============================================
         cameraCreate();
 
-        secondScreenCreate();
+
 
     }
 
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onDestroy() {
 
-        secondScreenDestroy();
+
 
         cameraDestroy();
 
@@ -133,21 +135,21 @@ public class MainActivity extends AppCompatActivity
 
 //region Message handling
     public void onMessageSelected(ScreenMessage sm) {
-        if (mMessageDisplayer == null) {
-            //something went wrong
-        } else {
-            mMessageDisplayer.updateDisplay(sm);
-
-        }
+//        if (mMessageDisplayer == null) {
+//            //something went wrong
+//        } else {
+//            mMessageDisplayer.updateDisplay(sm);
+//
+//        }
     }
 
 
     private void testDisplayFragment() {
-
-        mMessageDisplayer.updateDisplay("this is a test",
-                Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf"), Color.RED);
-
-    }
+//
+//        mMessageDisplayer.updateDisplay("this is a test",
+//                Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf"), Color.RED);
+//
+   }
 
 //endregion Message handling
 
@@ -377,104 +379,133 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    private void secondScreenCreate()
-    {
-        MediaRouter mr = (MediaRouter) getSystemService(MEDIA_ROUTER_SERVICE);
-        if (mr != null)
-        {
-            mCallback = new MyCallback();
-            mr.addCallback(MediaRouter.ROUTE_TYPE_LIVE_VIDEO, mCallback);
+
+
+
+
+
+    /**
+     * The presentation to show on the secondary display.
+     *
+     * Note that the presentation display may have different metrics from the display on which
+     * the main activity is showing so we must be careful to use the presentation's
+     * own {@link Context} whenever we load resources.
+     */
+    private final class DemoPresentation extends Presentation {
+
+        final MessageDisplayer mContents;
+
+        public DemoPresentation(Context context, Display display,
+                                MessageDisplayer contents) {
+            super(context, display);
+            mContents = contents;
         }
-        MediaRouter.RouteInfo info = mr.getSelectedRoute(MediaRouter.ROUTE_TYPE_LIVE_VIDEO);
-        if (info != null && info.isEnabled() && info.getPresentationDisplay() != null)
-        {
-            mPresentation = new MyPresentation(this,
-                    info.getPresentationDisplay(),
-                    android.R.style.Theme_Holo_Light_NoActionBar);
-            mPresentation.show();
-        }
-    }
 
+        /**
+         * Sets the preferred display mode id for the presentation.
+         */
+        public void setPreferredDisplayMode(int modeId) {
+            mContents.displayModeId = modeId;
 
-    private void secondScreenDestroy()
-    {
-        if (mCallback != null)
-        {
-            MediaRouter mr = (MediaRouter) getSystemService(MEDIA_ROUTER_SERVICE);
-            mr.removeCallback(mCallback);
-            mCallback = null;
-        }
-    }
-
-
-    private class MyCallback extends MediaRouter.SimpleCallback
-    {
-        @Override
-        public void onRoutePresentationDisplayChanged(MediaRouter router,
-                                                      MediaRouter.RouteInfo info)
-        {
-            if (info != null && info.isEnabled() && mPresentation == null)
-            {
-                mPresentation = new MyPresentation(MainActivity.this,
-                        info.getPresentationDisplay(),
-                        android.R.style.Theme_Holo_Light_NoActionBar);
-                mPresentation.show();
-            }
-            else
-            {
-                mPresentation = null;
-            }
-        }
-    }
-
-//TODO: for reference only,
-//    private static void populate(View v, Display display)
-//    {
-//        DisplayMetrics metrics = new DisplayMetrics();
-//        display.getMetrics(metrics);
-//        float density = metrics.density;
-//        TextView actual = (TextView) v.findViewById(R.id.actual);
-//        if (actual != null)
-//        {
-//            actual.setText(String.format("%dx%d", metrics.widthPixels,
-//                    metrics.heightPixels));
-//        }
-//        TextView df = (TextView) v.findViewById(R.id.density_factor);
-//        if (df != null)
-//        {
-//            df.setText(String.format("%f", density));
-//        }
-//        TextView dp = (TextView) v.findViewById(R.id.device_pixels);
-//        if (dp != null)
-//        {
-//            dp.setText(String.format("%dx%d",
-//                    ((int) ((float) metrics.widthPixels / density)),
-//                    ((int) ((float) metrics.heightPixels / density))));
-//        }
-//    }
-
-
-
-    public class MyPresentation extends Presentation
-    {
-
-        public MyPresentation(Context outerContext, Display display, int theme)
-        {
-            super(outerContext, display, theme);
+            WindowManager.LayoutParams params = getWindow().getAttributes();
+            params.preferredDisplayModeId = modeId;
+            getWindow().setAttributes(params);
         }
 
         @Override
-        protected void onCreate(Bundle savedInstanceState)
-        {
+        protected void onCreate(Bundle savedInstanceState) {
+            // Be sure to call the super class.
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.fragment_messagedisplay);
-            mMessageDisplayer = new MessageDisplayer(findViewById(R.id.MessageDisplayPanel));
+
+            // Get the resources for the context of the presentation.
+            // Notice that we are getting the resources from the context of the presentation.
+            Resources r = getContext().getResources();
+
+            // Inflate the layout.
+            setContentView(R.layout.messagedisplaylayout);
+
+            final Display display = getDisplay();
+            final int displayId = display.getDisplayId();
+            final int photo = mContents.photo;
+
+            // Show a caption to describe what's going on.
+            TextView text = (TextView)findViewById(R.id.mainLabel);
+            text.setText(r.getString(R.string.app_name));
+
+
+            // Show a n image for visual interest.
+            ImageView image = (ImageView)findViewById(R.id.messageImage);
+            image.setImageDrawable(r.getDrawable(R.drawable.functionistcouncilinsignia)); //TODO this is a good candidate for an error!
 
         }
+
+    }
+
+    /**
+     * Information about the content we want to show in the presentation.
+     */
+    private final static class MessageDisplayer  implements Parcelable {
+
+        final int photo;
+        final int[] colors;
+        int displayModeId;
+
+        public static final Creator<MessageDisplayer> CREATOR =
+                new Creator<MessageDisplayer>() {
+                    @Override
+                    public MessageDisplayer createFromParcel(Parcel in) {
+                        return new MessageDisplayer(in);
+                    }
+
+                    @Override
+                    public MessageDisplayer[] newArray(int size) {
+                        return new MessageDisplayer[size];
+                    }
+                };
+
+        public MessageDisplayer(int photo)
+        {
+            //TODO
+            this.photo = photo;
+            colors = new int[] {
+                    ((int) (Math.random() * Integer.MAX_VALUE)) | 0xFF000000,
+                    ((int) (Math.random() * Integer.MAX_VALUE)) | 0xFF000000 };
+        }
+
+        private MessageDisplayer(Parcel in)
+        {
+            //TODO
+            photo = in.readInt();
+            colors = new int[] { in.readInt(), in.readInt() };
+            displayModeId = in.readInt();
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            //TODO
+            dest.writeInt(photo);
+            dest.writeInt(colors[0]);
+            dest.writeInt(colors[1]);
+            dest.writeInt(displayModeId);
+        }
+
     }
 
 //endregion Second Screen
 
 
 }
+
+
+
+
+
+
+
+
 
