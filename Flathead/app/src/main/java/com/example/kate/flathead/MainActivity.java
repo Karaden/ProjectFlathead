@@ -3,13 +3,9 @@ package com.example.kate.flathead;
 import android.app.Presentation;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.SurfaceTexture;
-import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
+import android.hardware.display.DisplayManager;
 import android.hardware.usb.UsbDevice;
-import android.media.MediaRouter;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -48,7 +44,9 @@ public class MainActivity extends AppCompatActivity
     BasicImmersiveModeFragment immersiveModeFragment;
 
 
-    private MessageDisplayer mMessageDisplayer;
+    private DisplayManager mDisplayManager;
+    private DemoPresentation mDemoPresentation;
+    private DemoPresentationContents mDemoPresentationContents;
 
     private static final boolean DEBUG = true;    // TODO set false on release
 
@@ -76,9 +74,24 @@ public class MainActivity extends AppCompatActivity
         //==============================================
         cameraCreate();
 
-
+        secondScreenCreate();
 
     }
+
+    // onCreate stuff for secondScreen
+    private void secondScreenCreate() {
+        // Get the display manager service.
+        mDisplayManager = (DisplayManager)getSystemService(Context.DISPLAY_SERVICE);
+
+        //Assuming only getting one back...
+        Display[] displays = mDisplayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION);
+
+        mDemoPresentationContents = new DemoPresentationContents(1);
+        showPresentation(displays[0], mDemoPresentationContents);
+    }
+
+
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -135,10 +148,10 @@ public class MainActivity extends AppCompatActivity
 
 //region Message handling
     public void onMessageSelected(ScreenMessage sm) {
-//        if (mMessageDisplayer == null) {
+//        if (mDemoPresentationContents == null) {
 //            //something went wrong
 //        } else {
-//            mMessageDisplayer.updateDisplay(sm);
+//            mDemoPresentationContents.updateDisplay(sm);
 //
 //        }
     }
@@ -146,7 +159,7 @@ public class MainActivity extends AppCompatActivity
 
     private void testDisplayFragment() {
 //
-//        mMessageDisplayer.updateDisplay("this is a test",
+//        mDemoPresentationContents.updateDisplay("this is a test",
 //                Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf"), Color.RED);
 //
    }
@@ -377,7 +390,22 @@ public class MainActivity extends AppCompatActivity
 //region Second Screen
 
 
+    /**
+     * Shows a {@link Presentation} on the specified display.
+     */
+    private void showPresentation(Display display, DemoPresentationContents contents) {
+        final int displayId = display.getDisplayId();
+        if (mDemoPresentation != null) {
+            return;
+        }
 
+        Log.d(TAG, "Showing presentation photo #" + contents.photo
+                + " on display #" + displayId + ".");
+
+        mDemoPresentation = new DemoPresentation(this, display, contents);
+        mDemoPresentation.show();
+
+    }
 
 
 
@@ -393,10 +421,10 @@ public class MainActivity extends AppCompatActivity
      */
     private final class DemoPresentation extends Presentation {
 
-        final MessageDisplayer mContents;
+        final DemoPresentationContents mContents;
 
         public DemoPresentation(Context context, Display display,
-                                MessageDisplayer contents) {
+                                DemoPresentationContents contents) {
             super(context, display);
             mContents = contents;
         }
@@ -444,26 +472,26 @@ public class MainActivity extends AppCompatActivity
     /**
      * Information about the content we want to show in the presentation.
      */
-    private final static class MessageDisplayer  implements Parcelable {
+    private final static class DemoPresentationContents implements Parcelable {
 
         final int photo;
         final int[] colors;
         int displayModeId;
 
-        public static final Creator<MessageDisplayer> CREATOR =
-                new Creator<MessageDisplayer>() {
+        public static final Creator<DemoPresentationContents> CREATOR =
+                new Creator<DemoPresentationContents>() {
                     @Override
-                    public MessageDisplayer createFromParcel(Parcel in) {
-                        return new MessageDisplayer(in);
+                    public DemoPresentationContents createFromParcel(Parcel in) {
+                        return new DemoPresentationContents(in);
                     }
 
                     @Override
-                    public MessageDisplayer[] newArray(int size) {
-                        return new MessageDisplayer[size];
+                    public DemoPresentationContents[] newArray(int size) {
+                        return new DemoPresentationContents[size];
                     }
                 };
 
-        public MessageDisplayer(int photo)
+        public DemoPresentationContents(int photo)
         {
             //TODO
             this.photo = photo;
@@ -472,7 +500,7 @@ public class MainActivity extends AppCompatActivity
                     ((int) (Math.random() * Integer.MAX_VALUE)) | 0xFF000000 };
         }
 
-        private MessageDisplayer(Parcel in)
+        private DemoPresentationContents(Parcel in)
         {
             //TODO
             photo = in.readInt();
