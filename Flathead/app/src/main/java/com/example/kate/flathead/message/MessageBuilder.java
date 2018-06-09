@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 
+import com.example.kate.flathead.MainActivity;
 import com.example.kate.flathead.R;
 import com.example.kate.flathead.message.types.ConversationMessage;
 import com.example.kate.flathead.message.types.MoodPromptMessage;
@@ -18,6 +19,7 @@ public class MessageBuilder {
 
 
     private Typeface moodPromptFont, conversationFont;
+    private MainActivity.TypefaceName moodPromptTypefaceName, conversationTypefaceName;
 
     private List<ScreenMessage> screenMessages;
     private String messageSuffix, secondaryText;
@@ -44,6 +46,7 @@ public class MessageBuilder {
          Can they be set in the class file, rather than on object instantiation?
         */
 
+
         //Things to display
         moodPromptFont = Typeface.createFromAsset(act.getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(act.getAssets(), "fonts/datacontrol.ttf");
@@ -52,7 +55,6 @@ public class MessageBuilder {
         logo = R.drawable.functionistcouncilinsignia;
         defaultTextColour = Color.BLACK;
         moodPromptTextColour = Color.WHITE;
-
 
         ensureMessagesAreAvailable();
         populateScreenMessages();

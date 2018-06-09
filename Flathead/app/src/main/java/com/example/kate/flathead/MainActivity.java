@@ -4,6 +4,7 @@ import android.app.Presentation;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.SurfaceTexture;
+import android.graphics.Typeface;
 import android.hardware.display.DisplayManager;
 import android.hardware.usb.UsbDevice;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -25,6 +27,8 @@ import android.widget.ToggleButton;
 import com.example.kate.flathead.immersivemode.BasicImmersiveModeFragment;
 import com.example.kate.flathead.message.MessageBuilder;
 import com.example.kate.flathead.message.picker.MessagePickerFragment;
+import com.example.kate.flathead.message.types.ConversationMessage;
+import com.example.kate.flathead.message.types.MoodPromptMessage;
 import com.example.kate.flathead.message.types.ScreenMessage;
 import com.serenegiant.usb.CameraDialog;
 import com.serenegiant.usb.USBMonitor;
@@ -47,8 +51,17 @@ public class MainActivity extends AppCompatActivity
     private DisplayManager mDisplayManager;
     private DemoPresentation mDemoPresentation;
     private DemoPresentationContents mDemoPresentationContents;
+    public Typeface moodPromptFont;
+    public Typeface conversationFont;
+
 
     private static final boolean DEBUG = true;    // TODO set false on release
+
+    public enum TypefaceName {
+        FURMANITE,
+        DATACONTROL;
+
+    }
 
 
     @Override
@@ -80,14 +93,12 @@ public class MainActivity extends AppCompatActivity
 
     // onCreate stuff for secondScreen
     private void secondScreenCreate() {
+
+        moodPromptFont = Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf");
+        conversationFont = Typeface.createFromAsset(getAssets(), "fonts/datacontrol.ttf");
+
         // Get the display manager service.
         mDisplayManager = (DisplayManager)getSystemService(Context.DISPLAY_SERVICE);
-
-        //Assuming only getting one back...
-        Display[] displays = mDisplayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION);
-
-        mDemoPresentationContents = new DemoPresentationContents(1);
-        showPresentation(displays[0], mDemoPresentationContents);
     }
 
 
@@ -111,7 +122,6 @@ public class MainActivity extends AppCompatActivity
 
         mpf.setMessages(mb.getScreenMessages());
 
-        testDisplayFragment();
     }
 
 
@@ -148,21 +158,16 @@ public class MainActivity extends AppCompatActivity
 
 //region Message handling
     public void onMessageSelected(ScreenMessage sm) {
-//        if (mDemoPresentationContents == null) {
-//            //something went wrong
-//        } else {
-//            mDemoPresentationContents.updateDisplay(sm);
-//
-//        }
+
+
+            //Assuming only getting one back...
+            Display[] displays = mDisplayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION);
+            mDemoPresentationContents = new DemoPresentationContents(sm);
+            showPresentation(displays[0], mDemoPresentationContents);
+
+
     }
 
-
-    private void testDisplayFragment() {
-//
-//        mDemoPresentationContents.updateDisplay("this is a test",
-//                Typeface.createFromAsset(getAssets(), "fonts/furmanite.otf"), Color.RED);
-//
-   }
 
 //endregion Message handling
 
@@ -389,27 +394,36 @@ public class MainActivity extends AppCompatActivity
 
 //region Second Screen
 
+    public Typeface getTypeface(TypefaceName tfn){
+
+        if (tfn == TypefaceName.FURMANITE)
+        {
+            return moodPromptFont;
+        }
+        else if (tfn == TypefaceName.DATACONTROL)
+        {
+            return conversationFont;
+        }
+        else
+        {
+            //TODO: pick a Default
+            return conversationFont;
+        }
+
+    }
+
+
 
     /**
      * Shows a {@link Presentation} on the specified display.
      */
     private void showPresentation(Display display, DemoPresentationContents contents) {
         final int displayId = display.getDisplayId();
-        if (mDemoPresentation != null) {
-            return;
-        }
-
-        Log.d(TAG, "Showing presentation photo #" + contents.photo
-                + " on display #" + displayId + ".");
 
         mDemoPresentation = new DemoPresentation(this, display, contents);
         mDemoPresentation.show();
 
     }
-
-
-
-
 
 
     /**
@@ -422,6 +436,7 @@ public class MainActivity extends AppCompatActivity
     private final class DemoPresentation extends Presentation {
 
         final DemoPresentationContents mContents;
+
 
         public DemoPresentation(Context context, Display display,
                                 DemoPresentationContents contents) {
@@ -454,17 +469,30 @@ public class MainActivity extends AppCompatActivity
 
             final Display display = getDisplay();
             final int displayId = display.getDisplayId();
-            final int photo = mContents.photo;
 
-            // Show a caption to describe what's going on.
-            TextView text = (TextView)findViewById(R.id.mainLabel);
-            text.setText(r.getString(R.string.app_name));
+            TextView primaryLabel = (TextView)findViewById(R.id.mainLabel);
+            primaryLabel.setVisibility(mDemoPresentationContents.mPrimaryLabelVisible);
+            primaryLabel.setText(mDemoPresentationContents.mPrimaryLabelText);
+            primaryLabel.setTypeface(getTypeface(mDemoPresentationContents.mPrimaryLabelTypeface));
+            primaryLabel.setTextColor(mDemoPresentationContents.mPrimaryLabelTextColor);
+
+            TextView secondaryLabel = (TextView)findViewById(R.id.subLabel);
+            secondaryLabel.setVisibility(mDemoPresentationContents.mSecondaryLabelVisible);
+            if (mDemoPresentationContents.mSecondaryLabelVisible == View.VISIBLE) {
+                secondaryLabel.setText(mDemoPresentationContents.mSecondaryLabelText);
+                secondaryLabel.setTypeface(getTypeface(mDemoPresentationContents.mSecondaryLabelTypeface));
+                secondaryLabel.setTextColor(mDemoPresentationContents.mSecondaryLabelTextColor);
+            }
+
 
 
             // Show a n image for visual interest.
             ImageView image = (ImageView)findViewById(R.id.messageImage);
-            image.setImageDrawable(r.getDrawable(R.drawable.functionistcouncilinsignia)); //TODO this is a good candidate for an error!
-
+            image.setVisibility(mDemoPresentationContents.mLogoVisible);
+            if (mDemoPresentationContents.mLogoVisible == View.VISIBLE)
+            {
+                image.setImageResource(mDemoPresentationContents.mLogoImage);
+            }
         }
 
     }
@@ -474,9 +502,22 @@ public class MainActivity extends AppCompatActivity
      */
     private final static class DemoPresentationContents implements Parcelable {
 
-        final int photo;
-        final int[] colors;
         int displayModeId;
+
+        int mPrimaryLabelVisible;
+        String mPrimaryLabelText;
+        TypefaceName mPrimaryLabelTypeface;
+        int mPrimaryLabelTextColor;
+
+        int mSecondaryLabelVisible;
+        String mSecondaryLabelText;
+        TypefaceName mSecondaryLabelTypeface;
+        int mSecondaryLabelTextColor;
+
+        int mLogoVisible;
+        int mLogoImage;
+
+
 
         public static final Creator<DemoPresentationContents> CREATOR =
                 new Creator<DemoPresentationContents>() {
@@ -491,21 +532,56 @@ public class MainActivity extends AppCompatActivity
                     }
                 };
 
-        public DemoPresentationContents(int photo)
-        {
-            //TODO
-            this.photo = photo;
-            colors = new int[] {
-                    ((int) (Math.random() * Integer.MAX_VALUE)) | 0xFF000000,
-                    ((int) (Math.random() * Integer.MAX_VALUE)) | 0xFF000000 };
+
+        public DemoPresentationContents(ScreenMessage sm) {
+            if (sm instanceof MoodPromptMessage) {
+
+            mPrimaryLabelVisible = View.VISIBLE;
+            mPrimaryLabelText = sm.primaryText;
+            mPrimaryLabelTypeface = TypefaceName.FURMANITE;
+            mPrimaryLabelTextColor = sm.primaryColour;
+
+            mSecondaryLabelVisible = View.VISIBLE;
+            mSecondaryLabelText = sm.secondaryText;
+            mSecondaryLabelTypeface = TypefaceName.FURMANITE;
+            mSecondaryLabelTextColor = sm.secondaryColour;
+
+            mLogoVisible = View.VISIBLE;
+            mLogoImage = sm.logoResourceID;
+
+
+
+            }
+            else if (sm instanceof ConversationMessage) {
+
+                mPrimaryLabelVisible = View.VISIBLE;
+                mPrimaryLabelText = sm.primaryText;
+                mPrimaryLabelTypeface = TypefaceName.DATACONTROL;
+                mPrimaryLabelTextColor = sm.primaryColour;
+
+                mSecondaryLabelVisible = View.GONE;
+
+                mLogoVisible = View.GONE;
+
+
+            }
         }
 
         private DemoPresentationContents(Parcel in)
         {
-            //TODO
-            photo = in.readInt();
-            colors = new int[] { in.readInt(), in.readInt() };
             displayModeId = in.readInt();
+            mPrimaryLabelVisible = in.readInt();
+            mPrimaryLabelText = in.readString();
+            mPrimaryLabelTypeface = TypefaceName.values()[in.readInt()];
+            mPrimaryLabelTextColor = in.readInt();
+
+            mSecondaryLabelVisible = in.readInt();
+            mSecondaryLabelText = in.readString();
+            mSecondaryLabelTypeface = TypefaceName.values()[in.readInt()];
+            mSecondaryLabelTextColor = in.readInt();
+
+            mLogoVisible = in.readInt();
+            mLogoImage = in.readInt();
         }
 
         @Override
@@ -516,10 +592,20 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             //TODO
-            dest.writeInt(photo);
-            dest.writeInt(colors[0]);
-            dest.writeInt(colors[1]);
             dest.writeInt(displayModeId);
+
+            dest.writeInt(mPrimaryLabelVisible);
+            dest.writeString(mPrimaryLabelText);
+            dest.writeInt(mPrimaryLabelTypeface.ordinal());
+            dest.writeInt(mPrimaryLabelTextColor);
+
+            dest.writeInt(mSecondaryLabelVisible);
+            dest.writeString(mSecondaryLabelText);
+            dest.writeInt(mSecondaryLabelTypeface.ordinal());
+            dest.writeInt(mSecondaryLabelTextColor);
+
+            dest.writeInt(mLogoVisible);
+            dest.writeInt(mLogoImage);
         }
 
     }
