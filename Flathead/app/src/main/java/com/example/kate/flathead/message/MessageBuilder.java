@@ -19,7 +19,6 @@ public class MessageBuilder {
 
 
     private Typeface moodPromptFont, conversationFont;
-    private MainActivity.TypefaceName moodPromptTypefaceName, conversationTypefaceName;
 
     private List<ScreenMessage> screenMessages;
     private String messageSuffix, secondaryText;
