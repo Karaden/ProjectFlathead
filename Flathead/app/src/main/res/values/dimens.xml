@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ASUS_USB_Screen_width">1366dp</dimen>
+    <dimen name="ASUS_USB_Screen_height">768dp</dimen>
+    <dimen name="active_area__padding_height">10dp</dimen>
+</resources>
