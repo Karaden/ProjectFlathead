@@ -20,7 +20,7 @@ public class MessageBuilder {
     private Typeface moodPromptFont, conversationFont;
 
     private List<ScreenMessage> screenMessages;
-    private String messageSuffix, secondaryText;
+    private String secondaryText;
     private int logo;
 
     private final String moodFile = "mood_messages.txt";
@@ -48,7 +48,6 @@ public class MessageBuilder {
         //Things to display
         moodPromptFont = Typeface.createFromAsset(act.getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(act.getAssets(), "fonts/datacontrol.ttf");
-        messageSuffix = act.getResources().getString(R.string.messageSuffix);
         secondaryText = act.getResources().getString(R.string.secondaryText);
         logo = R.drawable.ic_functionist_council_insignia;
         defaultTextColour = Color.BLACK;
