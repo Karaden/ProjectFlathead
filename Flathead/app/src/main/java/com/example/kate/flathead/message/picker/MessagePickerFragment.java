@@ -14,6 +14,7 @@ import com.example.kate.flathead.message.types.ScreenMessage;
 import com.example.kate.flathead.message.types.ScreenMessageAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by kate on 25/03/18.
@@ -43,7 +44,7 @@ public class MessagePickerFragment extends ListFragment {
 
     private void initialise() {
 
-        listView = getView().findViewById(android.R.id.list); //TODO: null check
+        listView = Objects.requireNonNull(getView()).findViewById(android.R.id.list);
     }
 
     private void populateListView(List<ScreenMessage> screenMessages) {

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by kate on 22/11/17.
@@ -39,7 +40,7 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
 
         ScreenMessage sm = (ScreenMessage) getItem(position);
 
-        text.setText(sm.primaryText); //TODO: null check
+        text.setText(Objects.requireNonNull(sm).primaryText);
         text.setTypeface(sm.typeface);
         text.setPadding(20, 30, 20, 30);
 

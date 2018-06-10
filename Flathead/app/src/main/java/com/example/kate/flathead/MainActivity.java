@@ -2,7 +2,6 @@ package com.example.kate.flathead;
 
 import android.app.Presentation;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.SurfaceTexture;
 import android.graphics.Typeface;
 import android.hardware.display.DisplayManager;
@@ -17,7 +16,6 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -375,8 +373,6 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * to access from CameraDialog
-     *
-     * @return
      */
     @Override
     public USBMonitor getUSBMonitor() {
@@ -396,18 +392,14 @@ public class MainActivity extends AppCompatActivity
 
     private Typeface getTypeface(TypefaceName tfn){
 
-        if (tfn == TypefaceName.FURMANITE)
-        {
-            return moodPromptFont;
-        }
-        else if (tfn == TypefaceName.DATACONTROL)
-        {
-            return conversationFont;
-        }
-        else
-        {
-            //TODO: pick a Default
-            return conversationFont;
+        switch (tfn) {
+            case FURMANITE:
+                return moodPromptFont;
+            case DATACONTROL:
+                return conversationFont;
+            default:
+                //TODO: pick a Default
+                return conversationFont;
         }
 
     }
@@ -452,13 +444,13 @@ public class MainActivity extends AppCompatActivity
             // Inflate the layout.
             setContentView(R.layout.messagedisplaylayout);
 
-            TextView primaryLabel = (TextView)findViewById(R.id.mainLabel);
+            TextView primaryLabel = findViewById(R.id.mainLabel);
             primaryLabel.setVisibility(mDemoPresentationContents.mPrimaryLabelVisible);
             primaryLabel.setText(mDemoPresentationContents.mPrimaryLabelText);
             primaryLabel.setTypeface(getTypeface(mDemoPresentationContents.mPrimaryLabelTypeface));
             primaryLabel.setTextColor(mDemoPresentationContents.mPrimaryLabelTextColor);
 
-            TextView secondaryLabel = (TextView)findViewById(R.id.subLabel);
+            TextView secondaryLabel = findViewById(R.id.subLabel);
             secondaryLabel.setVisibility(mDemoPresentationContents.mSecondaryLabelVisible);
             if (mDemoPresentationContents.mSecondaryLabelVisible == View.VISIBLE) {
                 secondaryLabel.setText(mDemoPresentationContents.mSecondaryLabelText);
@@ -469,7 +461,7 @@ public class MainActivity extends AppCompatActivity
 
 
             // Show a n image for visual interest.
-            ImageView image = (ImageView)findViewById(R.id.messageImage);
+            ImageView image = findViewById(R.id.messageImage);
             image.setVisibility(mDemoPresentationContents.mLogoVisible);
             if (mDemoPresentationContents.mLogoVisible == View.VISIBLE)
             {

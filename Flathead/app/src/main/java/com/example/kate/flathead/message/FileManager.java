@@ -86,6 +86,7 @@ class FileManager {
             String line = reader.readLine();
             while (line != null) {
                 //The following line is NOT redundant! It is necessary to force the correct parsing of new line characters
+                //noinspection RedundantStringFormatCall
                 line = String.format(line);
                 res.add(line);
                 line = reader.readLine();
