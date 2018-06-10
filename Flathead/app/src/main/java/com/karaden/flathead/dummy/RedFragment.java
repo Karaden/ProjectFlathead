@@ -1,4 +1,4 @@
-package com.example.kate.flathead.dummy;
+package com.karaden.flathead.dummy;
 
 
 import android.app.Fragment;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.kate.flathead.R;
+import com.karaden.flathead.R;
 
 public class RedFragment extends Fragment {
 

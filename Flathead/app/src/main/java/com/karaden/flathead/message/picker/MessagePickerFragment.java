@@ -1,4 +1,4 @@
-package com.example.kate.flathead.message.picker;
+package com.karaden.flathead.message.picker;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.kate.flathead.R;
-import com.example.kate.flathead.message.types.ScreenMessage;
-import com.example.kate.flathead.message.types.ScreenMessageAdapter;
+import com.karaden.flathead.R;
+import com.karaden.flathead.message.types.ScreenMessage;
+import com.karaden.flathead.message.types.ScreenMessageAdapter;
 
 import java.util.List;
 import java.util.Objects;

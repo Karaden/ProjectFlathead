@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.example.kate.flathead.immersivemode;
+package com.karaden.flathead.immersivemode;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

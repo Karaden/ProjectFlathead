@@ -1,4 +1,4 @@
-package com.example.kate.flathead;
+package com.karaden.flathead;
 
 import org.junit.Test;
 

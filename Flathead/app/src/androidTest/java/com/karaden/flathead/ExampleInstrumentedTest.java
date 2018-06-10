@@ -1,4 +1,4 @@
-package com.example.kate.flathead;
+package com.karaden.flathead;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.kate.flathead", appContext.getPackageName());
+        assertEquals("com.karaden.flathead", appContext.getPackageName());
     }
 }

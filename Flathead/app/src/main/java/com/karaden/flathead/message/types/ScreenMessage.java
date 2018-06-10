@@ -1,4 +1,4 @@
-package com.example.kate.flathead.message.types;
+package com.karaden.flathead.message.types;
 
 import android.graphics.Typeface;
 

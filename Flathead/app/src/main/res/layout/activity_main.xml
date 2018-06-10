@@ -7,7 +7,7 @@
     android:baselineAligned="false"
     android:keepScreenOn="true"
     android:orientation="horizontal"
-    tools:context="com.example.kate.flathead.MainActivity">
+    tools:context="com.karaden.flathead.MainActivity">
 
     <!--Message picker-->
     <RelativeLayout
@@ -17,7 +17,7 @@
 
         <fragment
             android:id="@+id/messageListFragment"
-            android:name="com.example.kate.flathead.message.picker.MessagePickerFragment"
+            android:name="com.karaden.flathead.message.picker.MessagePickerFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_messagepicker" />
@@ -33,7 +33,7 @@
 
         <fragment
             android:id="@+id/vid_fragment"
-            android:name="com.example.kate.flathead.cameraUVC.UVCCameraFragment"
+            android:name="com.karaden.flathead.cameraUVC.UVCCameraFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_uvccamera" />

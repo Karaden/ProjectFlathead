@@ -1,4 +1,4 @@
-package com.example.kate.flathead.message;
+package com.karaden.flathead.message;
 
 import android.content.res.AssetManager;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package com.example.kate.flathead.cameraUVC;
+package com.karaden.flathead.cameraUVC;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.kate.flathead.R;
+import com.karaden.flathead.R;
 
 /**
  * A simple {@link Fragment} subclass.

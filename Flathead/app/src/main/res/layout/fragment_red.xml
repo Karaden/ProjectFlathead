@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kate.flathead.dummy.RedFragment">
+    tools:context="com.karaden.flathead.dummy.RedFragment">
 
     <TextView
         android:id="@+id/red"

@@ -1,14 +1,14 @@
-package com.example.kate.flathead.message;
+package com.karaden.flathead.message;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 
-import com.example.kate.flathead.R;
-import com.example.kate.flathead.message.types.ConversationMessage;
-import com.example.kate.flathead.message.types.MoodPromptMessage;
-import com.example.kate.flathead.message.types.ScreenMessage;
+import com.karaden.flathead.R;
+import com.karaden.flathead.message.types.ConversationMessage;
+import com.karaden.flathead.message.types.MoodPromptMessage;
+import com.karaden.flathead.message.types.ScreenMessage;
 
 import java.io.IOException;
 import java.util.ArrayList;

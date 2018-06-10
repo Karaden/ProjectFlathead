@@ -1,4 +1,4 @@
-package com.example.kate.flathead;
+package com.karaden.flathead;
 
 import android.app.Presentation;
 import android.content.Context;
@@ -22,12 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.example.kate.flathead.immersivemode.BasicImmersiveModeFragment;
-import com.example.kate.flathead.message.MessageBuilder;
-import com.example.kate.flathead.message.picker.MessagePickerFragment;
-import com.example.kate.flathead.message.types.ConversationMessage;
-import com.example.kate.flathead.message.types.MoodPromptMessage;
-import com.example.kate.flathead.message.types.ScreenMessage;
+import com.karaden.flathead.immersivemode.BasicImmersiveModeFragment;
+import com.karaden.flathead.message.MessageBuilder;
+import com.karaden.flathead.message.picker.MessagePickerFragment;
+import com.karaden.flathead.message.types.ConversationMessage;
+import com.karaden.flathead.message.types.MoodPromptMessage;
+import com.karaden.flathead.message.types.ScreenMessage;
 import com.serenegiant.usb.CameraDialog;
 import com.serenegiant.usb.USBMonitor;
 import com.serenegiant.usb.UVCCamera;
