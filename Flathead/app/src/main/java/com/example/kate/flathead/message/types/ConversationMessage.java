@@ -5,11 +5,10 @@ import android.graphics.Typeface;
 public class ConversationMessage extends ScreenMessage {
 
 
-    public ConversationMessage(String primaryText, int primaryColour, Typeface defaultTypeface, String messageSuffix,
+    public ConversationMessage(String primaryText, int primaryColour, Typeface defaultTypeface,
                                String secondaryText, int secondaryColour, int logoImage) {
 
-        super(primaryText, primaryColour, defaultTypeface, messageSuffix,
-                secondaryText, secondaryColour, logoImage);
+        super(primaryText, primaryColour, defaultTypeface, secondaryText, secondaryColour, logoImage);
 
     }
 }

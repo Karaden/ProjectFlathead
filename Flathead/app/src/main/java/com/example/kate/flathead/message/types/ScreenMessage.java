@@ -13,19 +13,17 @@ import android.graphics.Typeface;
 public abstract class ScreenMessage {
     public final String primaryText;
     public final Typeface typeface;
-    private final String messageSuffix; //TODO why isn't this being used anymore?
     public final String secondaryText;
     public final int logoResourceID;
     public final int primaryColour;
     public final int secondaryColour;
 
 
-    ScreenMessage(String primaryText, int primaryColour, Typeface typeface, String messageSuffix,
+    ScreenMessage(String primaryText, int primaryColour, Typeface typeface,
                   String secondaryText, int secondaryColour, int logoImage) {
         this.primaryText = primaryText;
         this.primaryColour = primaryColour;
         this.typeface = typeface;
-        this.messageSuffix = messageSuffix;
         this.secondaryText = secondaryText;
         this.secondaryColour = secondaryColour;
         this.logoResourceID = logoImage;
