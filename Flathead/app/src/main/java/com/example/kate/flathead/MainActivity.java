@@ -42,24 +42,24 @@ public class MainActivity extends AppCompatActivity
         CameraDialog.CameraDialogParent {
 
 
-    public MessageBuilder mb;
-    public MessagePickerFragment mpf;
+    private MessageBuilder mb;
+    private MessagePickerFragment mpf;
 
-    BasicImmersiveModeFragment immersiveModeFragment;
+    private BasicImmersiveModeFragment immersiveModeFragment;
 
 
     private DisplayManager mDisplayManager;
     private DemoPresentation mDemoPresentation;
     private DemoPresentationContents mDemoPresentationContents;
-    public Typeface moodPromptFont;
-    public Typeface conversationFont;
+    private Typeface moodPromptFont;
+    private Typeface conversationFont;
 
 
     private static final boolean DEBUG = true;    // TODO set false on release
 
     public enum TypefaceName {
         FURMANITE,
-        DATACONTROL;
+        DATACONTROL
 
     }
 
@@ -394,7 +394,7 @@ public class MainActivity extends AppCompatActivity
 
 //region Second Screen
 
-    public Typeface getTypeface(TypefaceName tfn){
+    private Typeface getTypeface(TypefaceName tfn){
 
         if (tfn == TypefaceName.FURMANITE)
         {
@@ -418,7 +418,6 @@ public class MainActivity extends AppCompatActivity
      * Shows a {@link Presentation} on the specified display.
      */
     private void showPresentation(Display display, DemoPresentationContents contents) {
-        final int displayId = display.getDisplayId();
 
         mDemoPresentation = new DemoPresentation(this, display, contents);
         mDemoPresentation.show();
@@ -438,21 +437,10 @@ public class MainActivity extends AppCompatActivity
         final DemoPresentationContents mContents;
 
 
-        public DemoPresentation(Context context, Display display,
-                                DemoPresentationContents contents) {
+        DemoPresentation(Context context, Display display,
+                         DemoPresentationContents contents) {
             super(context, display);
             mContents = contents;
-        }
-
-        /**
-         * Sets the preferred display mode id for the presentation.
-         */
-        public void setPreferredDisplayMode(int modeId) {
-            mContents.displayModeId = modeId;
-
-            WindowManager.LayoutParams params = getWindow().getAttributes();
-            params.preferredDisplayModeId = modeId;
-            getWindow().setAttributes(params);
         }
 
         @Override
@@ -460,15 +448,9 @@ public class MainActivity extends AppCompatActivity
             // Be sure to call the super class.
             super.onCreate(savedInstanceState);
 
-            // Get the resources for the context of the presentation.
-            // Notice that we are getting the resources from the context of the presentation.
-            Resources r = getContext().getResources();
 
             // Inflate the layout.
             setContentView(R.layout.messagedisplaylayout);
-
-            final Display display = getDisplay();
-            final int displayId = display.getDisplayId();
 
             TextView primaryLabel = (TextView)findViewById(R.id.mainLabel);
             primaryLabel.setVisibility(mDemoPresentationContents.mPrimaryLabelVisible);
@@ -533,7 +515,7 @@ public class MainActivity extends AppCompatActivity
                 };
 
 
-        public DemoPresentationContents(ScreenMessage sm) {
+        DemoPresentationContents(ScreenMessage sm) {
             if (sm instanceof MoodPromptMessage) {
 
             mPrimaryLabelVisible = View.VISIBLE;

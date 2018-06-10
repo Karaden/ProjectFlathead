@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 
-import com.example.kate.flathead.MainActivity;
 import com.example.kate.flathead.R;
 import com.example.kate.flathead.message.types.ConversationMessage;
 import com.example.kate.flathead.message.types.MoodPromptMessage;
@@ -24,14 +23,14 @@ public class MessageBuilder {
     private String messageSuffix, secondaryText;
     private int logo;
 
-    private String moodFile = "mood_messages.txt";
-    private String conversationFile = "conversation_messages.txt";
+    private final String moodFile = "mood_messages.txt";
+    private final String conversationFile = "conversation_messages.txt";
 
     private int defaultTextColour;
     private int moodPromptTextColour;
 
 
-    private Activity act;
+    private final Activity act;
 
     public MessageBuilder(Activity activity) {
 

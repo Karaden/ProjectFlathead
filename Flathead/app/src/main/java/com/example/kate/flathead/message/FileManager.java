@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by kate on 21/3/18.
  * Handle the reading/writing of the messages file
  */
-public class FileManager {
+class FileManager {
     public static void writeMessageFile(File externalFilesDir, String messageFileName, AssetManager assetManager, String assetFileName) {
 
         File outFile = new File(externalFilesDir, messageFileName);

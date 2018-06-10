@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MessagePickerFragment extends ListFragment {
 
-    OnMessageSelectedListener mCallback;
+    private OnMessageSelectedListener mCallback;
 
     private ListView listView;
 
