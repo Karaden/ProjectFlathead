@@ -51,7 +51,7 @@ public class MessageBuilder {
         conversationFont = Typeface.createFromAsset(act.getAssets(), "fonts/datacontrol.ttf");
         messageSuffix = act.getResources().getString(R.string.messageSuffix);
         secondaryText = act.getResources().getString(R.string.secondaryText);
-        logo = R.drawable.functionistcouncilinsignia;
+        logo = R.drawable.ic_functionist_council_insignia;
         defaultTextColour = Color.BLACK;
         moodPromptTextColour = Color.WHITE;
 

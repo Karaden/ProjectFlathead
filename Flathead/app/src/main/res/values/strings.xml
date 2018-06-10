@@ -6,7 +6,7 @@
 
     <string name="default_message">Hello world!</string>
 
-    <string name="secondaryText">Mood prompt issued by \nthe Functionist Council</string>
+    <string name="secondaryText">Mood prompt issued by the Functionist Council</string>
     <string name="messageSuffix">⌷</string>
 
     <string name="logoDescription">[Functionist insignia]</string>

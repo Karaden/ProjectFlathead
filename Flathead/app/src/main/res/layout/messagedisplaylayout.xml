@@ -47,11 +47,10 @@
 
         <TextView
             android:id="@+id/mainLabel"
-            android:layout_width="397dp"
-            android:layout_height="104dp"
+            android:layout_width="917dp"
+            android:layout_height="415dp"
             android:layout_marginTop="8dp"
             android:autoSizeTextType="uniform"
-            android:autoText="false"
             android:text="@string/default_message"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +60,8 @@
 
         <ImageView
             android:id="@+id/messageImage"
-            android:layout_width="406dp"
-            android:layout_height="157dp"
+            android:layout_width="1286dp"
+            android:layout_height="341dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -71,13 +70,14 @@
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/functionistcouncilinsignia" />
+            app:srcCompat="@drawable/ic_functionist_council_insignia" />
 
         <TextView
             android:id="@+id/subLabel"
-            android:layout_width="269dp"
-            android:layout_height="55dp"
+            android:layout_width="330dp"
+            android:layout_height="66dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -85,11 +85,12 @@
             android:text="@string/secondaryText"
             android:textAlignment="center"
             android:textColor="@color/BLACK"
-            android:textSize="30sp"
+            android:textSize="32sp"
             app:layout_constraintBottom_toTopOf="@+id/messageImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/mainLabel"
+            app:layout_constraintVertical_bias="0.991" />
 
 
     </android.support.constraint.ConstraintLayout>
