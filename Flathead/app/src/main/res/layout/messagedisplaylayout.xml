@@ -61,7 +61,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mainLabel"
-            app:layout_constraintVertical_bias="0.991" />
+            app:layout_constraintVertical_bias="0.578" />
 
 
     </android.support.constraint.ConstraintLayout>
