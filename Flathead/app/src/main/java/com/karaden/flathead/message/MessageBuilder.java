@@ -71,8 +71,8 @@ public class MessageBuilder {
 
         try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), moodFile)) {
-                screenMessages.add(new MoodPromptMessage(m, moodPromptTextColour, moodPromptFont,
-                        secondaryText, defaultTextColour, logo));
+                screenMessages.add(new MoodPromptMessage(m.toUpperCase(), moodPromptTextColour, moodPromptFont,
+                        secondaryText.toUpperCase(), defaultTextColour, logo));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read mood primaryText file", e);
@@ -80,8 +80,8 @@ public class MessageBuilder {
 
         try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), conversationFile)) {
-                screenMessages.add(new ConversationMessage(m, defaultTextColour, conversationFont,
-                        secondaryText, defaultTextColour, logo));
+                screenMessages.add(new ConversationMessage(m.toUpperCase(), defaultTextColour, conversationFont,
+                        secondaryText.toUpperCase(), defaultTextColour, logo));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read conversation primaryText file", e);
