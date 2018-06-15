@@ -15,6 +15,7 @@ import com.karaden.flathead.message.types.ScreenMessageAdapter;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.zip.Inflater;
 
 /**
  * Created by kate on 25/03/18.
@@ -27,12 +28,15 @@ public class MessagePickerFragment extends ListFragment {
 
     private ListView listView;
 
+    private LayoutInflater mInflater;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_messagepicker, container, false);
+        mInflater = inflater;
+        return mInflater.inflate(R.layout.fragment_messagepicker, container, false);
     }
 
     @Override
@@ -57,9 +61,10 @@ public class MessagePickerFragment extends ListFragment {
 
         ScreenMessageAdapter<ScreenMessage> adapter = new ScreenMessageAdapter<>(
                 getContext(),
-                android.R.layout.simple_list_item_1,
+                android.R.layout.simple_list_item_single_choice,
                 android.R.id.text1,
                 screenMessages);
+
 
         // Assign adapter to ListView
         listView.setAdapter(adapter);
@@ -77,8 +82,6 @@ public class MessagePickerFragment extends ListFragment {
         mCallback.onMessageSelected(sm);
 
 
-        // Set the item as checked to be highlighted when in two-pane layout
-        //  getListView().setItemChecked(position, true);
 
 
     }
