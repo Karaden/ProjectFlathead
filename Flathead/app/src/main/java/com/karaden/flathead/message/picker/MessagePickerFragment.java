@@ -15,7 +15,6 @@ import com.karaden.flathead.message.types.ScreenMessageAdapter;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.zip.Inflater;
 
 /**
  * Created by kate on 25/03/18.
@@ -28,15 +27,12 @@ public class MessagePickerFragment extends ListFragment {
 
     private ListView listView;
 
-    private LayoutInflater mInflater;
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mInflater = inflater;
-        return mInflater.inflate(R.layout.fragment_messagepicker, container, false);
+        return inflater.inflate(R.layout.fragment_messagepicker, container, false);
     }
 
     @Override
@@ -75,7 +71,6 @@ public class MessagePickerFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
 
         // Notify the parent activity of selected item
-        // mCallback.onMessageSelected(position);
 
         ScreenMessage sm = (ScreenMessage) listView.getItemAtPosition(position);
 

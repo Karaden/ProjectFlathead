@@ -32,31 +32,6 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
 
     }
 
-//    @NonNull
-//    @Override
-//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//
-//        TextView text;
-//
-//        if (convertView == null)
-//        {
-//            text = new TextView(getContext());
-//        }
-//        else
-//        {
-//            text = (TextView) convertView;
-//        }
-//
-//        ScreenMessage sm = (ScreenMessage) getItem(position);
-//
-//        text.setText(Objects.requireNonNull(sm).primaryText);
-//        text.setTypeface(sm.typeface);
-//        text.setPadding(20, 30, 20, 30);
-//
-//        return text;
-//
-//    }
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup container) {
@@ -65,7 +40,6 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
 
         if (convertView == null)
         {
-            //LayoutInflater inflater = mContext.getLayoutInflator();
             LayoutInflater inflater = LayoutInflater.from(mContext);
 
             convertView = inflater.inflate(R.layout.list_item, container, false);
