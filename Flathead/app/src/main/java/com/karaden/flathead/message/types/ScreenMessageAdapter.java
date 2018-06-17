@@ -36,8 +36,6 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup container) {
 
-
-
         if (convertView == null)
         {
             LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -51,7 +49,6 @@ public class ScreenMessageAdapter<T> extends ArrayAdapter {
         ((TextView) convertView.findViewById(android.R.id.text1)).setText(Objects.requireNonNull(sm).primaryText);
         ((TextView) convertView.findViewById(android.R.id.text1)).setTypeface(sm.typeface);
         ((TextView) convertView.findViewById(android.R.id.text1)).setPadding(20, 30, 20, 30);
-        ((TextView) convertView.findViewById(android.R.id.text1)).setTextColor(sm.primaryColour);
 
         return convertView;
     }

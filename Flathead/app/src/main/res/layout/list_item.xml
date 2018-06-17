@@ -36,13 +36,18 @@
         used in the textColor attribute causes its text color to change when its parent
         is checked or unchecked.
     -->
-    <TextView android:id="@android:id/text1"
-        android:duplicateParentState="true"
+    <TextView
+        android:id="@android:id/text1"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:duplicateParentState="true"
+        android:shadowColor="@color/BLACK"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2.5"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@color/BLACK_A100" />
+        android:textColor="@color/WHITE" />
 
     <!--
         The duplicateParentState attribute on this ImageView, along with the state list
