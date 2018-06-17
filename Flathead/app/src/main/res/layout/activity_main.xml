@@ -1,46 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0099cc"
-    android:baselineAligned="false"
     android:keepScreenOn="true"
-    android:orientation="horizontal"
     tools:context="com.karaden.flathead.MainActivity">
 
-    <!--Message picker-->
-    <RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5">
-
-        <fragment
-            android:id="@+id/messageListFragment"
-            android:name="com.karaden.flathead.message.picker.MessagePickerFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_messagepicker" />
-
-
-    </RelativeLayout>
 
     <!--The video preview panel-->
-    <RelativeLayout
-        android:layout_width="0dip"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5">
-
-        <fragment
-            android:id="@+id/vid_fragment"
-            android:name="com.karaden.flathead.cameraUVC.UVCCameraFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_uvccamera" />
-
-    </RelativeLayout>
+    <fragment
+    android:id="@+id/vid_fragment"
+    android:name="com.karaden.flathead.cameraUVC.UVCCameraFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout="@layout/fragment_uvccamera" />
 
 
-</LinearLayout>
+    <!--Message picker-->
+    <fragment
+        android:id="@+id/messageListFragment"
+        android:name="com.karaden.flathead.message.picker.MessagePickerFragment"
+        android:layout_width="467dp"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_messagepicker" />
+
+
+</FrameLayout>
 
 
