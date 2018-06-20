@@ -30,7 +30,6 @@
         android:layout_height="fill_parent"
         android:layout_weight="0.5">
 
-
         <com.serenegiant.widget.UVCCameraTextureView
             android:id="@+id/camera_view_R"
             android:layout_width="match_parent"
@@ -38,23 +37,6 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
 
-        <ToggleButton
-            android:id="@+id/capture_button_L"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/capture_button_R"
-            android:text="ToggleButton" />
-
-        <ToggleButton
-            android:id="@+id/capture_button_R"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/camera_view_R"
-            android:layout_alignRight="@id/camera_view_R"
-            android:text="ToggleButton" />
     </RelativeLayout>
-
-
 
 </LinearLayout>

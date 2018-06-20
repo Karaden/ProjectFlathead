@@ -181,36 +181,6 @@ public class MainActivity extends AppCompatActivity
 
     private static final float[] BANDWIDTH_FACTORS = { 0.5f, 0.5f };
 
-
-    /**
-     * set true if you want to record movie using MediaSurfaceEncoder
-     * (writing frame data into Surface camera from MediaCodec
-     * by almost same way as USBCameratest2)
-     * set false if you want to record movie using MediaVideoEncoder
-     */
-    private static final boolean USE_SURFACE_ENCODER = false;
-    /**
-     * preview resolution(width)
-     * if your camera does not support specific resolution and mode,
-     * {@link UVCCamera#setPreviewSize(int, int, int)} throw exception
-     */
-    private static final int PREVIEW_WIDTH = 640;
-    /**
-     * preview resolution(height)
-     * if your camera does not support specific resolution and mode,
-     * {@link UVCCamera#setPreviewSize(int, int, int)} throw exception
-     */
-    private static final int PREVIEW_HEIGHT = 480;
-    /**
-     * preview mode
-     * if your camera does not support specific resolution and mode,
-     * {@link UVCCamera#setPreviewSize(int, int, int)} throw exception
-     * 0:YUYV, other:MJPEG
-     */
-    private static final int PREVIEW_MODE = 1;
-
-
-
     /**
      * for accessing USB
      */
@@ -228,102 +198,77 @@ public class MainActivity extends AppCompatActivity
     private CameraViewInterface mUVCCameraViewL;
     private CameraViewInterface mUVCCameraViewR;
 
-    /**
-     * for open&start / stop&close camera preview
-     */
-    private ToggleButton mCaptureButtonL;
-    private ToggleButton mCaptureButtonR;
-
 
     private Surface mLeftPreviewSurface;
     private Surface mRightPreviewSurface;
 
 
-//Done...ish?
     private void cameraCreate()
     {
         if (DEBUG) Log.v(TAG, "onCreate:");
 
-        mUVCCameraViewL = (CameraViewInterface)findViewById(R.id.camera_view_L);
+        mUVCCameraViewL = findViewById(R.id.camera_view_L);
         mUVCCameraViewL.setAspectRatio(UVCCamera.DEFAULT_PREVIEW_WIDTH / (float)UVCCamera.DEFAULT_PREVIEW_HEIGHT);
         ((UVCCameraTextureView)mUVCCameraViewL).setOnClickListener(mOnClickListener);
-        mCaptureButtonL = (ToggleButton) findViewById(R.id.capture_button_L);
-        mCaptureButtonL.setOnClickListener(mOnClickListener);
-        mCaptureButtonL.setVisibility(View.INVISIBLE);
         mHandlerL = UVCCameraHandler.createHandler(this, mUVCCameraViewL, UVCCamera.DEFAULT_PREVIEW_WIDTH, UVCCamera.DEFAULT_PREVIEW_HEIGHT, BANDWIDTH_FACTORS[0]);
 
-        mUVCCameraViewR = (CameraViewInterface)findViewById(R.id.camera_view_R);
+        mUVCCameraViewR = findViewById(R.id.camera_view_R);
         mUVCCameraViewR.setAspectRatio(UVCCamera.DEFAULT_PREVIEW_WIDTH / (float)UVCCamera.DEFAULT_PREVIEW_HEIGHT);
         ((UVCCameraTextureView)mUVCCameraViewR).setOnClickListener(mOnClickListener);
-        mCaptureButtonR = (ToggleButton) findViewById(R.id.capture_button_R);
-        mCaptureButtonR.setOnClickListener(mOnClickListener);
-        mCaptureButtonR.setVisibility(View.INVISIBLE);
         mHandlerR = UVCCameraHandler.createHandler(this, mUVCCameraViewR, UVCCamera.DEFAULT_PREVIEW_WIDTH, UVCCamera.DEFAULT_PREVIEW_HEIGHT, BANDWIDTH_FACTORS[1]);
 
         mUSBMonitor = new USBMonitor(this, mOnDeviceConnectListener);
     }
 
-
     private void cameraStart() {
-        //Camera
+
         mUSBMonitor.register();
-        if (mUVCCameraViewR != null)
+
+        if (mUVCCameraViewR != null) {
             mUVCCameraViewR.onResume();
-        if (mUVCCameraViewL != null)
+        }
+
+        if (mUVCCameraViewL != null) {
             mUVCCameraViewL.onResume();
+        }
     }
 
-    //Done
+
     private void cameraStop() {
         mHandlerR.close();
-        if (mUVCCameraViewR != null)
+
+        if (mUVCCameraViewR != null) {
             mUVCCameraViewR.onPause();
+        }
+
         mHandlerL.close();
-        mCaptureButtonR.setVisibility(View.INVISIBLE);
-        if (mUVCCameraViewL != null)
+
+        if (mUVCCameraViewL != null) {
             mUVCCameraViewL.onPause();
-        mCaptureButtonL.setVisibility(View.INVISIBLE);
+        }
+
         mUSBMonitor.unregister();
     }
 
-    //Done
+
     private void cameraDestroy() {
         if (mHandlerR != null) {
             mHandlerR = null;
         }
+
         if (mHandlerL != null) {
             mHandlerL = null;
         }
+
         if (mUSBMonitor != null) {
             mUSBMonitor.destroy();
             mUSBMonitor = null;
         }
+
         mUVCCameraViewR = null;
-        mCaptureButtonR = null;
         mUVCCameraViewL = null;
-        mCaptureButtonL = null;
+
     }
-
-
-    //    private final CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener
-//            = new CompoundButton.OnCheckedChangeListener() {
-//        @Override
-//        public void onCheckedChanged(
-//                final CompoundButton compoundButton, final boolean isChecked) {
-//
-//            switch (compoundButton.getId()) {
-//                case R.id.camera_button:
-//                    if (isChecked && !mCameraHandler.isOpened()) {
-//                        CameraDialog.showDialog(MainActivity.this);
-//                    } else {
-//                        stopPreview();
-//                    }
-//                    break;
-//            }
-//        }
-//    };
-
-
 
 
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -334,85 +279,28 @@ public class MainActivity extends AppCompatActivity
                     if (mHandlerL != null) {
                         if (!mHandlerL.isOpened()) {
                             CameraDialog.showDialog(MainActivity.this);
-                        } else {
+                        }
+                        else {
                             mHandlerL.close();
-                            setCameraButton();
                         }
                     }
-                    break;
-                case R.id.capture_button_L:
                     break;
                 case R.id.camera_view_R:
                     if (mHandlerR != null) {
                         if (!mHandlerR.isOpened()) {
                             CameraDialog.showDialog(MainActivity.this);
-                        } else {
+                        }
+                        else {
                             mHandlerR.close();
-                            setCameraButton();
                         }
                     }
-                    break;
-                case R.id.capture_button_R:
                     break;
             }
         }
     };
 
 
-//
-//    private void setCameraButton(final boolean isOn) {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (mCameraButton != null) {
-//                    try {
-//                        mCameraButton.setOnCheckedChangeListener(null);
-//                        mCameraButton.setChecked(isOn);
-//                    } finally {
-//                        mCameraButton.setOnCheckedChangeListener(mOnCheckedChangeListener);
-//                    }
-//                }
-//
-//            }
-//        });
-//
-//    }
 
-//    private void startPreview() {
-//        if (DEBUG) Log.v(TAG, "startPreview:");
-//        mUVCCameraView.resetFps();
-//        mCameraHandler.startPreview();
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    final SurfaceTexture st = mUVCCameraView.getSurfaceTexture();
-//                    if (st != null) {
-//                        final Surface surface = new Surface(st);
-//                        mPreviewSurfaceId = surface.hashCode();
-//                        mCameraHandler.addSurface(mPreviewSurfaceId, surface, false);
-//                    }
-//
-//                } catch (final Exception e) {
-//                    Log.w(TAG, e);
-//                }
-//            }
-//        });
-//    }
-
-//    private void stopPreview() {
-//        if (DEBUG) Log.v(TAG, "stopPreview:");
-//
-//        if (mPreviewSurfaceId != 0) {
-//            mCameraHandler.removeSurface(mPreviewSurfaceId);
-//            mPreviewSurfaceId = 0;
-//        }
-//        mCameraHandler.close();
-//        setCameraButton(false);
-//    }
-
-
-//Done
 private final OnDeviceConnectListener mOnDeviceConnectListener = new OnDeviceConnectListener() {
 
     @Override
@@ -425,27 +313,21 @@ private final OnDeviceConnectListener mOnDeviceConnectListener = new OnDeviceCon
     public void onConnect(final UsbDevice device,
                           final USBMonitor.UsbControlBlock ctrlBlock, final boolean createNew) {
 
-        if (DEBUG) Log.v(TAG, "onConnect:" + device);
+        if (DEBUG)  {
+            Log.v(TAG, "onConnect:" + device);
+        }
+
         if (!mHandlerL.isOpened()) {
             mHandlerL.open(ctrlBlock);
             final SurfaceTexture st = mUVCCameraViewL.getSurfaceTexture();
             mHandlerL.startPreview(new Surface(st));
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mCaptureButtonL.setVisibility(View.VISIBLE);
-                }
-            });
-        } else if (!mHandlerR.isOpened()) {
+
+        }
+        else if (!mHandlerR.isOpened()) {
             mHandlerR.open(ctrlBlock);
             final SurfaceTexture st = mUVCCameraViewR.getSurfaceTexture();
             mHandlerR.startPreview(new Surface(st));
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mCaptureButtonR.setVisibility(View.VISIBLE);
-                }
-            });
+
         }
     }
 
@@ -465,7 +347,6 @@ private final OnDeviceConnectListener mOnDeviceConnectListener = new OnDeviceCon
                         mLeftPreviewSurface.release();
                         mLeftPreviewSurface = null;
                     }
-                    setCameraButton();
                 }
             };
 
@@ -481,7 +362,6 @@ private final OnDeviceConnectListener mOnDeviceConnectListener = new OnDeviceCon
                         mRightPreviewSurface.release();
                         mRightPreviewSurface = null;
                     }
-                    setCameraButton();
                 }
             };
 
@@ -513,30 +393,8 @@ private final OnDeviceConnectListener mOnDeviceConnectListener = new OnDeviceCon
     @Override //Done
     public void onDialogResult(boolean canceled) {
         if (DEBUG) Log.v(TAG, "onDialogResult:canceled=" + canceled);
-        if (canceled) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    setCameraButton();
-                }
-            });
-        }
     }
 
-    //Straight copy
-    private void setCameraButton() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if ((mHandlerL != null) && !mHandlerL.isOpened() && (mCaptureButtonL != null)) {
-                    mCaptureButtonL.setVisibility(View.INVISIBLE);
-                }
-                if ((mHandlerR != null) && !mHandlerR.isOpened() && (mCaptureButtonR != null)) {
-                    mCaptureButtonR.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-    }
 //endregion Camera
 
 //region Second Screen
