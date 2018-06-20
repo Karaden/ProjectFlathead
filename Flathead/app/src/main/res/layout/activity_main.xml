@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/messageListFragment"
         android:name="com.karaden.flathead.message.picker.MessagePickerFragment"
-        android:layout_width="467dp"
+        android:layout_width="309dp"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_messagepicker" />
 
