@@ -15,7 +15,5 @@
   -->
 <resources>
     <!-- Trust Webcam -->
-    <usb-device
-        product-id="0x01cc"
-        vendor-id="0x145f" />
+    <usb-device/>
 </resources>
