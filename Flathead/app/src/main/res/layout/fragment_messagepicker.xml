@@ -12,6 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
-        android:choiceMode="singleChoice">
-    </ListView>
+        android:choiceMode="singleChoice"
+        android:focusable="auto"></ListView>
 </FrameLayout>

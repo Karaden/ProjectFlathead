@@ -16,26 +16,23 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.karaden.flathead.immersivemode.BasicImmersiveModeFragment;
 import com.karaden.flathead.message.MessageBuilder;
 import com.karaden.flathead.message.picker.MessagePickerFragment;
 import com.karaden.flathead.message.types.ConversationMessage;
 import com.karaden.flathead.message.types.MoodPromptMessage;
+import com.karaden.flathead.message.types.MoustacheMessage;
 import com.karaden.flathead.message.types.ScreenMessage;
 import com.serenegiant.usb.CameraDialog;
 import com.serenegiant.usb.USBMonitor;
 
-import com.serenegiant.usb.USBMonitor.UsbControlBlock;
 import com.serenegiant.usb.USBMonitor.OnDeviceConnectListener;
 import com.serenegiant.usb.UVCCamera;
 import com.serenegiant.usbcameracommon.UVCCameraHandler;
-import com.serenegiant.usbcameracommon.UVCCameraHandlerMultiSurface;
 import com.serenegiant.widget.CameraViewInterface;
 import com.serenegiant.widget.UVCCameraTextureView;
 
@@ -517,6 +514,7 @@ private final OnDeviceConnectListener mOnDeviceConnectListener = new OnDeviceCon
 
 
         DemoPresentationContents(ScreenMessage sm) {
+
             if (sm instanceof MoodPromptMessage) {
 
             mPrimaryLabelVisible = View.VISIBLE;
@@ -532,8 +530,6 @@ private final OnDeviceConnectListener mOnDeviceConnectListener = new OnDeviceCon
             mLogoVisible = View.VISIBLE;
             mLogoImage = sm.logoResourceID;
 
-
-
             }
             else if (sm instanceof ConversationMessage) {
 
@@ -546,7 +542,20 @@ private final OnDeviceConnectListener mOnDeviceConnectListener = new OnDeviceCon
 
                 mLogoVisible = View.GONE;
 
+            }
+            else if (sm instanceof MoustacheMessage) {
 
+                mPrimaryLabelVisible = View.GONE;
+
+                //These are not displayed, but are needed for the display to render properly
+                mPrimaryLabelText = sm.primaryText;
+                mPrimaryLabelTypeface = TypefaceName.DATACONTROL;
+                mPrimaryLabelTextColor = sm.primaryColour;
+
+                mSecondaryLabelVisible = View.GONE;
+
+                mLogoVisible = View.VISIBLE;
+                mLogoImage = sm.logoResourceID;
             }
         }
 

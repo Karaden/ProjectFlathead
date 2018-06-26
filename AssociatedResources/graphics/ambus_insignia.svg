@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg3416"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   width="850"
+   height="325"
+   viewBox="0 0 850 325"
+   sodipodi:docname="ambus_insignia.svg">
+  <metadata
+     id="metadata3422">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3420" />
+  <sodipodi:namedview
+     pagecolor="#ffb9ff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     id="namedview3418"
+     showgrid="true"
+     inkscape:zoom="0.71750542"
+     inkscape:cx="540.62632"
+     inkscape:cy="312.76535"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3416">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4243" />
+  </sodipodi:namedview>
+  <a
+     id="a4249" />
+  <g
+     id="g4813"
+     transform="matrix(1.0057779,0,0,0.99997434,2.5251641,-0.48840664)">
+    <a
+       transform="translate(-1.4782608,-1.7246376)"
+       id="a4252">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4245"
+         d="M 397.3914,17.039283 106.88165,219.31138 61.011811,161.51902 -0.14647526,204.86388 106.88165,320.44858 421.34848,90.831745 736.21426,320.74144 843.24463,205.15673 782.08409,161.81419 736.21426,219.60423 445.70451,17.332138 421.66403,47.621702 397.3914,17.039283 Z"
+         style="fill:#1a1a1a;fill-rule:evenodd;stroke:#000000;stroke-width:1.48630273px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </a>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4811"
+       d="m 420.84543,322.12659 -54.26978,-131.38352 108.53956,0 z"
+       style="fill:#1a1a1a;fill-rule:evenodd;stroke:#000000;stroke-width:1.80027199px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>

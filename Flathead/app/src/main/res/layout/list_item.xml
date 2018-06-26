@@ -25,10 +25,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:minHeight="?android:listPreferredItemHeight"
     android:gravity="center_vertical">
 
     <!--
@@ -46,8 +45,10 @@
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="2.5"
+        android:textAlignment="textEnd"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@color/WHITE" />
+        android:textColor="@color/WHITE"
+        android:textSize="10sp" />
 
     <!--
         The duplicateParentState attribute on this ImageView, along with the state list
@@ -58,11 +59,14 @@
         ?android:listChoiceIndicatorMultiple or ?android:listChoiceIndicatorSingle. These
         are system theme attributes that reference a state list drawable.
     -->
-    <ImageView android:src="?android:listChoiceIndicatorSingle"
-        android:duplicateParentState="true"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:duplicateParentState="true"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:src="?android:listChoiceIndicatorSingle" />
 
 </com.karaden.flathead.message.picker.CheckableLinearLayout>

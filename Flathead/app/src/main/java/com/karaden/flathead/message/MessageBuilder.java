@@ -8,6 +8,7 @@ import android.util.Log;
 import com.karaden.flathead.R;
 import com.karaden.flathead.message.types.ConversationMessage;
 import com.karaden.flathead.message.types.MoodPromptMessage;
+import com.karaden.flathead.message.types.MoustacheMessage;
 import com.karaden.flathead.message.types.ScreenMessage;
 
 import java.io.IOException;
@@ -21,7 +22,8 @@ public class MessageBuilder {
 
     private List<ScreenMessage> screenMessages;
     private String secondaryText;
-    private int logo;
+    private int functionistInsignia;
+    private int ambusInsignia;
 
     private final String moodFile = "mood_messages.txt";
     private final String conversationFile = "conversation_messages.txt";
@@ -48,8 +50,12 @@ public class MessageBuilder {
         //Things to display
         moodPromptFont = Typeface.createFromAsset(act.getAssets(), "fonts/furmanite.otf");
         conversationFont = Typeface.createFromAsset(act.getAssets(), "fonts/datacontrol.ttf");
+
         secondaryText = act.getResources().getString(R.string.secondaryText);
-        logo = R.drawable.ic_functionist_council_insignia;
+
+        functionistInsignia = R.drawable.ic_functionist_council_insignia;
+        ambusInsignia = R.drawable.ic_ambus_insignia;
+
         defaultTextColour = Color.BLACK;
         moodPromptTextColour = Color.WHITE;
 
@@ -69,10 +75,13 @@ public class MessageBuilder {
 
         screenMessages = new ArrayList<>(0);
 
+        screenMessages.add(new MoustacheMessage("Moustache", defaultTextColour, moodPromptFont,
+                "", defaultTextColour, ambusInsignia));
+
         try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), moodFile)) {
                 screenMessages.add(new MoodPromptMessage(m.toUpperCase(), moodPromptTextColour, moodPromptFont,
-                        secondaryText.toUpperCase(), defaultTextColour, logo));
+                        secondaryText.toUpperCase(), defaultTextColour, functionistInsignia));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read mood primaryText file", e);
@@ -81,7 +90,7 @@ public class MessageBuilder {
         try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), conversationFile)) {
                 screenMessages.add(new ConversationMessage(m.toUpperCase(), defaultTextColour, conversationFont,
-                        secondaryText.toUpperCase(), defaultTextColour, logo));
+                        secondaryText.toUpperCase(), defaultTextColour, functionistInsignia));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read conversation primaryText file", e);
