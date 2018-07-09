@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/MessageDisplayerPanel"
-    android:layout_width="1366px"
-    android:layout_height="1366px"
+    android:layout_width="1366dp"
+    android:layout_height="1366dp"
     android:background="@color/flatScreenPrimary"
     android:fadingEdge="horizontal"
     android:orientation="horizontal"
@@ -11,14 +11,14 @@
 
     <!--Asus display is 1366x768-->
     <android.support.constraint.ConstraintLayout
-        android:layout_width="768px"
-        android:layout_height="match_parent"
+        android:layout_width="768dp"
+        android:layout_height="800dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:padding="@dimen/active_area__padding_height">
 
         <TextView
             android:id="@+id/mainLabel"
-            android:layout_width="768dp"
+            android:layout_width="750dp"
             android:layout_height="415dp"
             android:layout_marginTop="10dp"
             android:autoSizeTextType="uniform"
@@ -26,10 +26,10 @@
             android:text="@string/default_message"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
-
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <!--app:layout_constraintHorizontal_bias="0.5"-->
+
         <ImageView
             android:id="@+id/messageImage"
             android:layout_width="1286dp"
