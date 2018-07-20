@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
         android:choiceMode="singleChoice"
+        android:listSelector="@color/HALF_CLEAR_GRAY"
         android:focusable="auto"
         android:paddingBottom="45dp"
         android:paddingTop="40dp"/>
