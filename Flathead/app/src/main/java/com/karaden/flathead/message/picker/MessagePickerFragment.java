@@ -33,6 +33,7 @@ public class MessagePickerFragment extends ListFragment {
 
     private Random rand;
 
+    // TODO: choose the timer period
     // 3 mins = 180,000
     // 10s = 10,000
     CountDownTimer timer = new CountDownTimer(10000, 1000) {
@@ -52,8 +53,9 @@ public class MessagePickerFragment extends ListFragment {
                 n = rand.nextInt(listView.getCount()); // Gives n such that 0 <= n < size of the listview
             } while ( !(listView.getItemAtPosition(n) instanceof MoodPromptMessage));
 
-            // Display it
+            // Display it and update the checkboxes
             onListItemClick(n);
+            listView.setItemChecked(n, true);
         }
     };
 
