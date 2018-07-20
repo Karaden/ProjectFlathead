@@ -2,6 +2,7 @@ package com.karaden.flathead.message.picker;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -10,11 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.karaden.flathead.R;
+import com.karaden.flathead.message.types.MoodPromptMessage;
 import com.karaden.flathead.message.types.ScreenMessage;
 import com.karaden.flathead.message.types.ScreenMessageAdapter;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+import java.util.Timer;
 
 /**
  * Created by kate on 25/03/18.
@@ -26,6 +30,33 @@ public class MessagePickerFragment extends ListFragment {
     private OnMessageSelectedListener mCallback;
 
     private ListView listView;
+
+    private Random rand;
+
+    // 3 mins = 180,000
+    // 10s = 10,000
+    CountDownTimer timer = new CountDownTimer(10000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            // Do nothing
+        }
+
+        @Override
+        public void onFinish() {
+
+            //Pick a random message (of type MoodPrompt) from the list
+            int n;
+
+            do {
+                rand = new Random();
+                n = rand.nextInt(listView.getCount()); // Gives n such that 0 <= n < size of the listview
+            } while ( !(listView.getItemAtPosition(n) instanceof MoodPromptMessage));
+
+            // Display it
+            onListItemClick(n);
+        }
+    };
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -69,16 +100,17 @@ public class MessagePickerFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        onListItemClick(position);
+    }
+
+    public void onListItemClick(int position) {
+        // Restart the timer to display the next message
+        timer.start();
 
         // Notify the parent activity of selected item
-
         ScreenMessage sm = (ScreenMessage) listView.getItemAtPosition(position);
 
         mCallback.onMessageSelected(sm);
-
-
-
-
     }
 
     @Override
