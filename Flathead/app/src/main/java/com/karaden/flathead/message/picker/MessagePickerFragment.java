@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.karaden.flathead.R;
+import com.karaden.flathead.message.FileManager;
 import com.karaden.flathead.message.types.MoodPromptMessage;
 import com.karaden.flathead.message.types.ScreenMessage;
 import com.karaden.flathead.message.types.ScreenMessageAdapter;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -32,32 +35,18 @@ public class MessagePickerFragment extends ListFragment {
     private ListView listView;
 
     private Random rand;
+    private String timerValFileName = "timer.txt";
 
-    // TODO: choose the timer period
-    // 3 mins = 180,000
+    //default timer period
     // 10s = 10,000
-    CountDownTimer timer = new CountDownTimer(10000, 1000) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-            // Do nothing
-        }
+    private int timerVal = 10000;
 
-        @Override
-        public void onFinish() {
+    CountDownTimer timer;
 
-            //Pick a random message (of type MoodPrompt) from the list
-            int n;
-
-            do {
-                rand = new Random();
-                n = rand.nextInt(listView.getCount()); // Gives n such that 0 <= n < size of the listview
-            } while ( !(listView.getItemAtPosition(n) instanceof MoodPromptMessage));
-
-            // Display it and update the checkboxes
-            onListItemClick(n);
-            listView.setItemChecked(n, true);
-        }
-    };
+    private void ensureTimerAvailable() {
+        FileManager.writeMessageFile(getActivity().getExternalFilesDir(null),
+                timerValFileName, getActivity().getAssets(), timerValFileName);
+    }
 
 
     @Override
@@ -77,8 +66,42 @@ public class MessagePickerFragment extends ListFragment {
 
     private void initialise() {
 
+        try {
+
+            ensureTimerAvailable();
+            timerVal = FileManager.readTimerFile(getActivity().getExternalFilesDir(null), timerValFileName);
+
+        } catch (IOException e) {
+            Log.e("tag", "Failed to read timerVal file", e);
+        }
+
+        timer = new CountDownTimer(timerVal, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Do nothing
+            }
+
+            @Override
+            public void onFinish() {
+
+                //Pick a random message (of type MoodPrompt) from the list
+                int n;
+
+                do {
+                    rand = new Random();
+                    n = rand.nextInt(listView.getCount()); // Gives n such that 0 <= n < size of the listview
+                } while ( !(listView.getItemAtPosition(n) instanceof MoodPromptMessage));
+
+                // Display it and update the checkboxes
+                onListItemClick(n);
+                listView.setItemChecked(n, true);
+            }
+        };
+
         listView = Objects.requireNonNull(getView()).findViewById(android.R.id.list);
+
     }
+
 
     private void populateListView(List<ScreenMessage> screenMessages) {
 

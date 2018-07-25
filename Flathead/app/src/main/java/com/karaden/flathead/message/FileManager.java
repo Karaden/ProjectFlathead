@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by kate on 21/3/18.
  * Handle the reading/writing of the messages file
  */
-class FileManager {
+public class FileManager {
     public static void writeMessageFile(File externalFilesDir, String messageFileName, AssetManager assetManager, String assetFileName) {
 
         File outFile = new File(externalFilesDir, messageFileName);
@@ -97,8 +97,31 @@ class FileManager {
         }
 
         return res;
+    }
+
+    public static int readTimerFile(File externalFilesDir, String fileName)
+        throws IOException {
+
+        int timeOut;
+        FileInputStream in;
+        BufferedReader reader;
+
+        File file = new File(externalFilesDir, fileName);
+
+        //make sure it exists
+        if (file.isFile() && !file.isDirectory()) {
 
 
+            in = new FileInputStream(file);
+            reader = new BufferedReader(new InputStreamReader(in));
+
+            timeOut = Integer.parseInt(reader.readLine());
+
+        } else {
+            throw new IOException("File not found: " + fileName);
+        }
+
+        return timeOut;
     }
 
 }
