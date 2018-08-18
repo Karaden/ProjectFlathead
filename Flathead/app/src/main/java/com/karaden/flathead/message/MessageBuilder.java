@@ -79,21 +79,21 @@ public class MessageBuilder {
                 "", defaultTextColour, ambusInsignia));
 
         try {
-            for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), moodFile)) {
-                screenMessages.add(new MoodPromptMessage(m.toUpperCase(), moodPromptTextColour, moodPromptFont,
-                        secondaryText.toUpperCase(), defaultTextColour, functionistInsignia));
-            }
-        } catch (IOException e) {
-            Log.e("tag", "Failed to read mood primaryText file", e);
-        }
-
-        try {
             for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), conversationFile)) {
                 screenMessages.add(new ConversationMessage(m.toUpperCase(), defaultTextColour, conversationFont,
                         secondaryText.toUpperCase(), defaultTextColour, functionistInsignia));
             }
         } catch (IOException e) {
             Log.e("tag", "Failed to read conversation primaryText file", e);
+        }
+
+        try {
+            for (String m : FileManager.readArrayFromFile(act.getExternalFilesDir(null), moodFile)) {
+                screenMessages.add(new MoodPromptMessage(m.toUpperCase(), moodPromptTextColour, moodPromptFont,
+                        secondaryText.toUpperCase(), defaultTextColour, functionistInsignia));
+            }
+        } catch (IOException e) {
+            Log.e("tag", "Failed to read mood primaryText file", e);
         }
 
         Log.i("tag", "Finished loading messages");
